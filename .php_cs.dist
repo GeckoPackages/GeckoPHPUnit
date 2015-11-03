@@ -1,0 +1,31 @@
+<?php
+
+$header = <<<EOF
+This file is part of the GeckoPackages.
+
+(c) GeckoPackages https://github.com/GeckoPackages
+
+This source file is subject to the MIT license that is bundled
+with this source code in the file LICENSE.
+EOF;
+
+Symfony\CS\Fixer\Contrib\HeaderCommentFixer::setHeader($header);
+
+return Symfony\CS\Config\Config::create()
+    // use SYMFONY_LEVEL:
+    ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
+    // and extra fixers:
+    ->fixers(array(
+        'header_comment',
+        'long_array_syntax',
+        'ordered_use',
+        '-psr0',
+        '-empty_return',
+    ))
+    ->finder(
+        Symfony\CS\Finder\DefaultFinder::create()
+            ->in(__DIR__.'/src/')
+            ->in(__DIR__.'/tests/')
+            ->name('*.php')
+    )
+;
