@@ -1,5 +1,5 @@
 {
-  "name": "GeckoPackages/PHPUnit",
+  "name": "gecko-packages/php-unit",
   "type": "library",
   "homepage": "https://github.com/GeckoPackages",
   "description": "Additional PHPUnit tests.",
