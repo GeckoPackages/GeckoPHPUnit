@@ -33,12 +33,28 @@ class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
     public function provideFiles()
     {
         // make symlinks if needed
-        if (!file_exists($this->getAssetsDir().'test_link')) {
-            symlink($this->getAssetsDir().'_link_test_target_dir_', $this->getAssetsDir().'test_link');
+        if (!file_exists($this->getAssetsDir().'test_link') && false === @symlink($this->getAssetsDir().'_link_test_target_dir_', $this->getAssetsDir().'test_link')) {
+            $error = error_get_last();
+            $this->fail(
+                sprintf(
+                    'Failed to create symlink "%s" for target "%s".%s',
+                    $this->getAssetsDir().'test_link',
+                    $this->getAssetsDir().'_link_test_target_dir_',
+                    $error ? $error['message'] : ''
+                )
+            );
         }
 
-        if (!file_exists($this->getAssetsDir().'test_link_file')) {
-            symlink($this->getAssetsDir().'_link_test_target_dir_/placeholder.tmp', $this->getAssetsDir().'test_link_file');
+        if (!file_exists($this->getAssetsDir().'test_link_file') && false === symlink($this->getAssetsDir().'_link_test_target_dir_/placeholder.tmp', $this->getAssetsDir().'test_link_file')) {
+            $error = error_get_last();
+            $this->fail(
+                sprintf(
+                    'Failed to create symlink "%s" for target "%s".%s',
+                    $this->getAssetsDir().'test_link_file',
+                    $this->getAssetsDir().'_link_test_target_dir_/placeholder.tmp',
+                    $error ? $error['message'] : ''
+                )
+            );
         }
 
         return array(
