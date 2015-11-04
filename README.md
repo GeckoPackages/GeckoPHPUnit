@@ -12,7 +12,7 @@ The additional asserts are provided through the Traits:
 - **FileSystemAssertTrait**  
   Provides asserts for testing directories, files and symbolic links.
 - **ScalarAssertTrait**  
-  Provides asserts for testing for scalars such as integer, float, etc.
+  Provides asserts for testing of scalars such as integer, float, etc.
 - **XMLAssertTrait**  
   Additional PHPUnit asserts for testing XML based logic.
 
@@ -28,7 +28,7 @@ PHPUnit PHPUnit >= 3.5.0 (https://phpunit.de/)
 ## FileExistsTrait
 ###### GeckoPackages\PHPUnit\Asserts\FileExistsTrait
 Replacement for PHPUnits `assertFileExists` and `assertFileNotExists`.
-Assert if the filename exists and is a regular file, i.e. directories do not pass.
+Asserts when the filename exists and is a regular file, i.e. directories do not pass.
 (Note. Since this changes the default behaviour of the PHPUnit assert this has been placed in a separate trait)
 Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 
@@ -68,7 +68,7 @@ Assert that a directory exists.
 The inverse assertion
 #### assertDirectoryNotExists()
 ###### assertDirectoryNotExists(string $filename [,string $message = ''])
-Assert that filename does not exists as directory.
+Assert that a filename does not exists as directory.
 
 
 #### assertFileHasPermissions()
@@ -77,12 +77,12 @@ Asserts that a file permission matches, for example: 'drwxrwxrwx' or '0664'.
 
 #### assertFileIsLink()
 ###### assertFileIsLink(string $filename [,string $message = ''])
-Assert file is a symbolic link.
+Assert that a file is a symbolic link.
 
 The inverse assertion
 #### assertFileIsNotLink()
 ###### assertFileIsNotLink(string $filename [,string $message = ''])
-Assert file is not a symbolic link.
+Assert that a file is not a symbolic link.
 
 
 #### assertFilePermissionMask()
@@ -162,6 +162,26 @@ The inverse assertion
 Assert value is not a string.
 
 
+#### assertStringIsEmpty()
+###### assertStringIsEmpty(mixed $actual [,string $message = ''])
+Assert value is a string and is empty.
+
+The inverse assertion
+#### assertStringIsNotEmpty()
+###### assertStringIsNotEmpty(mixed $actual [,string $message = ''])
+Assert value is a string and is not empty.
+
+
+#### assertStringIsWhiteSpace()
+###### assertStringIsWhiteSpace(mixed $actual [,string $message = ''])
+Assert value is a string and only contains white space characters (" \t\n\r\0\x0B").
+
+The inverse assertion
+#### assertStringIsNotWhiteSpace()
+###### assertStringIsNotWhiteSpace(mixed $actual [,string $message = ''])
+Assert value is a string and not only contains white space characters (" \t\n\r\0\x0B").
+
+
 ## XMLAssertTrait
 ###### GeckoPackages\PHPUnit\Asserts\XMLAssertTrait
 
@@ -173,11 +193,11 @@ Requires:
 
 #### assertXMLMatchesXSD()
 ###### assertXMLMatchesXSD(string $XML, string $XSD [,string $message = ''])
-Assert given XML is formatted as defined by the XML Schema Definition.
+Assert string is XML formatted as defined by the XML Schema Definition.
 
 #### assertXMLValid()
 ###### assertXMLValid(string $XML [,string $message = ''])
-Assert given XML is valid.
+Assert string is valid XML.
 
 ### License
 

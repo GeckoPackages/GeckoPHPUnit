@@ -35,6 +35,26 @@ class ScalarAssertTraitTest extends PHPUnit_Framework_TestCase
         $this->assertString('test');
     }
 
+    public function testAssertStringIsEmpty()
+    {
+        $this->assertStringIsEmpty('');
+    }
+
+    public function testAssertStringIsNotEmpty()
+    {
+        $this->assertStringIsNotEmpty('   a');
+    }
+
+    public function testAssertStringIsWhiteSpace()
+    {
+        $this->assertStringIsWhiteSpace("\n\t  \n");
+    }
+
+    public function testAssertStringIsNotWhiteSpace()
+    {
+        $this->assertStringIsNotWhiteSpace("\n\t  \n1");
+    }
+
     public function testAssertFloat()
     {
         $this->assertFloat(1.0);
@@ -91,5 +111,23 @@ class ScalarAssertTraitTest extends PHPUnit_Framework_TestCase
     public function testAssertBoolFail()
     {
         $this->assertBool(new \DateTime());
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Failed asserting that a string is not empty.
+     */
+    public function testAssertStringIsNotEmptyFail()
+    {
+        $this->assertStringIsNotEmpty('');
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Failed asserting that a string is empty.
+     */
+    public function testAssertStringIsWhiteSpaceFail()
+    {
+        $this->assertStringIsWhiteSpace('test');
     }
 }

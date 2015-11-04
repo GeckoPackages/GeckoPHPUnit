@@ -27,7 +27,7 @@ use GeckoPackages\PHPUnit\Constraints\XML\XMLValidConstraint;
 trait XMLAssertTrait
 {
     /**
-     * Assert given XML is valid.
+     * Assert string is valid XML.
      *
      * @param string $XML
      * @param string $message
@@ -44,7 +44,7 @@ trait XMLAssertTrait
     }
 
     /**
-     * Assert given XML is formatted as defined by the XML Schema Definition.
+     * Assert string is XML formatted as defined by the XML Schema Definition.
      *
      * @param string $XML
      * @param string $XSD
