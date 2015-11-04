@@ -14,7 +14,7 @@ namespace GeckoPackages\PHPUnit\Asserts;
 use GeckoPackages\PHPUnit\Constraints\ScalarConstraint;
 
 /**
- * Provides asserts for testing for scalars such as integer, float, etc.
+ * Provides asserts for testing of scalars such as integer, float, etc.
  *
  * Additional shorthand PHPUnit asserts to test (for) scalar types.
  *
@@ -79,6 +79,72 @@ trait ScalarAssertTrait
     public static function assertString($actual, $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
+    }
+
+    /**
+     * Assert value is a string and is empty.
+     *
+     * @param mixed  $actual
+     * @param string $message
+     */
+    public static function assertStringIsEmpty($actual, $message = '')
+    {
+        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
+        self::assertEmpty($actual, $message);
+    }
+
+    /**
+     * Assert value is a string and is not empty.
+     *
+     * @param mixed  $actual
+     * @param string $message
+     */
+    public static function assertStringIsNotEmpty($actual, $message = '')
+    {
+        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
+        self::assertNotEmpty($actual, $message);
+    }
+
+    /**
+     * Assert value is a string and only contains white space characters (" \t\n\r\0\x0B").
+     *
+     * Uses PHP function trim @see http://php.net/manual/en/function.trim.php
+     * The following characters are considered white space:
+     * - " "    (ASCII 32 (0x20)), an ordinary space.
+     * - "\t"   (ASCII  9 (0x09)), a tab.
+     * - "\n"   (ASCII 10 (0x0A)), a new line (line feed).
+     * - "\r"   (ASCII 13 (0x0D)), a carriage return.
+     * - "\0"   (ASCII  0 (0x00)), the NUL-byte.
+     * - "\x0B" (ASCII 11 (0x0B)), a vertical tab.
+     *
+     * @param mixed  $actual
+     * @param string $message
+     */
+    public static function assertStringIsWhiteSpace($actual, $message = '')
+    {
+        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
+        self::assertEmpty(trim($actual), $message);
+    }
+
+    /**
+     * Assert value is a string and not only contains white space characters (" \t\n\r\0\x0B").
+     *
+     * Uses PHP function trim @see http://php.net/manual/en/function.trim.php
+     * The following characters are considered white space:
+     * - " "    (ASCII 32 (0x20)), an ordinary space.
+     * - "\t"   (ASCII  9 (0x09)), a tab.
+     * - "\n"   (ASCII 10 (0x0A)), a new line (line feed).
+     * - "\r"   (ASCII 13 (0x0D)), a carriage return.
+     * - "\0"   (ASCII  0 (0x00)), the NUL-byte.
+     * - "\x0B" (ASCII 11 (0x0B)), a vertical tab.
+     *
+     * @param mixed  $actual
+     * @param string $message
+     */
+    public static function assertStringIsNotWhiteSpace($actual, $message = '')
+    {
+        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
+        self::assertNotEmpty(trim($actual), $message);
     }
 
     /**

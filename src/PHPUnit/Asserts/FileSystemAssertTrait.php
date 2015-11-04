@@ -70,7 +70,7 @@ trait FileSystemAssertTrait
     }
 
     /**
-     * Assert that filename does not exists as directory.
+     * Assert that a filename does not exists as directory.
      *
      * @param string $filename
      * @param string $message
@@ -138,7 +138,7 @@ trait FileSystemAssertTrait
     }
 
     /**
-     * Assert file is a symbolic link.
+     * Assert that a file is a symbolic link.
      *
      * @param string $filename
      * @param string $message
@@ -149,7 +149,7 @@ trait FileSystemAssertTrait
     }
 
     /**
-     * Assert file is not a symbolic link.
+     * Assert that a file is not a symbolic link.
      *
      * @param string $filename
      * @param string $message

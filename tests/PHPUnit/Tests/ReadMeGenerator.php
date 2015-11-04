@@ -138,7 +138,6 @@ The project is released under the MIT license, see the LICENSE file.
 
 EOF;
         $readMeTemplate = str_replace('#GENERATED_LISTING#', $listing, $readMeTemplate);
-
         return str_replace('#GENERATED_BODY#', $doc, $readMeTemplate);
     }
 
@@ -222,10 +221,16 @@ EOF;
             return false;
         }
 
-        $methodDoc = array('doc' => '', 'params' => array());
+        $methodDoc = array('doc' => '', 'long' => '', 'params' => array());
+        $capture = 'doc';
         foreach ($matches[0] as $docLine) {
             $docLine = trim($docLine);
-            if ('*' === $docLine || '/**' === $docLine || '*/' === $docLine) {
+            if ( '/**' === $docLine || '*/' === $docLine) {
+                continue;
+            }
+
+            if ('*' === $docLine) {
+                $capture = 'long';
                 continue;
             }
 
@@ -241,10 +246,11 @@ EOF;
                 continue;
             }
 
-            $methodDoc['doc'] .= substr($docLine, 2)."\n";
+            $methodDoc[$capture] .= substr($docLine, 2)."\n";
         }
 
         $methodDoc['doc'] = trim($methodDoc['doc']);
+        $methodDoc['long'] = trim($methodDoc['long']);
 
         return $methodDoc;
     }
