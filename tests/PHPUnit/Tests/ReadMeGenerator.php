@@ -138,6 +138,7 @@ The project is released under the MIT license, see the LICENSE file.
 
 EOF;
         $readMeTemplate = str_replace('#GENERATED_LISTING#', $listing, $readMeTemplate);
+
         return str_replace('#GENERATED_BODY#', $doc, $readMeTemplate);
     }
 
@@ -225,7 +226,7 @@ EOF;
         $capture = 'doc';
         foreach ($matches[0] as $docLine) {
             $docLine = trim($docLine);
-            if ( '/**' === $docLine || '*/' === $docLine) {
+            if ('/**' === $docLine || '*/' === $docLine) {
                 continue;
             }
 
