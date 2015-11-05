@@ -2,7 +2,7 @@
 
 # PHPUnit extensions
 
-Provides additional asserts to be used in PHPUnit test.
+Provides additional asserts to be used in PHPUnit tests (https://phpunit.de/).
 The asserts are provided using Traits so no changes are needed in the hierarchy of test classes.
 
 The additional asserts are provided through the Traits:
@@ -21,7 +21,35 @@ See Traits and asserts listing for more details.
 ### Requirements
 
 PHP 5.4.0 (for Traits)
-PHPUnit PHPUnit >= 3.5.0 (https://phpunit.de/)
+PHPUnit >= 3.5.0 (https://phpunit.de/)
+
+### Install
+
+The package can be installed using Composer (https://getcomposer.org/).
+Add the package to your `composer.json`.
+
+```
+"require-dev": {
+    "gecko-packages/php-unit" : "1.0"
+}
+```
+
+### Usage
+
+Example usage of `FileSystemAssertTrait`.
+
+```php
+class myTest extends PHPUnit_Framework_TestCase
+{
+    use \GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait;
+
+    public function testFilePermissionsOfThisFile()
+    {
+        $this->assertFileHasPermissions('lrwxrwxrwx', __FILE__);
+    }
+}
+
+```
 
 # Traits and asserts listing
 
@@ -30,6 +58,7 @@ PHPUnit PHPUnit >= 3.5.0 (https://phpunit.de/)
 Replacement for PHPUnits `assertFileExists` and `assertFileNotExists`.
 Asserts when the filename exists and is a regular file, i.e. directories do not pass.
 (Note. Since this changes the default behaviour of the PHPUnit assert this has been placed in a separate trait)
+
 Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 
 ### Methods
@@ -47,6 +76,7 @@ Assert the filename does not exists or is not a regular file.
 ## FileSystemAssertTrait
 ###### GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait
 Additional PHPUnit asserts for testing file (system) based logic.
+
 Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 
 ### Methods
@@ -98,6 +128,7 @@ Asserts that a file permission does not matches mask, for example: '0607'.
 ## ScalarAssertTrait
 ###### GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait
 Additional shorthand PHPUnit asserts to test (for) scalar types.
+
 Requires PHPUnit >= 3.5.0 (https://phpunit.de/).
 
 ### Methods
