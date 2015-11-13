@@ -13,9 +13,9 @@ namespace GeckoPackages\PHPUnit\Asserts;
 
 use GeckoPackages\PHPUnit\Constraints\DirectoryEmptyConstraint;
 use GeckoPackages\PHPUnit\Constraints\DirectoryExistsConstraint;
-use GeckoPackages\PHPUnit\Constraints\IsFileLinkConstraint;
-use GeckoPackages\PHPUnit\Constraints\PermissionIsIdenticalConstraint;
-use GeckoPackages\PHPUnit\Constraints\PermissionMaskConstraint;
+use GeckoPackages\PHPUnit\Constraints\FileIsLinkConstraint;
+use GeckoPackages\PHPUnit\Constraints\FilePermissionsIsIdenticalConstraint;
+use GeckoPackages\PHPUnit\Constraints\FilePermissionsMaskConstraint;
 
 /**
  * Provides asserts for testing directories, files and symbolic links.
@@ -110,7 +110,7 @@ trait FileSystemAssertTrait
                     throw AssertHelper::createException(__TRAIT__, 'assertFileHasPermissions', sprintf('Permission to match "%s" is not formatted correctly', $permissions));
                 }
 
-                self::assertThat(self::getFilePermissionsAsString($perms), new PermissionIsIdenticalConstraint($permissions, $filename, $type), $message);
+                self::assertThat(self::getFilePermissionsAsString($perms), new FilePermissionsIsIdenticalConstraint($permissions, $filename, $type), $message);
 
                 return;
             }
@@ -134,7 +134,7 @@ trait FileSystemAssertTrait
             $filePerm = (int) sprintf('%o', $perms);
         }
 
-        self::assertThat($filePerm, new PermissionIsIdenticalConstraint($permissions, $filename, $type), $message);
+        self::assertThat($filePerm, new FilePermissionsIsIdenticalConstraint($permissions, $filename, $type), $message);
     }
 
     /**
@@ -145,7 +145,7 @@ trait FileSystemAssertTrait
      */
     public static function assertFileIsLink($filename, $message = '')
     {
-        self::assertFileLInk($filename, $message, 'assertFileIsLink', new IsFileLinkConstraint());
+        self::assertFileLInk($filename, $message, 'assertFileIsLink', new FileIsLinkConstraint());
     }
 
     /**
@@ -156,7 +156,7 @@ trait FileSystemAssertTrait
      */
     public static function assertFileIsNotLink($filename, $message = '')
     {
-        self::assertFileLInk($filename, $message, 'assertFileIsNotLink', new \PHPUnit_Framework_Constraint_Not(new IsFileLinkConstraint()));
+        self::assertFileLInk($filename, $message, 'assertFileIsNotLink', new \PHPUnit_Framework_Constraint_Not(new FileIsLinkConstraint()));
     }
 
     /**
@@ -204,7 +204,7 @@ trait FileSystemAssertTrait
             $type = is_file($filename) ? 'file' : (is_dir($filename) ? 'directory' : 'other');
         }
 
-        $constraint = new PermissionMaskConstraint($permissionMask, $filename, $type);
+        $constraint = new FilePermissionsMaskConstraint($permissionMask, $filename, $type);
 
         self::assertThat($perms, $positive ? $constraint : new \PHPUnit_Framework_Constraint_Not($constraint), $message);
     }
