@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-use GeckoPackages\PHPUnit\Constraints\PermissionIsIdenticalConstraint;
+use GeckoPackages\PHPUnit\Constraints\FilePermissionsIsIdenticalConstraint;
 use GeckoPackages\PHPUnit\Constraints\ScalarConstraint;
 
 class BasicConstraintTest extends PHPUnit_Framework_TestCase
@@ -58,7 +58,7 @@ class BasicConstraintTest extends PHPUnit_Framework_TestCase
 
     public function testPermissionIsIdenticalConstraint()
     {
-        $constraint = new PermissionIsIdenticalConstraint('abc', __FILE__, 'a');
+        $constraint = new FilePermissionsIsIdenticalConstraint('abc', __FILE__, 'a');
         $this->assertSame('is identical to permission "abc"', $constraint->toString());
     }
 
