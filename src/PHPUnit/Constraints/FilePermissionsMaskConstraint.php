@@ -11,7 +11,7 @@
 
 namespace GeckoPackages\PHPUnit\Constraints;
 
-final class PermissionMaskConstraint extends \PHPUnit_Framework_Constraint
+final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
 {
     /**
      * @var int

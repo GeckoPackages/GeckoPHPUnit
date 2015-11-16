@@ -11,7 +11,7 @@
 
 namespace GeckoPackages\PHPUnit\Constraints;
 
-final class IsFileLinkConstraint extends \PHPUnit_Framework_Constraint
+final class FileIsLinkConstraint extends \PHPUnit_Framework_Constraint
 {
     /**
      * {@inheritdoc}
