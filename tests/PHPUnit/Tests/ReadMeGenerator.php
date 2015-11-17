@@ -141,7 +141,7 @@ Add the package to your `composer.json`.
 
 ```
 "require-dev": {
-    "gecko-packages/php-unit" : "1.0"
+    "gecko-packages/gecko-php-unit" : "1.0"
 }
 ```
 
