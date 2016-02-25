@@ -2,7 +2,7 @@
 
 # PHPUnit extensions
 
-Provides additional asserts to be used in PHPUnit tests (https://phpunit.de/).
+Provides additional asserts to be used in [PHPUnit](https://phpunit.de/) tests.
 The asserts are provided using Traits so no changes are needed in the hierarchy of test classes.
 
 The additional asserts are provided through the Traits:
@@ -21,11 +21,11 @@ See Traits and asserts listing for more details.
 ### Requirements
 
 PHP 5.4.0 (for Traits)
-PHPUnit >= 3.5.0 (https://phpunit.de/)
+PHPUnit >= 3.5.0
 
 ### Install
 
-The package can be installed using Composer (https://getcomposer.org/).
+The package can be installed using [Composer](https://getcomposer.org/).
 Add the package to your `composer.json`.
 
 ```
@@ -33,6 +33,8 @@ Add the package to your `composer.json`.
     "gecko-packages/gecko-php-unit" : "1.0"
 }
 ```
+
+Please note we hint `-dev` here because typically you only need tests during development.
 
 ### Usage
 
