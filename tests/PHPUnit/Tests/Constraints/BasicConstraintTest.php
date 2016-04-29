@@ -12,7 +12,7 @@
 use GeckoPackages\PHPUnit\Constraints\FilePermissionsIsIdenticalConstraint;
 use GeckoPackages\PHPUnit\Constraints\ScalarConstraint;
 
-class BasicConstraintTest extends PHPUnit_Framework_TestCase
+final class BasicConstraintTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @param string $class
@@ -64,7 +64,7 @@ class BasicConstraintTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Unknown ScalarConstraint type "-1" provided.
+     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "-1" provided.$#
      */
     public function testScalarConstraintConstructorInvalidTyp()
     {

@@ -11,7 +11,7 @@
 
 use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
 
-class ScalarAssertTraitTest extends PHPUnit_Framework_TestCase
+final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
 {
     use ScalarAssertTrait;
 
@@ -97,7 +97,7 @@ class ScalarAssertTraitTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Failed asserting that "1" (double) is of type int.
+     * @expectedExceptionMessageRegExp #^Failed asserting that "1" \(double\) is of type int.$#
      */
     public function testAssertIntFail()
     {
@@ -106,7 +106,7 @@ class ScalarAssertTraitTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Failed asserting that "[?]" (DateTime) is of type bool.
+     * @expectedExceptionMessageRegExp #^Failed asserting that "\[\?\]" \(DateTime\) is of type bool.$#
      */
     public function testAssertBoolFail()
     {
@@ -115,7 +115,7 @@ class ScalarAssertTraitTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Failed asserting that a string is not empty.
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty.$#
      */
     public function testAssertStringIsNotEmptyFail()
     {
@@ -124,7 +124,7 @@ class ScalarAssertTraitTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Failed asserting that a string is empty.
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty.$#
      */
     public function testAssertStringIsWhiteSpaceFail()
     {

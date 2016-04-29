@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-abstract class AbstractGeckoPHPUnitTest extends PHPUnit_Framework_TestCase
+abstract class AbstractGeckoPHPUnitTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @return string

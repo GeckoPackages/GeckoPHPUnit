@@ -14,7 +14,7 @@ use GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait;
 use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
 use GeckoPackages\PHPUnit\Asserts\XMLAssertTrait;
 
-class TestDummy
+final class TestDummy
 {
     use FileExistsTrait;
     use FileSystemAssertTrait;
@@ -22,16 +22,16 @@ class TestDummy
     use XMLAssertTrait;
 }
 
-class TestDummy2
+final class TestDummy2
 {
     use FileSystemAssertTrait;
 }
 
-class AssertHelperTest extends AbstractGeckoPHPUnitTest
+final class AssertHelperTest extends AbstractGeckoPHPUnitTest
 {
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage FileExistsTrait::assertFileExists() Relies on missing method "assertThat".
+     * @expectedExceptionMessageRegExp #^FileExistsTrait::assertFileExists\(\) Relies on missing method "assertThat".$#
      */
     public function testMissingMethod()
     {
@@ -41,7 +41,7 @@ class AssertHelperTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage FileSystemAssertTrait::assertFileIsLink() Relies on missing methods "assertThat", "assertFileExists".
+     * @expectedExceptionMessageRegExp #^FileSystemAssertTrait::assertFileIsLink\(\) Relies on missing methods "assertThat", "assertFileExists".$#
      */
     public function testMissingMethods()
     {
