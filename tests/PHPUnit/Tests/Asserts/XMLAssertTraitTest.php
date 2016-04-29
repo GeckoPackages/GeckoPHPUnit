@@ -11,13 +11,13 @@
 
 use GeckoPackages\PHPUnit\Asserts\XMLAssertTrait;
 
-class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
+final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 {
     use XMLAssertTrait;
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (integer#1234) of XMLAssertTrait::assertXMLValid() must be a string.
+     * @expectedExceptionMessageRegExp /^Argument #1 \(integer#1234\) of XMLAssertTrait::assertXMLValid\(\) must be a string.$/
      */
     public function testAssertXMLValidInvalidInput()
     {
@@ -65,7 +65,7 @@ class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (integer#1) of XMLAssertTrait::assertXMLMatchesXSD() must be a string.
+     * @expectedExceptionMessageRegExp /^Argument #1 \(integer#1\) of XMLAssertTrait::assertXMLMatchesXSD\(\) must be a string.$/
      */
     public function testAssertXMLMatchesXSDInvalidInputXSD()
     {
@@ -74,7 +74,7 @@ class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #2 (stdClass#) of XMLAssertTrait::assertXMLMatchesXSD() must be a string.
+     * @expectedExceptionMessageRegExp /^Argument #2 \(stdClass#\) of XMLAssertTrait::assertXMLMatchesXSD\(\) must be a string.$/
      */
     public function testAssertXMLMatchesXSDInvalidInputXML()
     {

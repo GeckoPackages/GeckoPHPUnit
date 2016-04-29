@@ -11,7 +11,7 @@
 
 use GeckoPackages\PHPUnit\Asserts\FileExistsTrait;
 
-class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
+final class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
 {
     use FileExistsTrait;
 
@@ -68,7 +68,7 @@ class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (integer#123) of FileExistsTrait::assertFileExists() must be a string.
+     * @expectedExceptionMessageRegExp /^Argument #1 \(integer\#123\) of FileExistsTrait::assertFileExists\(\) must be a string.$/
      */
     public function testFailIntMessage()
     {
@@ -77,7 +77,7 @@ class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (stdClass#) of FileExistsTrait::assertFileExists() must be a string.
+     * @expectedExceptionMessageRegExp /^Argument #1 \(stdClass#\) of FileExistsTrait::assertFileExists\(\) must be a string.$/
      */
     public function testFailStdClassMessage()
     {
@@ -86,7 +86,7 @@ class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (NULL#) of FileExistsTrait::assertFileExists() must be a string.
+     * @expectedExceptionMessageRegExp /^Argument #1 \(NULL#\) of FileExistsTrait::assertFileExists\(\) must be a string.$/
      */
     public function testFailNullMessage()
     {
@@ -95,7 +95,7 @@ class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Failed asserting that file "_no_file_" exists.
+     * @expectedExceptionMessageRegExp /^Failed asserting that file "_no_file_" exists.$/
      */
     public function testNoFileFoundMessage()
     {
@@ -104,7 +104,7 @@ class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #Failed asserting that directory "/.*PHPUnit/tests/PHPUnit/Tests/Asserts" exists as file.#
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory "/.*PHPUnit/tests/PHPUnit/Tests/Asserts" exists as file.$#
      */
     public function testFailDirectoryMessage()
     {
