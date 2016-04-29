@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-class ReadMeTest extends PHPUnit_Framework_TestCase
+final class ReadMeTest extends \PHPUnit_Framework_TestCase
 {
     public function testReadMe()
     {

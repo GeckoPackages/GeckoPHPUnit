@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-class ReadMeGenerator
+final class ReadMeGenerator
 {
     /**
      * @param string[] $classes
@@ -152,7 +152,7 @@ Please note we hint `-dev` here because typically you only need tests during dev
 Example usage of `FileSystemAssertTrait`.
 
 ```php
-class myTest extends PHPUnit_Framework_TestCase
+class myTest extends \PHPUnit_Framework_TestCase
 {
     use \GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait;
 
