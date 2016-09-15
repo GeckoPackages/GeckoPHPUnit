@@ -30,7 +30,7 @@ final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
 
     /**
      * @param string $filename
-     * @param string $type     Type being tested, for example: link, file, directory.
+     * @param string $type     Type being tested, for example: link, file, directory
      * @param int    $mask
      */
     public function __construct($mask, $filename, $type)

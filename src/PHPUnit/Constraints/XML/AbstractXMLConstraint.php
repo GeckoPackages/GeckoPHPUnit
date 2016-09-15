@@ -19,25 +19,25 @@ abstract class AbstractXMLConstraint extends \PHPUnit_Framework_Constraint
     /**
      * @var string[]
      */
-    protected $XMLConstraintErrors = array();
+    protected $XMLConstraintErrors = [];
 
     protected function setXMLConstraintErrors()
     {
         foreach (libxml_get_errors() as $error) {
             switch ($error->level) {
-                case LIBXML_ERR_WARNING :{
+                case LIBXML_ERR_WARNING:{
                     $level = 'warning ';
                     break;
                 }
-                case LIBXML_ERR_ERROR :{
+                case LIBXML_ERR_ERROR:{
                     $level = 'error ';
                     break;
                 }
-                case LIBXML_ERR_FATAL :{
+                case LIBXML_ERR_FATAL:{
                     $level = 'fatal ';
                     break;
                 }
-                default :{
+                default:{
                     $level = '';
                     break;
                 }

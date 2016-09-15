@@ -20,7 +20,7 @@ See Traits and asserts listing for more details.
 
 ### Requirements
 
-PHP 5.4.0 (for Traits)
+PHP 5.4 (PHP7 supported). Optional HHVM support >= 3.9.
 PHPUnit >= 3.5.0
 
 ### Install

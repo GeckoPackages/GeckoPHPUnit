@@ -34,7 +34,7 @@ trait XMLAssertTrait
      */
     public static function assertXMLValid($XML, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLValid', array('assertThat'));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLValid', ['assertThat']);
 
         if (!is_string($XML)) {
             throw AssertHelper::createArgumentException(__TRAIT__, 'assertXMLValid', 'string', $XML);
@@ -52,7 +52,7 @@ trait XMLAssertTrait
      */
     public static function assertXMLMatchesXSD($XSD, $XML, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLMatchesXSD', array('assertThat'));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLMatchesXSD', ['assertThat']);
 
         if (!is_string($XSD)) {
             throw AssertHelper::createArgumentException(__TRAIT__, 'assertXMLMatchesXSD', 'string', $XSD);

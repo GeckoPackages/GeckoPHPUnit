@@ -30,37 +30,37 @@ final class ScalarConstraint extends \PHPUnit_Framework_Constraint
     {
         parent::__construct();
         switch ($type) {
-            case self::TYPE_BOOL : {
+            case self::TYPE_BOOL: {
                 $this->testFunction = 'is_bool';
                 $this->type = 'bool';
                 break;
             }
-            case self::TYPE_INT : {
+            case self::TYPE_INT: {
                 $this->testFunction = 'is_int';
                 $this->type = 'int';
                 break;
             }
-            case self::TYPE_STRING : {
+            case self::TYPE_STRING: {
                 $this->testFunction = 'is_string';
                 $this->type = 'string';
                 break;
             }
-            case self::TYPE_FLOAT : {
+            case self::TYPE_FLOAT: {
                 $this->testFunction = 'is_float';
                 $this->type = 'float';
                 break;
             }
-            case self::TYPE_ARRAY : {
+            case self::TYPE_ARRAY: {
                 $this->testFunction = 'is_array';
                 $this->type = 'array';
                 break;
             }
-            case self::TYPE_SCALAR : {
+            case self::TYPE_SCALAR: {
                 $this->testFunction = 'is_scalar';
                 $this->type = 'scalar';
                 break;
             }
-            default : {
+            default: {
                 throw new \InvalidArgumentException(sprintf('Unknown ScalarConstraint type "%d" provided.', $type));
             }
         }
