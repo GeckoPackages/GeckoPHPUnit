@@ -16,11 +16,24 @@ return Symfony\CS\Config\Config::create()
     ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
     // and extra fixers:
     ->fixers(array(
+        'combine_consecutive_unsets',
+        'ereg_to_preg',
         'header_comment',
-        'long_array_syntax',
+        'newline_after_open_tag',
+        'no_useless_else',
+        'no_useless_return',
         'ordered_use',
-        '-psr0',
+        'short_array_syntax',
+        'phpdoc_order',
+        'php_unit_construct',
+        'php_unit_dedicate_assert',
+        'php_unit_strict',
+        'strict',
+        'strict_param',
         '-empty_return',
+        '-phpdoc_short_description',
+        '-phpdoc_to_comment',
+        '-psr0',
     ))
     ->finder(
         Symfony\CS\Finder\DefaultFinder::create()

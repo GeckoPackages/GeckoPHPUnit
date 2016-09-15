@@ -57,13 +57,13 @@ class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
             );
         }
 
-        return array(
-            array(true, __FILE__),
-            array(true, $this->getAssetsDir().'test_link_file'), // sym link to file
-            array(false, $this->getAssetsDir().'test_link'), // sym link to directory
-            array(false, __FILE__.time()),
-            array(false, __DIR__),
-        );
+        return [
+            [true, __FILE__],
+            [true, $this->getAssetsDir().'test_link_file'], // sym link to file
+            [false, $this->getAssetsDir().'test_link'], // sym link to directory
+            [false, __FILE__.time()],
+            [false, __DIR__],
+        ];
     }
 
     /**

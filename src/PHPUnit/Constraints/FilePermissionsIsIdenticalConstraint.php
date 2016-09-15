@@ -26,7 +26,7 @@ final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Cons
     /**
      * @param int|string $permissions
      * @param string     $filename
-     * @param string     $type        Type being tested, for example: link, file, directory.
+     * @param string     $type        Type being tested, for example: link, file, directory
      */
     public function __construct($permissions, $filename, $type)
     {

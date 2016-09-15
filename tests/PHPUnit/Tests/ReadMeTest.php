@@ -32,7 +32,7 @@ class ReadMeTest extends PHPUnit_Framework_TestCase
         $classDir = new ReflectionClass('GeckoPackages\PHPUnit\Asserts\AssertHelper');
         $classDir = $classDir->getFileName();
         $classDir = substr($classDir, 0, strrpos($classDir, '/'));
-        $classes = array();
+        $classes = [];
         foreach (new DirectoryIterator($classDir) as $file) {
             if ($file->isDir()) {
                 continue;

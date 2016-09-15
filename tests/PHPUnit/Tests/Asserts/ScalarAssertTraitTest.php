@@ -62,7 +62,7 @@ class ScalarAssertTraitTest extends PHPUnit_Framework_TestCase
 
     public function testAssertArray()
     {
-        $this->assertArray(array());
+        $this->assertArray([]);
     }
 
     public function testAssertNotScalar()
