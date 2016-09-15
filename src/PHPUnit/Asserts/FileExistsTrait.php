@@ -52,7 +52,7 @@ trait FileExistsTrait
 
     private static function assertFileExisting($filename, $message, $method, \PHPUnit_Framework_Constraint $constraint)
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
 
         if (!is_string($filename)) {
             throw AssertHelper::createArgumentException(__TRAIT__, $method, 'string', $filename);
