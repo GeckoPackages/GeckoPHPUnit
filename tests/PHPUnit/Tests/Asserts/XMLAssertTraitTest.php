@@ -36,8 +36,7 @@ class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Failed asserting that XML is valid.
-     *                           [fatal 4] Start tag expected, '<' not found (line 1, column 1).
+     * @expectedExceptionMessageRegExp #^Failed asserting that XML is valid\.[\n]\[fatal 4\] .+.$#
      */
     public function testAssertXMLValidFailure()
     {
@@ -46,7 +45,7 @@ class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage [error 1845] Element 'note': No matching global declaration available for the validation root. (line 1, column 0).
+     * @expectedExceptionMessageRegExp #^Failed asserting that XML matches XSD\.[\n]\[error 1845\] .+.$#
      */
     public function testAssertXMLMatchesXSDNotMatchingXML()
     {
@@ -55,8 +54,7 @@ class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Failed asserting that XML matches XSD.
-     *                           [error 4] Start tag expected, '<' not found (line 1, column 1).
+     * @expectedExceptionMessageRegExp #^Failed asserting that XML matches XSD\.[\n]\[fatal 4\] .+.$#
      */
     public function testAssertXMLMatchesXSDInvalidXMLInvalidXSD()
     {
