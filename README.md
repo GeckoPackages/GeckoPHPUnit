@@ -11,6 +11,8 @@ The additional asserts are provided through the Traits:
   Replaces the PHPUnit `assertFileExists` method. This assert does not pass if there is a directory rather than a file.
 - **FileSystemAssertTrait**  
   Provides asserts for testing directories, files and symbolic links.
+- **SameStringsTrait**  
+  Provides asserts for testing of identical strings with line ending difference reporter.
 - **ScalarAssertTrait**  
   Provides asserts for testing of scalars such as integer, float, etc.
 - **XMLAssertTrait**  
@@ -125,6 +127,23 @@ The inverse assertion
 #### assertFilePermissionNotMask()
 ###### assertFilePermissionNotMask(int $permissionMask, string $filename [,string $message = ''])
 Asserts that a file permission does not matches mask, for example: '0607'.
+
+
+## SameStringsTrait
+###### GeckoPackages\PHPUnit\Asserts\SameStringsTrait
+
+Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
+
+### Methods
+
+#### assertSameStrings()
+###### assertSameStrings(string $expected, string $actual [,string $message = ''])
+Assert that strings are identical.
+
+The inverse assertion
+#### assertNotSameStrings()
+###### assertNotSameStrings(string $expected, string $actual [,string $message = ''])
+Assert that strings are not identical.
 
 
 ## ScalarAssertTrait
