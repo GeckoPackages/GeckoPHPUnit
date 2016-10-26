@@ -57,16 +57,16 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
             $link
         );
 
-        return [
-            [0775, __DIR__],
-            ['0775', __DIR__],
-            ['509', __DIR__],
-            ['drwxrwxr-x', __DIR__],
-            [0664, __FILE__],
-            [100664, __FILE__],
-            ['-rw-rw-r--', __FILE__],
-            ['lrwxrwxrwx', $link],
-        ];
+        return array(
+            array(0775, __DIR__),
+            array('0775', __DIR__),
+            array('509', __DIR__),
+            array('drwxrwxr-x', __DIR__),
+            array(0664, __FILE__),
+            array(100664, __FILE__),
+            array('-rw-rw-r--', __FILE__),
+            array('lrwxrwxrwx', $link),
+        );
     }
 
     /**
@@ -110,19 +110,19 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
         $reflection = new \ReflectionClass($this);
         $method = $reflection->getMethod('getFilePermissionsAsString');
         $method->setAccessible(true);
-        $this->assertSame($expected, $method->invokeArgs($this, [$input]));
+        $this->assertSame($expected, $method->invokeArgs($this, array($input)));
     }
 
     public function provideFilePermissions()
     {
-        return [
-            ['drwxrwxr-x', fileperms(__DIR__)],
-            ['urwxrwxrwx', 0777],
-            ['prwxrwxrwx', 010777],
-            ['crwxrwxrwx', 020777],
-            ['brwxrwxrwx', 060777],
-            ['srwxrwxrwx', 0140777],
-        ];
+        return array(
+            array('drwxrwxr-x', fileperms(__DIR__)),
+            array('urwxrwxrwx', 0777),
+            array('prwxrwxrwx', 010777),
+            array('crwxrwxrwx', 020777),
+            array('brwxrwxrwx', 060777),
+            array('srwxrwxrwx', 0140777),
+        );
     }
 
     /**
@@ -137,16 +137,16 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     public function provideFileMasks()
     {
-        return [
-            [0664],
-            [0000],
-            [0004],
-            [0060],
-            [0064],
-            [0600],
-            [0604],
-            [0660],
-        ];
+        return array(
+            array(0664),
+            array(0000),
+            array(0004),
+            array(0060),
+            array(0064),
+            array(0600),
+            array(0604),
+            array(0660),
+        );
     }
 
     public function testAssertFilePermissionLink()
@@ -172,19 +172,19 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     public function provideFilePermissionNotMask()
     {
-        return [
-            [0007],
-            [0005],
-            [0055],
-            [0777],
-            [0005],
-            [0050],
-            [0764],
-            [0700],
-            [0704],
-            [0650],
-            [0764],
-        ];
+        return array(
+            array(0007),
+            array(0005),
+            array(0055),
+            array(0777),
+            array(0005),
+            array(0050),
+            array(0764),
+            array(0700),
+            array(0704),
+            array(0650),
+            array(0764),
+        );
     }
 
     /**

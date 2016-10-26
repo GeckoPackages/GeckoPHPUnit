@@ -69,7 +69,7 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
 
     public function testAssertArray()
     {
-        $this->assertArray([]);
+        $this->assertArray(array());
     }
 
     public function testAssertNotScalar()

@@ -21,7 +21,7 @@ abstract class AbstractXMLConstraint extends \PHPUnit_Framework_Constraint
     /**
      * @var string[]
      */
-    protected $XMLConstraintErrors = [];
+    protected $XMLConstraintErrors = array();
 
     protected function setXMLConstraintErrors()
     {

@@ -39,25 +39,26 @@ final class FileExistsTraitTest extends AbstractGeckoPHPUnitFileTest
 
     public function provideFiles()
     {
-        $dirLink = $this->getAssetsDir().'test_link';
+        $dirLink = $this->getAssetsDir() . 'test_link';
         $this->createSymlink(
-            $this->getAssetsDir().'_link_test_target_dir_',
+            $this->getAssetsDir() . '_link_test_target_dir_',
             $dirLink
         );
 
-        $fileLink = $this->getAssetsDir().'test_link_file';
+        $fileLink = $this->getAssetsDir() . 'test_link_file';
         $this->createSymlink(
-            $this->getAssetsDir().'_link_test_target_dir_/placeholder.tmp',
+            $this->getAssetsDir() . '_link_test_target_dir_/placeholder.tmp',
             $fileLink
         );
 
-        return [
-            [true, __FILE__],
-            [true, $fileLink],
-            [false, $dirLink],
-            [false, __FILE__.time()],
-            [false, __DIR__],
-        ];
+        return array(
+            array(true, __FILE__),
+            array(true, $fileLink),
+            array(false, $dirLink),
+            array(false, __FILE__ . time()),
+            array(false, __DIR__),
+        );
+
     }
 
     /**
