@@ -32,7 +32,7 @@ final class BasicConstraintTest extends \PHPUnit_Framework_TestCase
 
     public function provideClasses()
     {
-        $classes = [];
+        $classes = array();
         $classDir = __DIR__.'/../../../../src/PHPUnit/Constraints';
         $namespace = 'GeckoPackages\\PHPUnit\\Constraints\\';
         foreach (new DirectoryIterator($classDir) as $file) {
@@ -45,12 +45,12 @@ final class BasicConstraintTest extends \PHPUnit_Framework_TestCase
                     if ($xmlFile->isDir()) {
                         continue;
                     }
-                    $classes[] = [$namespace.'XML\\'.substr($xmlFile->getFilename(), 0, -4)];
+                    $classes[] = array($namespace.'XML\\'.substr($xmlFile->getFilename(), 0, -4));
                 }
 
                 continue;
             }
-            $classes[] = [$namespace.substr($file->getFilename(), 0, -4)];
+            $classes[] = array($namespace.substr($file->getFilename(), 0, -4));
         }
 
         return $classes;

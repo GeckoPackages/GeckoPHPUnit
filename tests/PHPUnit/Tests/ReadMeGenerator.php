@@ -18,7 +18,7 @@ final class ReadMeGenerator
      */
     public function generateReadMe(array $classes)
     {
-        $docs = [];
+        $docs = array();
         foreach ($classes as $class) {
             $reflection = new ReflectionClass($class);
             $classDoc = $this->getClassDoc($reflection->getDocComment());
@@ -30,7 +30,7 @@ final class ReadMeGenerator
                 continue;
             }
 
-            $docs[$class] = ['classDoc' => $classDoc, 'methods' => []];
+            $docs[$class] = array('classDoc' => $classDoc, 'methods' => array());
             $reflectionMethods = $reflection->getMethods();
             foreach ($reflectionMethods as $method) {
                 $methodName = $method->name;
@@ -62,7 +62,7 @@ final class ReadMeGenerator
                         $doc['params'][$param->getName()]['default'] = $param->getDefaultValue();
                     }
                 }
-                $docs[$class]['methods'][$methodName] = ['doc' => $doc, 'name' => $methodName];
+                $docs[$class]['methods'][$methodName] = array('doc' => $doc, 'name' => $methodName);
             }
 
             ksort($docs[$class]['methods']);
@@ -197,7 +197,7 @@ EOF;
             return false;
         }
 
-        $doc = ['summary' => '', 'doc' => '', 'tags' => []];
+        $doc = array('summary' => '', 'doc' => '', 'tags' => array());
 
         $capture = 'summary';
         foreach ($matches[0] as $docLine) {
@@ -221,13 +221,13 @@ EOF;
                 if (false === $tagDivision) {
                     $index = substr($docLine, 1);
                     if (!array_key_exists($index, $doc['tags'])) {
-                        $doc['tags'][$index] = [];
+                        $doc['tags'][$index] = array();
                     }
                     $doc['tags'][$index][] = '';
                 } else {
                     $index = substr($docLine, 1, $tagDivision - 1);
                     if (!array_key_exists($index, $doc['tags'])) {
-                        $doc['tags'][$index] = [];
+                        $doc['tags'][$index] = array();
                     }
                     $doc['tags'][$index][] = substr($docLine, $tagDivision + 1);
                 }
@@ -256,7 +256,7 @@ EOF;
             return false;
         }
 
-        $methodDoc = ['doc' => '', 'long' => '', 'params' => []];
+        $methodDoc = array('doc' => '', 'long' => '', 'params' => array());
         $capture = 'doc';
         foreach ($matches[0] as $docLine) {
             $docLine = trim($docLine);
@@ -277,7 +277,7 @@ EOF;
                 $name = $matches[2];
                 //$description = count($matches[2]) > 2 ? $matches[3] : null;
 
-                $methodDoc['params'][$name] = ['type' => $type];
+                $methodDoc['params'][$name] = array('type' => $type);
                 continue;
             }
 
