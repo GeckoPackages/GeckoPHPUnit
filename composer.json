@@ -6,7 +6,7 @@
     "license": "MIT",
     "keywords": ["PHPUnit", "Extension", "FileSystem"],
     "require": {
-        "php": "^5.4 || ^7.0"
+        "php": "^5.3.6 || ^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "4.0"
