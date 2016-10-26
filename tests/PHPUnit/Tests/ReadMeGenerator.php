@@ -88,7 +88,7 @@ class ReadMeGenerator
             $shortClass = substr($class, strrpos($class, '\\') + 1);
             $classDoc = $properties['classDoc'];
 
-            $listing .= sprintf("\n- **%s**  \n  %s", $shortClass, $classDoc['summary']);
+            $listing .= sprintf("\n- **%s**\n  %s", $shortClass, $classDoc['summary']);
             $doc .= sprintf("\n## %s\n###### %s\n%s\n", $shortClass, $class, $classDoc['doc']);
             if ('' !== $classDoc['doc']) {
                 $doc .= "\n";
