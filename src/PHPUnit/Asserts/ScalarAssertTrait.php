@@ -89,7 +89,7 @@ trait ScalarAssertTrait
      */
     public static function assertStringIsEmpty($actual, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsEmpty', ['assertEmpty']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsEmpty', array('assertEmpty'));
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
         self::assertEmpty($actual, $message);
     }
@@ -102,7 +102,7 @@ trait ScalarAssertTrait
      */
     public static function assertStringIsNotEmpty($actual, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotEmpty', ['assertNotEmpty']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotEmpty', array('assertNotEmpty'));
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
         self::assertNotEmpty($actual, $message);
     }
@@ -124,7 +124,7 @@ trait ScalarAssertTrait
      */
     public static function assertStringIsWhiteSpace($actual, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsWhiteSpace', ['assertEmpty']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsWhiteSpace', array('assertEmpty'));
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
         self::assertEmpty(trim($actual), $message);
     }
@@ -146,7 +146,7 @@ trait ScalarAssertTrait
      */
     public static function assertStringIsNotWhiteSpace($actual, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotWhiteSpace', ['assertNotEmpty']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotWhiteSpace', array('assertNotEmpty'));
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
         self::assertNotEmpty(trim($actual), $message);
     }
@@ -230,7 +230,7 @@ trait ScalarAssertTrait
 
     private static function assertTypeOfScalar($actual, $message, $method, \PHPUnit_Framework_Constraint $constraint)
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
         self::assertThat($actual, $constraint, $message);
     }
 }

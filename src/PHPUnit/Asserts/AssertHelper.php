@@ -28,7 +28,7 @@ final class AssertHelper
      */
     public static function assertMethodDependency($class, $trait, $methodName, array $methodDependencies)
     {
-        $missing = [];
+        $missing = array();
         foreach ($methodDependencies as $methodDependency) {
             if (!method_exists($class, $methodDependency)) {
                 $missing[] = sprintf('"%s"', $methodDependency);
@@ -86,7 +86,7 @@ final class AssertHelper
                 $value,
                 substr($trait, strrpos($trait, '\\') + 1),
                 $methodName,
-                (in_array($typeValue[0], ['a', 'e', 'i', 'o', 'u'], true) ? 'an' : 'a').' '.$typeValue
+                (in_array($typeValue[0], array('a', 'e', 'i', 'o', 'u'), true) ? 'an' : 'a').' '.$typeValue
             )
         );
     }

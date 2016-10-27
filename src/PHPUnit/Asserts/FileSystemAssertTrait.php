@@ -89,7 +89,7 @@ trait FileSystemAssertTrait
      */
     public static function assertFileHasPermissions($permissions, $filename, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertFileHasPermissions', ['assertThat', 'assertFileExists']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertFileHasPermissions', array('assertThat', 'assertFileExists'));
 
         if (!is_string($filename)) {
             throw AssertHelper::createArgumentException(__TRAIT__, 'assertFileHasPermissions', 'string', $filename, 2);
@@ -185,7 +185,7 @@ trait FileSystemAssertTrait
 
     private static function filePermissionMask($permissionMask, $filename, $method, $positive, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat', 'assertFileExists']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat', 'assertFileExists'));
 
         if (!is_int($permissionMask)) {
             throw AssertHelper::createArgumentException(__TRAIT__, $method, 'int', $permissionMask);
@@ -211,7 +211,7 @@ trait FileSystemAssertTrait
 
     private static function assertDirectory($filename, $message, $method, \PHPUnit_Framework_Constraint $constraint)
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
 
         if (!is_string($filename)) {
             throw AssertHelper::createArgumentException(__TRAIT__, $method, 'string', $filename);
@@ -222,7 +222,7 @@ trait FileSystemAssertTrait
 
     private static function assertFileLInk($filename, $message, $method, \PHPUnit_Framework_Constraint $constraint)
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat', 'assertFileExists']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat', 'assertFileExists'));
 
         if (!is_string($filename)) {
             throw AssertHelper::createArgumentException(__TRAIT__, $method, 'string', $filename);
