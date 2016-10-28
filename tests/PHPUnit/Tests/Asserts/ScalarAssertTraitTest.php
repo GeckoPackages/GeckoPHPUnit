@@ -104,7 +104,7 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that "1" \(double\) is of type int.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that double\#1 is of type int.$#
      */
     public function testAssertIntFail()
     {
@@ -113,7 +113,7 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that "\[\?\]" \(DateTime\) is of type bool.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that DateTime\# is of type bool.$#
      */
     public function testAssertBoolFail()
     {

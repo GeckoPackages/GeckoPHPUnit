@@ -137,7 +137,7 @@ See Traits and asserts listing for more details.
 
 ### Requirements
 
-PHP 5.4 (PHP7 supported). Optional HHVM support >= 3.9. PHPUnit >= 3.5.0.
+PHP 5.4 (PHP 5.3.6 for the constraints, PHP 7 supported). Optional HHVM support >= 3.9. PHPUnit >= 3.5.0.
 
 ### Install
 
@@ -175,6 +175,18 @@ class myTest extends \PHPUnit_Framework_TestCase
 
 The project is released under the MIT license, see the LICENSE file.
 
+### Contributions
+
+Contributions are welcome!
+
+### Semantic Versioning
+
+This project follows [Semantic Versioning](http://semver.org/).
+
+Kindly note:
+We do not keep a backwards compatible promise on the tests and tooling (such as document generation) of the project itself 
+nor the content and/or format of exception messages.
+
 EOF;
         $readMeTemplate = str_replace('#GENERATED_LISTING#', $listing, $readMeTemplate);
 
@@ -207,16 +219,15 @@ EOF;
         $capture = 'summary';
         foreach ($matches[0] as $docLine) {
             $docLine = trim($docLine);
-            if ('/**' === $docLine) {
-                continue; // start of doc
+            if ('/**' === $docLine) { // start of doc
+                continue;
             }
 
-            if ('*/' === $docLine) {
-                break; // end of doc
+            if ('*/' === $docLine) { // end of doc
+                break;
             }
 
-            if ('*' === $docLine) {
-                // empty line
+            if ('*' === $docLine) { // empty line
                 $capture = 'doc';
             }
 
@@ -228,12 +239,14 @@ EOF;
                     if (!array_key_exists($index, $doc['tags'])) {
                         $doc['tags'][$index] = array();
                     }
+
                     $doc['tags'][$index][] = '';
                 } else {
                     $index = substr($docLine, 1, $tagDivision - 1);
                     if (!array_key_exists($index, $doc['tags'])) {
                         $doc['tags'][$index] = array();
                     }
+
                     $doc['tags'][$index][] = substr($docLine, $tagDivision + 1);
                 }
             } else {
@@ -271,6 +284,7 @@ EOF;
 
             if ('*' === $docLine) {
                 $capture = 'long';
+
                 continue;
             }
 
@@ -283,6 +297,7 @@ EOF;
                 //$description = count($matches[2]) > 2 ? $matches[3] : null;
 
                 $methodDoc['params'][$name] = array('type' => $type);
+
                 continue;
             }
 

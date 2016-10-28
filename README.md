@@ -7,7 +7,7 @@ The asserts are provided using Traits so no changes are needed in the hierarchy 
 
 The additional asserts are provided through the Traits:
 
-- **FileExistsTrait**
+- **FileExistsAssertTrait**
   Replaces the PHPUnit `assertFileExists` method. This assert does not pass if there is a directory rather than a file.
 - **FileSystemAssertTrait**
   Provides asserts for testing directories, files and symbolic links.
@@ -20,7 +20,7 @@ See Traits and asserts listing for more details.
 
 ### Requirements
 
-PHP 5.4 (PHP7 supported). Optional HHVM support >= 3.9. PHPUnit >= 3.5.0.
+PHP 5.4 (PHP 5.3.6 for the constraints, PHP 7 supported). Optional HHVM support >= 3.9. PHPUnit >= 3.5.0.
 
 ### Install
 
@@ -54,10 +54,10 @@ class myTest extends \PHPUnit_Framework_TestCase
 
 # Traits and asserts listing
 
-## FileExistsTrait
-###### GeckoPackages\PHPUnit\Asserts\FileExistsTrait
+## FileExistsAssertTrait
+###### GeckoPackages\PHPUnit\Asserts\FileExistsAssertTrait
 Replacement for PHPUnits `assertFileExists` and `assertFileNotExists`.
-Asserts when the filename exists and is a regular file, i.e. directories do not pass.
+Asserts when the filename exists and is a regular file, i.e. directories do not pass (symlink to a file does).
 (Note. Since this changes the default behaviour of the PHPUnit assert this has been placed in a separate trait)
 
 Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
@@ -94,7 +94,7 @@ Assert that a directory exists and is not empty.
 
 #### assertDirectoryExists()
 ###### assertDirectoryExists(string $filename [,string $message = ''])
-Assert that a directory exists.
+Assert that a directory exists (are is a symlink to a directory).
 
 The inverse assertion
 #### assertDirectoryNotExists()
@@ -234,3 +234,15 @@ Assert string is valid XML.
 ### License
 
 The project is released under the MIT license, see the LICENSE file.
+
+### Contributions
+
+Contributions are welcome!
+
+### Semantic Versioning
+
+This project follows [Semantic Versioning](http://semver.org/).
+
+Kindly note:
+We do not keep a backwards compatible promise on the tests and tooling (such as document generation) of the project itself 
+nor the content and/or format of exception messages.

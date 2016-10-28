@@ -12,6 +12,8 @@
 namespace GeckoPackages\PHPUnit\Constraints;
 
 /**
+ * @api
+ *
  * @author SpacePossum
  */
 final class DirectoryEmptyConstraint extends \PHPUnit_Framework_Constraint
@@ -21,6 +23,10 @@ final class DirectoryEmptyConstraint extends \PHPUnit_Framework_Constraint
      */
     protected function matches($other)
     {
+        if (!is_string($other) || !is_dir($other)) {
+            return false;
+        }
+
         foreach (new \DirectoryIterator($other) as $file) {
             if ($file->isDot()) {
                 continue;
@@ -37,7 +43,23 @@ final class DirectoryEmptyConstraint extends \PHPUnit_Framework_Constraint
      */
     protected function failureDescription($other)
     {
-        return sprintf('directory "%s" is empty', $other);
+        if (is_object($other)) {
+            $type = sprintf('%s#%s', get_class($other), method_exists($other, '__toString') ? $other->__toString() : '');
+        } elseif (null === $other) {
+            $type = 'null';
+        } elseif (!is_string($other)) {
+            $type = gettype($other).'#'.$other;
+        } elseif (is_link($other)) {
+            $type = 'link to file#'.$other;
+        } elseif (is_file($other)) {
+            $type = 'file#'.$other;
+        } elseif (is_dir($other)) {
+            $type = 'directory#'.$other;
+        } else {
+            $type = $other;
+        }
+
+        return $type.' is an empty directory';
     }
 
     /**
@@ -45,6 +67,6 @@ final class DirectoryEmptyConstraint extends \PHPUnit_Framework_Constraint
      */
     public function toString()
     {
-        return 'directory is empty';
+        return 'is an empty directory';
     }
 }

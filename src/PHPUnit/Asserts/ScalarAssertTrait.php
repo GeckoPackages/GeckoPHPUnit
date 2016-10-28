@@ -71,6 +71,17 @@ trait ScalarAssertTrait
     }
 
     /**
+     * Assert value is a scalar.
+     *
+     * @param mixed  $actual
+     * @param string $message
+     */
+    public static function assertScalar($actual, $message = '')
+    {
+        self::assertTypeOfScalar($actual, $message, 'assertScalar', new ScalarConstraint(ScalarConstraint::TYPE_SCALAR));
+    }
+
+    /**
      * Assert value is a string.
      *
      * @param mixed  $actual
@@ -89,8 +100,9 @@ trait ScalarAssertTrait
      */
     public static function assertStringIsEmpty($actual, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsEmpty', array('assertEmpty'));
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
+
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsEmpty', array('assertEmpty'));
         self::assertEmpty($actual, $message);
     }
 
@@ -102,8 +114,9 @@ trait ScalarAssertTrait
      */
     public static function assertStringIsNotEmpty($actual, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotEmpty', array('assertNotEmpty'));
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
+
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotEmpty', array('assertNotEmpty'));
         self::assertNotEmpty($actual, $message);
     }
 
@@ -124,8 +137,9 @@ trait ScalarAssertTrait
      */
     public static function assertStringIsWhiteSpace($actual, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsWhiteSpace', array('assertEmpty'));
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
+
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsWhiteSpace', array('assertEmpty'));
         self::assertEmpty(trim($actual), $message);
     }
 
@@ -146,20 +160,10 @@ trait ScalarAssertTrait
      */
     public static function assertStringIsNotWhiteSpace($actual, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotWhiteSpace', array('assertNotEmpty'));
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
-        self::assertNotEmpty(trim($actual), $message);
-    }
 
-    /**
-     * Assert value is a scalar.
-     *
-     * @param mixed  $actual
-     * @param string $message
-     */
-    public static function assertScalar($actual, $message = '')
-    {
-        self::assertTypeOfScalar($actual, $message, 'assertScalar', new ScalarConstraint(ScalarConstraint::TYPE_SCALAR));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotWhiteSpace', array('assertNotEmpty'));
+        self::assertNotEmpty(trim($actual), $message);
     }
 
     /**
@@ -207,17 +211,6 @@ trait ScalarAssertTrait
     }
 
     /**
-     * Assert value is not a string.
-     *
-     * @param mixed  $actual
-     * @param string $message
-     */
-    public static function assertNotString($actual, $message = '')
-    {
-        self::assertTypeOfScalar($actual, $message, 'assertNotString', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_STRING)));
-    }
-
-    /**
      * Assert value is not a scalar.
      *
      * @param mixed  $actual
@@ -226,6 +219,17 @@ trait ScalarAssertTrait
     public static function assertNotScalar($actual, $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertNotScalar', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_SCALAR)));
+    }
+
+    /**
+     * Assert value is not a string.
+     *
+     * @param mixed  $actual
+     * @param string $message
+     */
+    public static function assertNotString($actual, $message = '')
+    {
+        self::assertTypeOfScalar($actual, $message, 'assertNotString', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_STRING)));
     }
 
     private static function assertTypeOfScalar($actual, $message, $method, \PHPUnit_Framework_Constraint $constraint)

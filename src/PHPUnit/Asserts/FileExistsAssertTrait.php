@@ -17,7 +17,7 @@ use GeckoPackages\PHPUnit\Constraints\FileExistsConstraint;
  * Replaces the PHPUnit `assertFileExists` method. This assert does not pass if there is a directory rather than a file.
  *
  * Replacement for PHPUnits `assertFileExists` and `assertFileNotExists`.
- * Asserts when the filename exists and is a regular file, i.e. directories do not pass.
+ * Asserts when the filename exists and is a regular file, i.e. directories do not pass (symlink to a file does).
  * (Note. Since this changes the default behaviour of the PHPUnit assert this has been placed in a separate trait)
  *
  * @requires PHPUnit >= 3.0.0 (https://phpunit.de/)
@@ -26,7 +26,7 @@ use GeckoPackages\PHPUnit\Constraints\FileExistsConstraint;
  *
  * @author SpacePossum
  */
-trait FileExistsTrait
+trait FileExistsAssertTrait
 {
     /**
      * Assert the filename exists and is a regular file.
@@ -53,11 +53,6 @@ trait FileExistsTrait
     private static function assertFileExisting($filename, $message, $method, \PHPUnit_Framework_Constraint $constraint)
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
-
-        if (!is_string($filename)) {
-            throw AssertHelper::createArgumentException(__TRAIT__, $method, 'string', $filename);
-        }
-
         self::assertThat($filename, $constraint, $message);
     }
 }

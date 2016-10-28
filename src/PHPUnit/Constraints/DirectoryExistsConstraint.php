@@ -12,6 +12,8 @@
 namespace GeckoPackages\PHPUnit\Constraints;
 
 /**
+ * @api
+ *
  * @author SpacePossum
  */
 final class DirectoryExistsConstraint extends \PHPUnit_Framework_Constraint
@@ -21,7 +23,7 @@ final class DirectoryExistsConstraint extends \PHPUnit_Framework_Constraint
      */
     protected function matches($other)
     {
-        return is_dir($other);
+        return is_string($other) && is_dir($other);
     }
 
     /**
@@ -29,11 +31,21 @@ final class DirectoryExistsConstraint extends \PHPUnit_Framework_Constraint
      */
     protected function failureDescription($other)
     {
-        if (is_file($other)) {
-            return sprintf('file "%s" exists as directory', $other);
+        if (is_object($other)) {
+            $type = sprintf('%s#%s', get_class($other), method_exists($other, '__toString') ? $other->__toString() : '');
+        } elseif (null === $other) {
+            $type = 'null';
+        } elseif (!is_string($other)) {
+            $type = gettype($other).'#'.$other;
+        } elseif (is_link($other)) {
+            $type = 'link to file#'.$other;
+        } elseif (is_file($other)) {
+            $type = 'file#'.$other;
+        } else {
+            $type = $other;
         }
 
-        return sprintf('directory "%s" exists', $other);
+        return $type.' '.$this->toString();
     }
 
     /**
@@ -41,6 +53,6 @@ final class DirectoryExistsConstraint extends \PHPUnit_Framework_Constraint
      */
     public function toString()
     {
-        return 'directory exists';
+        return 'is a directory';
     }
 }

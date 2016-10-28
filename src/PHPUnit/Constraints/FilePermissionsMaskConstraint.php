@@ -12,6 +12,8 @@
 namespace GeckoPackages\PHPUnit\Constraints;
 
 /**
+ * @api
+ *
  * @author SpacePossum
  */
 final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
@@ -22,25 +24,12 @@ final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
     private $mask;
 
     /**
-     * @var string
+     * @param int $mask
      */
-    private $filename;
-
-    /**
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @param string $filename
-     * @param string $type     Type being tested, for example: link, file, directory
-     * @param int    $mask
-     */
-    public function __construct($mask, $filename, $type)
+    public function __construct($mask)
     {
         parent::__construct();
-        $this->filename = $filename;
-        $this->type = $type;
+
         $this->mask = $mask;
     }
 
@@ -49,7 +38,17 @@ final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
      */
     protected function matches($other)
     {
-        return ($other & $this->mask) === $this->mask;
+        if (!is_string($other) || !file_exists($other)) {
+            return false;
+        }
+
+        if (is_link($other)) {
+            $perms = lstat($other)['mode'];
+        } else {
+            $perms = fileperms($other);
+        }
+
+        return ($perms & $this->mask) === $this->mask;
     }
 
     /**
@@ -57,7 +56,31 @@ final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
      */
     protected function failureDescription($other)
     {
-        return sprintf('permission "%o" of %s "%s" %s', $other, $this->type, $this->filename, $this->toString());
+        if (!is_string($other)) {
+            if (is_object($other)) {
+                $type = sprintf('%s#%s', get_class($other), method_exists($other, '__toString') ? $other->__toString() : '');
+            } elseif (null === $other) {
+                $type = 'null';
+            } else {
+                $type = gettype($other).'#'.$other;
+            }
+
+            return $type.' '.$this->toString();
+        }
+
+        if (!file_exists($other)) {
+            return 'not file or directory#'.$other.' '.$this->toString();
+        }
+
+        if (is_link($other)) {
+            $type = 'link';
+            $perms = lstat($other)['mode'];
+        } else {
+            $type = is_file($other) ? 'file' : (is_dir($other) ? 'directory' : 'other');
+            $perms = fileperms($other);
+        }
+
+        return sprintf('%s#%s %o %s %o', $type, $other, $perms, $this->toString(), $this->mask);
     }
 
     /**
@@ -65,6 +88,6 @@ final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
      */
     public function toString()
     {
-        return sprintf('matches mask "%o"', $this->mask);
+        return 'permissions matches mask';
     }
 }

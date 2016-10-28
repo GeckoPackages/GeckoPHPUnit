@@ -24,7 +24,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Argument #1 \(integer#1234\) of XMLAssertTrait::assertXMLValid\(\) must be a string.$/
+     * @expectedExceptionMessageRegExp /^Failed asserting that integer\#1234 is valid XML.$/
      */
     public function testAssertXMLValidInvalidInput()
     {
@@ -43,7 +43,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that XML is valid\.[\n]\[fatal 4\] .+.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that test string is valid XML.[\n]\[fatal 4\] .+.$#
      */
     public function testAssertXMLValidFailure()
     {
@@ -52,7 +52,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that XML matches XSD\.[\n]\[error 1845\] .+.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that <note><test>Test</test></note> matches XSD.[\n]\[error 1845\] .+.$#
      */
     public function testAssertXMLMatchesXSDNotMatchingXML()
     {
@@ -61,7 +61,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that XML matches XSD\.[\n]\[fatal 4\] .+.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that b matches XSD.[\n]\[fatal 4\] .+.$#
      */
     public function testAssertXMLMatchesXSDInvalidXMLInvalidXSD()
     {
@@ -79,7 +79,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Argument #2 \(stdClass#\) of XMLAssertTrait::assertXMLMatchesXSD\(\) must be a string.$/
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# matches XSD.$#
      */
     public function testAssertXMLMatchesXSDInvalidInputXML()
     {

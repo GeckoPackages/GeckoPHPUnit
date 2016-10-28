@@ -2,4 +2,4 @@ composer.lock
 phpunit.xml
 vendor/
 tests/assets/test_link_file
-tests/assets/test_link
+tests/assets/test_link_dir
