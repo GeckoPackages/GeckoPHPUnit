@@ -9,6 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
+/**
+ * @internal
+ *
+ * @author SpacePossum
+ */
 abstract class AbstractGeckoPHPUnitTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -16,6 +21,12 @@ abstract class AbstractGeckoPHPUnitTest extends \PHPUnit_Framework_TestCase
      */
     protected function getAssetsDir()
     {
-        return __DIR__.'/../../assets/';
+        static $assertDir;
+
+        if (null === $assertDir) {
+            $assertDir = realpath(__DIR__.'/../../assets').'/';
+        }
+
+        return $assertDir;
     }
 }

@@ -12,6 +12,11 @@
 use GeckoPackages\PHPUnit\Constraints\FilePermissionsIsIdenticalConstraint;
 use GeckoPackages\PHPUnit\Constraints\ScalarConstraint;
 
+/**
+ * @internal
+ *
+ * @author SpacePossum
+ */
 final class BasicConstraintTest extends \PHPUnit_Framework_TestCase
 {
     /**

@@ -46,7 +46,7 @@ final class AssertHelper
     /**
      * @param string $trait      name of the trait used
      * @param string $methodName called method name
-     * @param string $message    123
+     * @param string $message
      *
      * @return \PHPUnit_Framework_Exception
      */

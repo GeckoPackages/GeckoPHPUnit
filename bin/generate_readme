@@ -1,10 +1,20 @@
 #!/usr/bin/env php
 <?php
-require_once __DIR__.'/vendor/autoload.php';
-require_once __DIR__.'/tests/PHPUnit/Tests/AbstractGeckoPHPUnitTest.php';
-require_once __DIR__.'/tests/PHPUnit/Tests/ReadMeTest.php';
 
-$readMeFile = __DIR__.'/README.md';
+/*
+ * This file is part of the GeckoPackages.
+ *
+ * (c) GeckoPackages https://github.com/GeckoPackages
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../tests/PHPUnit/Tests/AbstractGeckoPHPUnitTest.php';
+require_once __DIR__.'/../tests/PHPUnit/Tests/ReadMeTest.php';
+
+$readMeFile = __DIR__.'/../README.md';
 if (!file_exists($readMeFile)) {
     echo sprintf("\nCannot find \"%s\".\n", $readMeFile);
     exit(-1);

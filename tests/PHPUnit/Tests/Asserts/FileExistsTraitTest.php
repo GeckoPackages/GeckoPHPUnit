@@ -11,7 +11,14 @@
 
 use GeckoPackages\PHPUnit\Asserts\FileExistsTrait;
 
-final class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
+/**
+ * @requires PHP 5.4
+ *
+ * @internal
+ *
+ * @author SpacePossum
+ */
+final class FileExistsTraitTest extends AbstractGeckoPHPUnitFileTest
 {
     use FileExistsTrait;
 
@@ -32,35 +39,22 @@ final class FileExistsTraitTest extends AbstractGeckoPHPUnitTest
 
     public function provideFiles()
     {
-        // make symlinks if needed
-        if (!file_exists($this->getAssetsDir().'test_link') && false === @symlink($this->getAssetsDir().'_link_test_target_dir_', $this->getAssetsDir().'test_link')) {
-            $error = error_get_last();
-            $this->fail(
-                sprintf(
-                    'Failed to create symlink "%s" for target "%s".%s',
-                    $this->getAssetsDir().'test_link',
-                    $this->getAssetsDir().'_link_test_target_dir_',
-                    $error ? $error['message'] : ''
-                )
-            );
-        }
+        $dirLink = $this->getAssetsDir().'test_link';
+        $this->createSymlink(
+            $this->getAssetsDir().'_link_test_target_dir_',
+            $dirLink
+        );
 
-        if (!file_exists($this->getAssetsDir().'test_link_file') && false === symlink($this->getAssetsDir().'_link_test_target_dir_/placeholder.tmp', $this->getAssetsDir().'test_link_file')) {
-            $error = error_get_last();
-            $this->fail(
-                sprintf(
-                    'Failed to create symlink "%s" for target "%s".%s',
-                    $this->getAssetsDir().'test_link_file',
-                    $this->getAssetsDir().'_link_test_target_dir_/placeholder.tmp',
-                    $error ? $error['message'] : ''
-                )
-            );
-        }
+        $fileLink = $this->getAssetsDir().'test_link_file';
+        $this->createSymlink(
+            $this->getAssetsDir().'_link_test_target_dir_/placeholder.tmp',
+            $fileLink
+        );
 
         return [
             [true, __FILE__],
-            [true, $this->getAssetsDir().'test_link_file'], // sym link to file
-            [false, $this->getAssetsDir().'test_link'], // sym link to directory
+            [true, $fileLink],
+            [false, $dirLink],
             [false, __FILE__.time()],
             [false, __DIR__],
         ];

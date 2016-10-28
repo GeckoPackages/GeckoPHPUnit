@@ -14,6 +14,11 @@ use GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait;
 use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
 use GeckoPackages\PHPUnit\Asserts\XMLAssertTrait;
 
+/**
+ * @internal
+ *
+ * @author SpacePossum
+ */
 final class TestDummy
 {
     use FileExistsTrait;
@@ -22,11 +27,19 @@ final class TestDummy
     use XMLAssertTrait;
 }
 
+/**
+ * @internal
+ */
 final class TestDummy2
 {
     use FileSystemAssertTrait;
 }
 
+/**
+ * @requires PHP 5.4
+ *
+ * @internal
+ */
 final class AssertHelperTest extends AbstractGeckoPHPUnitTest
 {
     /**

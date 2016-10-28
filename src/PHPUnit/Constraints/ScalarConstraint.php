@@ -11,6 +11,9 @@
 
 namespace GeckoPackages\PHPUnit\Constraints;
 
+/**
+ * @author SpacePossum
+ */
 final class ScalarConstraint extends \PHPUnit_Framework_Constraint
 {
     const TYPE_SCALAR = 1;

@@ -11,6 +11,9 @@
 
 namespace GeckoPackages\PHPUnit\Constraints\XML;
 
+/**
+ * @author SpacePossum
+ */
 final class XMLValidConstraint extends AbstractXMLConstraint
 {
     /**

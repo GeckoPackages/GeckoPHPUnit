@@ -20,8 +20,7 @@ See Traits and asserts listing for more details.
 
 ### Requirements
 
-PHP 5.4 (PHP7 supported). Optional HHVM support >= 3.9.
-PHPUnit >= 3.5.0
+PHP 5.4 (PHP7 supported). Optional HHVM support >= 3.9. PHPUnit >= 3.5.0.
 
 ### Install
 
@@ -30,7 +29,7 @@ Add the package to your `composer.json`.
 
 ```
 "require-dev": {
-    "gecko-packages/gecko-php-unit" : "1.0"
+    "gecko-packages/gecko-php-unit" : "^1.0"
 }
 ```
 

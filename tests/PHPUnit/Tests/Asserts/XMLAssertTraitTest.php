@@ -11,6 +11,13 @@
 
 use GeckoPackages\PHPUnit\Asserts\XMLAssertTrait;
 
+/**
+ * @requires PHP 5.4
+ *
+ * @internal
+ *
+ * @author SpacePossum
+ */
 final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 {
     use XMLAssertTrait;

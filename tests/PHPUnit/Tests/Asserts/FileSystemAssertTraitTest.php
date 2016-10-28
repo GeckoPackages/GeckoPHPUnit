@@ -11,7 +11,14 @@
 
 use GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait;
 
-final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
+/**
+ * @requires PHP 5.4
+ *
+ * @internal
+ *
+ * @author SpacePossum
+ */
+final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 {
     use FileSystemAssertTrait;
 
@@ -21,7 +28,6 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
         mkdir($dir);
         $this->assertDirectoryEmpty($dir);
         rmdir($dir);
-
         $this->assertDirectoryNotEmpty(__DIR__);
     }
 
@@ -45,10 +51,11 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     public function provideFiles()
     {
-        // make symlink if needed
-        if (!file_exists($this->getAssetsDir().'test_link')) {
-            symlink($this->getAssetsDir().'_link_test_target_dir_', $this->getAssetsDir().'test_link');
-        }
+        $link = $this->getAssetsDir().'test_link';
+        $this->createSymlink(
+            $this->getAssetsDir().'_link_test_target_dir_',
+            $link
+        );
 
         return [
             [0775, __DIR__],
@@ -58,7 +65,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
             [0664, __FILE__],
             [100664, __FILE__],
             ['-rw-rw-r--', __FILE__],
-            ['lrwxrwxrwx', $this->getAssetsDir().'test_link'],
+            ['lrwxrwxrwx', $link],
         ];
     }
 
@@ -82,12 +89,13 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     public function testAssertFileIsLink()
     {
-        // make symlink if needed
-        if (!file_exists($this->getAssetsDir().'test_link')) {
-            symlink($this->getAssetsDir().'_link_test_target_dir_', $this->getAssetsDir().'test_link');
-        }
+        $link = $this->getAssetsDir().'test_link';
+        $this->createSymlink(
+            $this->getAssetsDir().'_link_test_target_dir_',
+            $link
+        );
 
-        $this->assertFileIsLink($this->getAssetsDir().'test_link');
+        $this->assertFileIsLink($link);
         $this->assertFileIsNotLink(__FILE__);
     }
 
@@ -143,12 +151,13 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     public function testAssertFilePermissionLink()
     {
-        // make symlink if needed
-        if (!file_exists($this->getAssetsDir().'test_link')) {
-            symlink($this->getAssetsDir().'_link_test_target_dir_', $this->getAssetsDir().'test_link');
-        }
+        $link = $this->getAssetsDir().'test_link';
+        $this->createSymlink(
+            $this->getAssetsDir().'_link_test_target_dir_',
+            $link
+        );
 
-        $this->assertFilePermissionMask(0664, $this->getAssetsDir().'test_link');
+        $this->assertFilePermissionMask(0664, $link);
     }
 
     /**

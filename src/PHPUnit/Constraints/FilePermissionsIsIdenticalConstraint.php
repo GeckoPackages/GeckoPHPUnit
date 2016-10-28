@@ -11,6 +11,9 @@
 
 namespace GeckoPackages\PHPUnit\Constraints;
 
+/**
+ * @author SpacePossum
+ */
 final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Constraint_IsIdentical
 {
     /**

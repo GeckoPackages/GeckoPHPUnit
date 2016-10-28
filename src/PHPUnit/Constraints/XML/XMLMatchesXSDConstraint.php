@@ -11,6 +11,9 @@
 
 namespace GeckoPackages\PHPUnit\Constraints\XML;
 
+/**
+ * @author SpacePossum
+ */
 class XMLMatchesXSDConstraint extends AbstractXMLConstraint
 {
     /**
@@ -24,8 +27,7 @@ class XMLMatchesXSDConstraint extends AbstractXMLConstraint
     public function __construct($XSD)
     {
         parent::__construct();
-        $XSD = str_replace('http://www.w3.org/2001/xml.xsd', 'file:////'.__DIR__.'/schema/xml.xsd', $XSD);
-        $this->XSD = $XSD;
+        $this->XSD = str_replace('http://www.w3.org/2001/xml.xsd', 'file:////'.__DIR__.'/schema/xml.xsd', $XSD);
     }
 
     /**

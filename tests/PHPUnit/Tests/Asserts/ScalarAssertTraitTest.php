@@ -11,6 +11,13 @@
 
 use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
 
+/**
+ * @requires PHP 5.4
+ *
+ * @internal
+ *
+ * @author SpacePossum
+ */
 final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
 {
     use ScalarAssertTrait;

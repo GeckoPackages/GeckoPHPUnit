@@ -4,7 +4,7 @@
     "homepage": "https://github.com/GeckoPackages",
     "description": "Additional PHPUnit tests.",
     "license": "MIT",
-    "keywords" : ["PHPUnit", "Extension", "FileSystem"],
+    "keywords": ["PHPUnit", "Extension", "FileSystem"],
     "require": {
         "php": "^5.4 || ^7.0"
     },

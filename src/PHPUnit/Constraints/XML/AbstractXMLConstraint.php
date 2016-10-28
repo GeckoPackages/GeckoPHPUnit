@@ -13,6 +13,8 @@ namespace GeckoPackages\PHPUnit\Constraints\XML;
 
 /**
  * @internal
+ *
+ * @author SpacePossum
  */
 abstract class AbstractXMLConstraint extends \PHPUnit_Framework_Constraint
 {

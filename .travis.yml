@@ -38,4 +38,5 @@ install:
 
 script:
     - phpunit --verbose
-    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then php php-cs-fixer.phar --dry-run -v --config-file=.php_cs.dist fix; fi
+    - phpenv config-rm xdebug.ini || return 0
+    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then php php-cs-fixer.phar --dry-run -v --config-file=.php_cs fix; fi
