@@ -16,17 +16,17 @@
  */
 final class ReadMeTest extends \PHPUnit_Framework_TestCase
 {
-    public function testReadMe()
-    {
-        $this->assertStringEqualsFile(__DIR__.'/../../../../README.md', $this->generateReadMe());
-    }
-
     public function generateReadMe()
     {
         require_once __DIR__.'/ReadMeGenerator.php';
         $generator = new ReadMeGenerator();
 
         return $generator->generateReadMe($this->getClasses());
+    }
+
+    public function testReadMe()
+    {
+        $this->assertStringEqualsFile(__DIR__.'/../../../../README.md', $this->generateReadMe());
     }
 
     /**

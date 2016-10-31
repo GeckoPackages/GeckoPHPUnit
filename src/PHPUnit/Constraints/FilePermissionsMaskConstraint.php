@@ -43,7 +43,8 @@ final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
         }
 
         if (is_link($other)) {
-            $perms = lstat($other)['mode'];
+            $perms = lstat($other);
+            $perms = $perms['mode'];
         } else {
             $perms = fileperms($other);
         }
@@ -74,7 +75,8 @@ final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
 
         if (is_link($other)) {
             $type = 'link';
-            $perms = lstat($other)['mode'];
+            $perms = lstat($other);
+            $perms = $perms['mode'];
         } else {
             $type = is_file($other) ? 'file' : (is_dir($other) ? 'directory' : 'other');
             $perms = fileperms($other);

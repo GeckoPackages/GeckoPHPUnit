@@ -162,7 +162,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is an empty directory.$#
      */
     public function testAssertDirectoryEmptyFail()
@@ -171,7 +171,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that a/b/c/d is a directory.$#
      */
     public function testAssertDirectoryExistsFail()
@@ -180,7 +180,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php is a directory.$#
      */
     public function testAssertDirectoryExistsFile()
@@ -198,7 +198,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php is a link.$#
      */
     public function testAssertFileIsLinkFailFile()
@@ -207,7 +207,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a link.$#
      */
     public function testAssertFileIsLinkFailDirectory()
@@ -237,7 +237,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
      * @expectedException PHPUnit_Framework_Exception
      * @expectedExceptionMessageRegExp #^Argument \#1 \(stdClass\#\) of FileSystemAssertTrait::assertFileHasPermissions\(\) must be an int \(>= 0\) or string.$#
      */
-    public function testAssertFileHasPermissionsFailStdClass()
+    public function testAssertFileHasPermissionsFailObject()
     {
         $this->assertFileHasPermissions(new \stdClass(), __FILE__);
     }

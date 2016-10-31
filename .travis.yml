@@ -39,6 +39,6 @@ install:
     - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.12.1/php-cs-fixer.phar -o php-cs-fixer.phar; fi
 
 script:
-    - if [[ $TRAVIS_PHP_VERSION = 5.3 ]]; then phpunit --verbose --testsuite "5.3"; else phpunit --verbose; fi
+    - if [[ $TRAVIS_PHP_VERSION = 5.3 ]]; then phpunit --verbose --testsuite "5.3.6"; else phpunit --verbose; fi
     - phpenv config-rm xdebug.ini || return 0
     - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then php php-cs-fixer.phar --dry-run -v --config-file=.php_cs fix; fi

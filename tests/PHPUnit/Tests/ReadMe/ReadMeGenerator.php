@@ -37,6 +37,8 @@ final class ReadMeGenerator
 
             $docs[$class] = array('classDoc' => $classDoc, 'methods' => array());
             $reflectionMethods = $reflection->getMethods();
+
+            /** @var ReflectionMethod $method */
             foreach ($reflectionMethods as $method) {
                 $methodName = $method->name;
                 $method = $reflection->getMethod($methodName);
@@ -146,7 +148,7 @@ Add the package to your `composer.json`.
 
 ```
 "require-dev": {
-    "gecko-packages/gecko-php-unit" : "^1.0"
+    "gecko-packages/gecko-php-unit" : "^2.0"
 }
 ```
 

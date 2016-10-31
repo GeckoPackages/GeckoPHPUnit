@@ -20,12 +20,12 @@ namespace GeckoPackages\PHPUnit\Constraints;
  */
 final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Constraint
 {
-    private static $permissionFormat = '#^[slbdcpu\-]([r-][w-][sxS-]){2}[r-][w-][txT-]$#';
-
     /**
      * @var int|string
      */
     private $permissions;
+
+    private static $permissionFormat = '#^[slbdcpu\-]([r-][w-][sxS-]){2}[r-][w-][txT-]$#';
 
     /**
      * @param int|string $permissions
@@ -81,7 +81,8 @@ final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Cons
         }
 
         if (is_link($other)) {
-            $perms = lstat($other)['mode'];
+            $perms = lstat($other);
+            $perms = $perms['mode'];
         } else {
             $perms = fileperms($other);
         }
@@ -125,7 +126,8 @@ final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Cons
         }
 
         if (is_link($other)) {
-            $perms = lstat($other)['mode'];
+            $perms = lstat($other);
+            $perms = $perms['mode'];
             $type = 'link';
         } else {
             $perms = fileperms($other);

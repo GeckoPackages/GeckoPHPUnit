@@ -97,16 +97,6 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null permissions are equal.$#
-     */
-    public function testFilePermissionsMaskConstraintNull()
-    {
-        $c = new FilePermissionsIsIdenticalConstraint(0777);
-        $c->evaluate(null);
-    }
-
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 permissions are equal.$#
      */
     public function testFilePermissionsMaskConstraintInt()
@@ -117,22 +107,32 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# permissions are equal.$#
-     */
-    public function testFilePermissionsMaskConstraintObject()
-    {
-        $c = new FilePermissionsIsIdenticalConstraint(0777);
-        $c->evaluate(new \stdClass());
-    }
-
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that not file or directory\#_does_not_exists_ permissions are equal.$#
      */
     public function testFilePermissionsMaskConstraintNoFile()
     {
         $c = new FilePermissionsIsIdenticalConstraint(0777);
         $c->evaluate('_does_not_exists_');
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null permissions are equal.$#
+     */
+    public function testFilePermissionsMaskConstraintNull()
+    {
+        $c = new FilePermissionsIsIdenticalConstraint(0777);
+        $c->evaluate(null);
+    }
+
+    /**
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# permissions are equal.$#
+     */
+    public function testFilePermissionsMaskConstraintObject()
+    {
+        $c = new FilePermissionsIsIdenticalConstraint(0777);
+        $c->evaluate(new \stdClass());
     }
 
     public function testFilePermissionsMaskConstraintFileLink()
@@ -224,7 +224,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
      *
      * @dataProvider provideFilePermissions
      */
-    public function testGetFilePermissionsAsString($expected, $input)
+    public function testPermissionsGetAsString($expected, $input)
     {
         $reflection = new \ReflectionClass('GeckoPackages\PHPUnit\Constraints\FilePermissionsIsIdenticalConstraint');
         $method = $reflection->getMethod('getFilePermissionsAsString');

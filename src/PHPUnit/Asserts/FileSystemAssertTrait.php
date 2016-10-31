@@ -42,7 +42,7 @@ trait FileSystemAssertTrait
     }
 
     /**
-     * Assert that a directory exists (are is a symlink to a directory).
+     * Assert that a directory exists (or is a symlink to a directory).
      *
      * @param string $filename
      * @param string $message

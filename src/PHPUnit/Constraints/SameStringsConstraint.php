@@ -25,10 +25,10 @@ final class SameStringsConstraint extends \PHPUnit_Framework_Constraint_IsIdenti
             return '';
         }
 
-        return ' #Warning: Strings contain different line endings! Debug using remaping ["\r" => "R", "\n" => "N", "\t" => "T"]:'
-        ."\n"
-        .' -'.str_replace(["\r", "\n", "\t"], ['R', 'N', 'T'], $other)
-        ."\n"
-        .' +'.str_replace(["\r", "\n", "\t"], ['R', 'N', 'T'], $this->value);
+        return ' #Warning: Strings contain different line endings! Debug using remapping ["\r" => "R", "\n" => "N", "\t" => "T"]:'
+            ."\n"
+            .' -'.str_replace(array("\r", "\n", "\t"), array('R', 'N', 'T'), $other)
+            ."\n"
+            .' +'.str_replace(array("\r", "\n", "\t"), array('R', 'N', 'T'), $this->value);
     }
 }

@@ -22,14 +22,9 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
 {
     use ScalarAssertTrait;
 
-    public function testAssertScalar()
+    public function testAssertArray()
     {
-        $this->assertScalar(1);
-    }
-
-    public function testAssertInt()
-    {
-        $this->assertInt(1);
+        $this->assertArray(array());
     }
 
     public function testAssertBool()
@@ -37,29 +32,13 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertBool(true);
     }
 
-    public function testAssertString()
+    /**
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that DateTime\# is of type bool.$#
+     */
+    public function testAssertBoolFail()
     {
-        $this->assertString('test');
-    }
-
-    public function testAssertStringIsEmpty()
-    {
-        $this->assertStringIsEmpty('');
-    }
-
-    public function testAssertStringIsNotEmpty()
-    {
-        $this->assertStringIsNotEmpty('   a');
-    }
-
-    public function testAssertStringIsWhiteSpace()
-    {
-        $this->assertStringIsWhiteSpace("\n\t  \n");
-    }
-
-    public function testAssertStringIsNotWhiteSpace()
-    {
-        $this->assertStringIsNotWhiteSpace("\n\t  \n1");
+        $this->assertBool(new \DateTime());
     }
 
     public function testAssertFloat()
@@ -67,14 +46,28 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertFloat(1.0);
     }
 
-    public function testAssertArray()
+    public function testAssertInt()
     {
-        $this->assertArray(array());
+        $this->assertInt(1);
     }
 
-    public function testAssertNotScalar()
+    /**
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that double\#1 is of type int.$#
+     */
+    public function testAssertIntFail()
     {
-        $this->assertNotScalar(new \stdClass());
+        $this->assertInt(1.0);
+    }
+
+    public function testAssertScalar()
+    {
+        $this->assertScalar(1);
+    }
+
+    public function testAssertString()
+    {
+        $this->assertString('test');
     }
 
     public function testAssertNotArray()
@@ -97,44 +90,13 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertNotInt('a');
     }
 
+    public function testAssertNotScalar()
+    {
+        $this->assertNotScalar(new \stdClass());
+    }
+
     public function testAssertNotString()
     {
         $this->assertNotString(false);
-    }
-
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that double\#1 is of type int.$#
-     */
-    public function testAssertIntFail()
-    {
-        $this->assertInt(1.0);
-    }
-
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that DateTime\# is of type bool.$#
-     */
-    public function testAssertBoolFail()
-    {
-        $this->assertBool(new \DateTime());
-    }
-
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty.$#
-     */
-    public function testAssertStringIsNotEmptyFail()
-    {
-        $this->assertStringIsNotEmpty('');
-    }
-
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty.$#
-     */
-    public function testAssertStringIsWhiteSpaceFail()
-    {
-        $this->assertStringIsWhiteSpace('test');
     }
 }

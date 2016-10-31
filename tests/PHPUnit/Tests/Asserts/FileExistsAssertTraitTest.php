@@ -62,46 +62,46 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a file.$#
+     */
+    public function testAssertFileExistsDirectory()
+    {
+        $this->assertFileExists(__DIR__);
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_Exception
      * @expectedExceptionMessageRegExp /^Failed asserting that integer\#123 is a file.$/
      */
-    public function testFailIntMessage()
+    public function testAssertFileExistsInt()
     {
         $this->assertFileExists(123);
     }
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that stdClass\# is a file.$/
-     */
-    public function testFailStdClassMessage()
-    {
-        $this->assertFileExists(new \stdClass());
-    }
-
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that null is a file.$/
-     */
-    public function testFailNullMessage()
-    {
-        $this->assertFileExists(null);
-    }
-
-    /**
-     * @expectedException PHPUnit_Framework_Exception
      * @expectedExceptionMessageRegExp /^Failed asserting that _no_file_ is a file.$/
      */
-    public function testNoFileFoundMessage()
+    public function testAssertFileExistsNoFile()
     {
         $this->assertFileExists('_no_file_');
     }
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a file.$#
+     * @expectedExceptionMessageRegExp /^Failed asserting that null is a file.$/
      */
-    public function testFailDirectoryMessage()
+    public function testAssertFileExistsNull()
     {
-        $this->assertFileExists(__DIR__);
+        $this->assertFileExists(null);
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_Exception
+     * @expectedExceptionMessageRegExp /^Failed asserting that stdClass\# is a file.$/
+     */
+    public function testAssertFileExistsObject()
+    {
+        $this->assertFileExists(new \stdClass());
     }
 }
