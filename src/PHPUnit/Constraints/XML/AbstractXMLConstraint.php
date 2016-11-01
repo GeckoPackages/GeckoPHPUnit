@@ -13,34 +13,55 @@ namespace GeckoPackages\PHPUnit\Constraints\XML;
 
 /**
  * @internal
+ *
+ * @author SpacePossum
  */
 abstract class AbstractXMLConstraint extends \PHPUnit_Framework_Constraint
 {
     /**
      * @var string[]
      */
-    protected $XMLConstraintErrors = [];
+    protected $XMLConstraintErrors = array();
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function matches($other)
+    {
+        if (!is_string($other)) {
+            return false;
+        }
+
+        return $this->stringMatches($other);
+    }
+
+    /**
+     * @param string $other
+     *
+     * @return bool
+     */
+    abstract protected function stringMatches($other);
 
     protected function setXMLConstraintErrors()
     {
         foreach (libxml_get_errors() as $error) {
             switch ($error->level) {
-                case LIBXML_ERR_WARNING:{
+                case LIBXML_ERR_WARNING:
                     $level = 'warning ';
+
                     break;
-                }
-                case LIBXML_ERR_ERROR:{
+                case LIBXML_ERR_ERROR:
                     $level = 'error ';
+
                     break;
-                }
-                case LIBXML_ERR_FATAL:{
+                case LIBXML_ERR_FATAL:
                     $level = 'fatal ';
+
                     break;
-                }
-                default:{
+                default:
                     $level = '';
+
                     break;
-                }
             }
 
             $this->XMLConstraintErrors[] = sprintf('[%s%s] %s (line %d, column %d).', $level, $error->code, trim($error->message), $error->line, $error->column);
@@ -52,6 +73,18 @@ abstract class AbstractXMLConstraint extends \PHPUnit_Framework_Constraint
      */
     protected function failureDescription($other)
     {
-        return sprintf("%s.\n%s", $this->toString(), implode("\n", $this->XMLConstraintErrors));
+        if (!is_string($other)) {
+            if (is_object($other)) {
+                $type = sprintf('%s#%s', get_class($other), method_exists($other, '__toString') ? $other->__toString() : '');
+            } elseif (null === $other) {
+                $type = 'null';
+            } else {
+                $type = gettype($other).'#'.$other;
+            }
+
+            return $type.' '.$this->toString();
+        }
+
+        return sprintf("%s %s.\n%s", $other, $this->toString(), implode("\n", $this->XMLConstraintErrors));
     }
 }

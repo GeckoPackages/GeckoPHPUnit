@@ -9,7 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-class ReadMeGenerator
+/**
+ * @internal
+ *
+ * @author SpacePossum
+ */
+final class ReadMeGenerator
 {
     /**
      * @param string[] $classes
@@ -18,7 +23,7 @@ class ReadMeGenerator
      */
     public function generateReadMe(array $classes)
     {
-        $docs = [];
+        $docs = array();
         foreach ($classes as $class) {
             $reflection = new ReflectionClass($class);
             $classDoc = $this->getClassDoc($reflection->getDocComment());
@@ -30,8 +35,10 @@ class ReadMeGenerator
                 continue;
             }
 
-            $docs[$class] = ['classDoc' => $classDoc, 'methods' => []];
+            $docs[$class] = array('classDoc' => $classDoc, 'methods' => array());
             $reflectionMethods = $reflection->getMethods();
+
+            /** @var ReflectionMethod $method */
             foreach ($reflectionMethods as $method) {
                 $methodName = $method->name;
                 $method = $reflection->getMethod($methodName);
@@ -62,7 +69,7 @@ class ReadMeGenerator
                         $doc['params'][$param->getName()]['default'] = $param->getDefaultValue();
                     }
                 }
-                $docs[$class]['methods'][$methodName] = ['doc' => $doc, 'name' => $methodName];
+                $docs[$class]['methods'][$methodName] = array('doc' => $doc, 'name' => $methodName);
             }
 
             ksort($docs[$class]['methods']);
@@ -74,6 +81,7 @@ class ReadMeGenerator
                     if (!array_key_exists($positive, $docs[$class]['methods'])) {
                         continue;
                     }
+
                     $docs[$class]['methods'][$positive]['not'] = $docs[$class]['methods'][$methodName];
                     unset($docs[$class]['methods'][$methodName]);
                 }
@@ -131,8 +139,7 @@ See Traits and asserts listing for more details.
 
 ### Requirements
 
-PHP 5.4 (PHP7 supported). Optional HHVM support >= 3.9.
-PHPUnit >= 3.5.0
+PHP 5.4 (PHP 5.3.6 for the constraints, PHP 7 supported). Optional HHVM support >= 3.9. PHPUnit >= 3.5.0.
 
 ### Install
 
@@ -141,7 +148,7 @@ Add the package to your `composer.json`.
 
 ```
 "require-dev": {
-    "gecko-packages/gecko-php-unit" : "1.0"
+    "gecko-packages/gecko-php-unit" : "^2.0"
 }
 ```
 
@@ -152,7 +159,7 @@ Please note we hint `-dev` here because typically you only need tests during dev
 Example usage of `FileSystemAssertTrait`.
 
 ```php
-class myTest extends PHPUnit_Framework_TestCase
+class myTest extends \PHPUnit_Framework_TestCase
 {
     use \GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait;
 
@@ -169,6 +176,18 @@ class myTest extends PHPUnit_Framework_TestCase
 ### License
 
 The project is released under the MIT license, see the LICENSE file.
+
+### Contributions
+
+Contributions are welcome!
+
+### Semantic Versioning
+
+This project follows [Semantic Versioning](http://semver.org/).
+
+Kindly note:
+We do not keep a backwards compatible promise on the tests and tooling (such as document generation) of the project itself 
+nor the content and/or format of exception messages.
 
 EOF;
         $readMeTemplate = str_replace('#GENERATED_LISTING#', $listing, $readMeTemplate);
@@ -197,21 +216,20 @@ EOF;
             return false;
         }
 
-        $doc = ['summary' => '', 'doc' => '', 'tags' => []];
+        $doc = array('summary' => '', 'doc' => '', 'tags' => array());
 
         $capture = 'summary';
         foreach ($matches[0] as $docLine) {
             $docLine = trim($docLine);
-            if ('/**' === $docLine) {
-                continue; // start of doc
+            if ('/**' === $docLine) { // start of doc
+                continue;
             }
 
-            if ('*/' === $docLine) {
-                break; // end of doc
+            if ('*/' === $docLine) { // end of doc
+                break;
             }
 
-            if ('*' === $docLine) {
-                // empty line
+            if ('*' === $docLine) { // empty line
                 $capture = 'doc';
             }
 
@@ -221,14 +239,16 @@ EOF;
                 if (false === $tagDivision) {
                     $index = substr($docLine, 1);
                     if (!array_key_exists($index, $doc['tags'])) {
-                        $doc['tags'][$index] = [];
+                        $doc['tags'][$index] = array();
                     }
+
                     $doc['tags'][$index][] = '';
                 } else {
                     $index = substr($docLine, 1, $tagDivision - 1);
                     if (!array_key_exists($index, $doc['tags'])) {
-                        $doc['tags'][$index] = [];
+                        $doc['tags'][$index] = array();
                     }
+
                     $doc['tags'][$index][] = substr($docLine, $tagDivision + 1);
                 }
             } else {
@@ -256,7 +276,7 @@ EOF;
             return false;
         }
 
-        $methodDoc = ['doc' => '', 'long' => '', 'params' => []];
+        $methodDoc = array('doc' => '', 'long' => '', 'params' => array());
         $capture = 'doc';
         foreach ($matches[0] as $docLine) {
             $docLine = trim($docLine);
@@ -266,6 +286,7 @@ EOF;
 
             if ('*' === $docLine) {
                 $capture = 'long';
+
                 continue;
             }
 
@@ -277,7 +298,8 @@ EOF;
                 $name = $matches[2];
                 //$description = count($matches[2]) > 2 ? $matches[3] : null;
 
-                $methodDoc['params'][$name] = ['type' => $type];
+                $methodDoc['params'][$name] = array('type' => $type);
+
                 continue;
             }
 

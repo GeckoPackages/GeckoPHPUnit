@@ -23,12 +23,12 @@ final class AssertHelper
     /**
      * @param string   $class              name of the class using trait;
      * @param string   $trait              name of the trait calling method;
-     * @param string   $methodName         called method name
-     * @param string[] $methodDependencies method dependencies
+     * @param string   $method             called method name
+     * @param string[] $methodDependencies list of methods the trait relies on
      */
-    public static function assertMethodDependency($class, $trait, $methodName, array $methodDependencies)
+    public static function assertMethodDependency($class, $trait, $method, array $methodDependencies)
     {
-        $missing = [];
+        $missing = array();
         foreach ($methodDependencies as $methodDependency) {
             if (!method_exists($class, $methodDependency)) {
                 $missing[] = sprintf('"%s"', $methodDependency);
@@ -39,54 +39,59 @@ final class AssertHelper
             return;
         }
 
-        $message = sprintf('Relies on missing %s %s', count($missing) > 1 ? 'methods' : 'method', implode(', ', $missing));
-        throw self::createException($trait, $methodName, $message);
-    }
-
-    /**
-     * @param string $trait      name of the trait used
-     * @param string $methodName called method name
-     * @param string $message    123
-     *
-     * @return \PHPUnit_Framework_Exception
-     */
-    public static function createException($trait, $methodName, $message)
-    {
-        return new \PHPUnit_Framework_Exception(
-            sprintf(
-                '%s::%s() %s.',
-                substr($trait, strrpos($trait, '\\') + 1),
-                $methodName,
-                $message
-            )
+        throw self::createException(
+            $trait,
+            $method,
+            sprintf('Relies on missing %s %s', count($missing) > 1 ? 'methods' : 'method', implode(', ', $missing))
         );
     }
 
     /**
-     * @param string $trait      name of the trait used
-     * @param string $methodName called method name
-     * @param string $typeValue  expected type description
-     * @param mixed  $value      given value
-     * @param int    $index      argument position
+     * @param string $trait                   name of the trait used
+     * @param string $method                  called method name
+     * @param string $expectedTypeForArgument expected type description
+     * @param mixed  $valueOfArgument         given value
+     * @param int    $index                   argument position
      *
      * @return \PHPUnit_Framework_Exception
      */
-    public static function createArgumentException($trait, $methodName, $typeValue, $value, $index = 1)
+    public static function createArgumentException($trait, $method, $expectedTypeForArgument, $valueOfArgument, $index = 1)
     {
-        if (is_object($value)) {
-            $value = sprintf('%s#%s', get_class($value), method_exists($value, '__toString') ? $value->toString() : '');
+        if (is_object($valueOfArgument)) {
+            $valueOfArgument = sprintf('%s#%s', get_class($valueOfArgument), method_exists($valueOfArgument, '__toString') ? $valueOfArgument->__toString() : '');
+        } elseif (null === $valueOfArgument) {
+            $valueOfArgument = 'null';
         } else {
-            $value = gettype($value).'#'.$value;
+            $valueOfArgument = gettype($valueOfArgument).'#'.$valueOfArgument;
         }
 
         return new \PHPUnit_Framework_Exception(
             sprintf(
                 'Argument #%d (%s) of %s::%s() must be %s.',
                 $index,
-                $value,
+                $valueOfArgument,
                 substr($trait, strrpos($trait, '\\') + 1),
-                $methodName,
-                (in_array($typeValue[0], ['a', 'e', 'i', 'o', 'u'], true) ? 'an' : 'a').' '.$typeValue
+                $method,
+                (in_array($expectedTypeForArgument[0], array('a', 'e', 'i', 'o', 'u'), true) ? 'an' : 'a').' '.$expectedTypeForArgument
+            )
+        );
+    }
+
+    /**
+     * @param string $trait   name of the trait used
+     * @param string $method  called method name
+     * @param string $message
+     *
+     * @return \PHPUnit_Framework_Exception
+     */
+    public static function createException($trait, $method, $message)
+    {
+        return new \PHPUnit_Framework_Exception(
+            sprintf(
+                '%s::%s() %s.',
+                substr($trait, strrpos($trait, '\\') + 1),
+                $method,
+                $message
             )
         );
     }

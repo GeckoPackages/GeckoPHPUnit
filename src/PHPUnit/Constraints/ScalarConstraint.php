@@ -11,6 +11,11 @@
 
 namespace GeckoPackages\PHPUnit\Constraints;
 
+/**
+ * @api
+ *
+ * @author SpacePossum
+ */
 final class ScalarConstraint extends \PHPUnit_Framework_Constraint
 {
     const TYPE_SCALAR = 1;
@@ -29,40 +34,43 @@ final class ScalarConstraint extends \PHPUnit_Framework_Constraint
     public function __construct($type)
     {
         parent::__construct();
+
         switch ($type) {
-            case self::TYPE_BOOL: {
+            case self::TYPE_BOOL:
                 $this->testFunction = 'is_bool';
                 $this->type = 'bool';
+
                 break;
-            }
-            case self::TYPE_INT: {
+            case self::TYPE_INT:
                 $this->testFunction = 'is_int';
                 $this->type = 'int';
+
                 break;
-            }
-            case self::TYPE_STRING: {
+            case self::TYPE_STRING:
                 $this->testFunction = 'is_string';
                 $this->type = 'string';
+
                 break;
-            }
-            case self::TYPE_FLOAT: {
+            case self::TYPE_FLOAT:
                 $this->testFunction = 'is_float';
                 $this->type = 'float';
+
                 break;
-            }
-            case self::TYPE_ARRAY: {
+            case self::TYPE_ARRAY:
                 $this->testFunction = 'is_array';
                 $this->type = 'array';
+
                 break;
-            }
-            case self::TYPE_SCALAR: {
+            case self::TYPE_SCALAR:
                 $this->testFunction = 'is_scalar';
                 $this->type = 'scalar';
+
                 break;
-            }
-            default: {
-                throw new \InvalidArgumentException(sprintf('Unknown ScalarConstraint type "%d" provided.', $type));
-            }
+            default:
+                throw new \InvalidArgumentException(sprintf(
+                    'Unknown ScalarConstraint type "%s" provided.',
+                    is_object($type) ? get_class($type) : (null === $type ? 'null' : gettype($type).'#'.$type)
+                ));
         }
     }
 
@@ -82,12 +90,14 @@ final class ScalarConstraint extends \PHPUnit_Framework_Constraint
     protected function failureDescription($other)
     {
         if (is_object($other)) {
-            $inputType = sprintf('"%s" (%s)', method_exists($other, '__toString') ? $other->toString() : '[?]', get_class($other));
+            $input = sprintf('%s#%s', get_class($other), method_exists($other, '__toString') ? $other->__toString() : '');
+        } elseif (null === $other) {
+            $input = 'null';
         } else {
-            $inputType = sprintf('"%s" (%s)', $other, gettype($other));
+            $input = gettype($other).'#'.$other;
         }
 
-        return sprintf('%s is of type %s', $inputType, $this->type);
+        return sprintf('%s is of type %s', $input, $this->type);
     }
 
     /**

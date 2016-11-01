@@ -11,7 +11,14 @@
 
 use GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait;
 
-class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
+/**
+ * @requires PHP 5.4
+ *
+ * @internal
+ *
+ * @author SpacePossum
+ */
+final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 {
     use FileSystemAssertTrait;
 
@@ -21,7 +28,6 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
         mkdir($dir);
         $this->assertDirectoryEmpty($dir);
         rmdir($dir);
-
         $this->assertDirectoryNotEmpty(__DIR__);
     }
 
@@ -45,26 +51,27 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     public function provideFiles()
     {
-        // make symlink if needed
-        if (!file_exists($this->getAssetsDir().'test_link')) {
-            symlink($this->getAssetsDir().'_link_test_target_dir_', $this->getAssetsDir().'test_link');
-        }
+        $link = $this->getAssetsDir().'test_link_dir';
+        $this->createSymlink(
+            $this->getAssetsDir().'_link_test_target_dir_',
+            $link
+        );
 
-        return [
-            [0775, __DIR__],
-            ['0775', __DIR__],
-            ['509', __DIR__],
-            ['drwxrwxr-x', __DIR__],
-            [0664, __FILE__],
-            [100664, __FILE__],
-            ['-rw-rw-r--', __FILE__],
-            ['lrwxrwxrwx', $this->getAssetsDir().'test_link'],
-        ];
+        return array(
+            array(0775, __DIR__),
+            array('0775', __DIR__),
+            array('509', __DIR__),
+            array('drwxrwxr-x', __DIR__),
+            array(0664, __FILE__),
+            array(100664, __FILE__),
+            array('-rw-rw-r--', __FILE__),
+            array('lrwxrwxrwx', $link),
+        );
     }
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #Failed asserting that permission 775 of directory "/.*PHPUnit/tests/PHPUnit/Tests/Asserts" is identical to permission 664.#
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/Tests/Asserts 0775 permissions are equal to 0664.$#
      */
     public function testAssertFileHasPermissionsFailureDir()
     {
@@ -73,7 +80,7 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #Failed asserting that permission 664 of file "/.*PHPUnit/tests/PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php" is identical to permission 555.#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php 0664 permissions are equal to 0555.$#
      */
     public function testAssertFileHasPermissionsFailureFile()
     {
@@ -82,39 +89,14 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     public function testAssertFileIsLink()
     {
-        // make symlink if needed
-        if (!file_exists($this->getAssetsDir().'test_link')) {
-            symlink($this->getAssetsDir().'_link_test_target_dir_', $this->getAssetsDir().'test_link');
-        }
+        $link = $this->getAssetsDir().'test_link_dir';
+        $this->createSymlink(
+            $this->getAssetsDir().'_link_test_target_dir_',
+            $link
+        );
 
-        $this->assertFileIsLink($this->getAssetsDir().'test_link');
+        $this->assertFileIsLink($link);
         $this->assertFileIsNotLink(__FILE__);
-    }
-
-    /**
-     * @param string $expected
-     * @param string $input
-     *
-     * @dataProvider provideFilePermissions
-     */
-    public function testGetFilePermissionsAsString($expected, $input)
-    {
-        $reflection = new \ReflectionClass($this);
-        $method = $reflection->getMethod('getFilePermissionsAsString');
-        $method->setAccessible(true);
-        $this->assertSame($expected, $method->invokeArgs($this, [$input]));
-    }
-
-    public function provideFilePermissions()
-    {
-        return [
-            ['drwxrwxr-x', fileperms(__DIR__)],
-            ['urwxrwxrwx', 0777],
-            ['prwxrwxrwx', 010777],
-            ['crwxrwxrwx', 020777],
-            ['brwxrwxrwx', 060777],
-            ['srwxrwxrwx', 0140777],
-        ];
     }
 
     /**
@@ -129,26 +111,27 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     public function provideFileMasks()
     {
-        return [
-            [0664],
-            [0000],
-            [0004],
-            [0060],
-            [0064],
-            [0600],
-            [0604],
-            [0660],
-        ];
+        return array(
+            array(0664),
+            array(0000),
+            array(0004),
+            array(0060),
+            array(0064),
+            array(0600),
+            array(0604),
+            array(0660),
+        );
     }
 
     public function testAssertFilePermissionLink()
     {
-        // make symlink if needed
-        if (!file_exists($this->getAssetsDir().'test_link')) {
-            symlink($this->getAssetsDir().'_link_test_target_dir_', $this->getAssetsDir().'test_link');
-        }
+        $link = $this->getAssetsDir().'test_link_dir';
+        $this->createSymlink(
+            $this->getAssetsDir().'_link_test_target_dir_',
+            $link
+        );
 
-        $this->assertFilePermissionMask(0664, $this->getAssetsDir().'test_link');
+        $this->assertFilePermissionMask(0664, $link);
     }
 
     /**
@@ -163,24 +146,24 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     public function provideFilePermissionNotMask()
     {
-        return [
-            [0007],
-            [0005],
-            [0055],
-            [0777],
-            [0005],
-            [0050],
-            [0764],
-            [0700],
-            [0704],
-            [0650],
-            [0764],
-        ];
+        return array(
+            array(0007),
+            array(0005),
+            array(0055),
+            array(0777),
+            array(0005),
+            array(0050),
+            array(0764),
+            array(0700),
+            array(0704),
+            array(0650),
+            array(0764),
+        );
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #Failed asserting that directory "/.*PHPUnit/tests/PHPUnit/Tests/Asserts" is empty.#
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is an empty directory.$#
      */
     public function testAssertDirectoryEmptyFail()
     {
@@ -188,8 +171,8 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Failed asserting that directory "a/b/c/d" exists.
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that a/b/c/d is a directory.$#
      */
     public function testAssertDirectoryExistsFail()
     {
@@ -197,8 +180,8 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #Failed asserting that file "/.*PHPUnit/tests/PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php" exists as directory.#
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php is a directory.$#
      */
     public function testAssertDirectoryExistsFile()
     {
@@ -207,7 +190,7 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (NULL#) of FileSystemAssertTrait::assertDirectoryExists() must be a string.
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is a directory.$#
      */
     public function testAssertDirectoryExistsFailNull()
     {
@@ -215,8 +198,8 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #Failed asserting that file "/.*PHPUnit/tests/PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php" is link.#
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php is a link.$#
      */
     public function testAssertFileIsLinkFailFile()
     {
@@ -224,8 +207,8 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #Failed asserting that directory "/.*PHPUnit/tests/PHPUnit/Tests/Asserts" is link.#
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a link.$#
      */
     public function testAssertFileIsLinkFailDirectory()
     {
@@ -234,16 +217,16 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (integer#123) of FileSystemAssertTrait::assertFileIsLink() must be a string.
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#678 is a link.$#
      */
     public function testAssertFileIsLinkFailInteger()
     {
-        $this->assertFileIsLink(123);
+        $this->assertFileIsLink(678);
     }
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (NULL#) of FileSystemAssertTrait::assertFileHasPermissions() must be an integer (>= 0) or string.
+     * @expectedExceptionMessageRegExp #^Argument \#1 \(null\) of FileSystemAssertTrait::assertFileHasPermissions\(\) must be an int \(>= 0\) or string.$#
      */
     public function testAssertFileHasPermissionsFailNull()
     {
@@ -252,16 +235,16 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (stdClass#) of FileSystemAssertTrait::assertFileHasPermissions() must be an integer (>= 0) or string.
+     * @expectedExceptionMessageRegExp #^Argument \#1 \(stdClass\#\) of FileSystemAssertTrait::assertFileHasPermissions\(\) must be an int \(>= 0\) or string.$#
      */
-    public function testAssertFileHasPermissionsFailStdClass()
+    public function testAssertFileHasPermissionsFailObject()
     {
         $this->assertFileHasPermissions(new \stdClass(), __FILE__);
     }
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage FileSystemAssertTrait::assertFileHasPermissions() Permission to match "invalidrwx" is not formatted correctly.
+     * @expectedExceptionMessageRegExp #^FileSystemAssertTrait::assertFileHasPermissions\(\) Permission to match "invalidrwx" is not formatted correctly.$#
      */
     public function testAssertFileHasPermissionsFailInvalidPermissionString()
     {
@@ -270,7 +253,16 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #2 (NULL#) of FileSystemAssertTrait::assertFileHasPermissions() must be a string.
+     * @expectedExceptionMessageRegExp #^Argument \#1 \(integer\#-1\) of FileSystemAssertTrait::assertFileHasPermissions\(\) must be an int \(>= 0\) or string.$#
+     */
+    public function testAssertFileHasPermissionsFailInvalidPermissionValue()
+    {
+        $this->assertFileHasPermissions(-1, __FILE__);
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_Exception
+     * @expectedExceptionMessageRegExp #^Failed asserting that null permissions are equal.$#
      */
     public function testAssertFileHasPermissionsFailFile()
     {
@@ -279,7 +271,7 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #Failed asserting that permission "100664" of file "/.*PHPUnit/tests/PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php" matches mask "777".#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts/FileSystemAssertTraitTest.php 100664 permissions matches mask 777.$#
      */
     public function testAssertFilePermissionMaskFail()
     {
@@ -288,7 +280,7 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #Failed asserting that permission "40775" of directory "/.*PHPUnit/tests/PHPUnit/Tests/Asserts" does not match mask "755".#
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts 40775 permissions does not match mask 755.$#
      */
     public function testAssertFilePermissionNotMaskFail()
     {
@@ -297,7 +289,7 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #1 (NULL#) of FileSystemAssertTrait::assertFilePermissionMask() must be an int.
+     * @expectedExceptionMessageRegExp #^Argument \#1 \(null\) of FileSystemAssertTrait::assertFilePermissionMask\(\) must be an int.$#
      */
     public function testAssertFilePermissionMaskInvalidArg1()
     {
@@ -306,44 +298,19 @@ class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Argument #2 (integer#123) of FileSystemAssertTrait::assertFilePermissionMask() must be a string.
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#89 permissions matches mask.$#
      */
     public function testAssertFilePermissionMaskInvalidArg2()
     {
-        $this->assertFilePermissionMask(0777, 123);
+        $this->assertFilePermissionMask(0777, 89);
     }
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessage Failed asserting that file "no_file" exists.
+     * @expectedExceptionMessageRegExp #^Failed asserting that not file or directory\#no_file permissions matches mask.$#
      */
     public function testAssertFilePermissionMaskInvalidArg2File()
     {
         $this->assertFilePermissionMask(0777, 'no_file');
-    }
-
-    public function testPermissionFormat()
-    {
-        $refection = new ReflectionClass($this);
-        $refectionProperty = $refection->getProperty('permissionFormat');
-        $refectionProperty->setAccessible(true);
-        $permissionFormat = $refectionProperty->getValue($this);
-
-        $this->assertRegExp($permissionFormat, 'lrwxrwxrwx');
-        $this->assertRegExp($permissionFormat, '-rw-rw-r--');
-        $this->assertRegExp($permissionFormat, 'drwxrwxr-x');
-        $this->assertRegExp($permissionFormat, 'd--s--S--t');
-
-        $this->assertNotRegExp($permissionFormat, ' d--s--S--t');
-        $this->assertNotRegExp($permissionFormat, 'd--s--S--t ');
-        $this->assertNotRegExp($permissionFormat, 'ad--s--S--t');
-        $this->assertNotRegExp($permissionFormat, 'd--s--S--ta');
-
-        $this->assertNotRegExp($permissionFormat, 'a');
-        $this->assertNotRegExp($permissionFormat, 'd-');
-        $this->assertNotRegExp($permissionFormat, '-rw-rw-r-');
-        $this->assertNotRegExp($permissionFormat, 'lrwxawxrwx');
-        $this->assertNotRegExp($permissionFormat, 'arwxrwxr-x');
-        $this->assertNotRegExp($permissionFormat, '-rrrwwwxxx');
     }
 }

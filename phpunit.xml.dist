@@ -12,7 +12,10 @@
     bootstrap="./tests/autoload.php"
 >
     <testsuites>
-        <testsuite name="GeckoPackages PHPUnit Test">
+        <testsuite name="5.3.6">
+            <directory>./tests/PHPUnit/Tests/Constraints</directory>
+        </testsuite>
+        <testsuite name="All">
             <directory>./tests/PHPUnit/Tests/</directory>
         </testsuite>
     </testsuites>

@@ -71,87 +71,6 @@ trait ScalarAssertTrait
     }
 
     /**
-     * Assert value is a string.
-     *
-     * @param mixed  $actual
-     * @param string $message
-     */
-    public static function assertString($actual, $message = '')
-    {
-        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
-    }
-
-    /**
-     * Assert value is a string and is empty.
-     *
-     * @param mixed  $actual
-     * @param string $message
-     */
-    public static function assertStringIsEmpty($actual, $message = '')
-    {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsEmpty', ['assertEmpty']);
-        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
-        self::assertEmpty($actual, $message);
-    }
-
-    /**
-     * Assert value is a string and is not empty.
-     *
-     * @param mixed  $actual
-     * @param string $message
-     */
-    public static function assertStringIsNotEmpty($actual, $message = '')
-    {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotEmpty', ['assertNotEmpty']);
-        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
-        self::assertNotEmpty($actual, $message);
-    }
-
-    /**
-     * Assert value is a string and only contains white space characters (" \t\n\r\0\x0B").
-     *
-     * Uses PHP function trim @see http://php.net/manual/en/function.trim.php
-     * The following characters are considered white space:
-     * - " "    (ASCII 32 (0x20)), an ordinary space.
-     * - "\t"   (ASCII  9 (0x09)), a tab.
-     * - "\n"   (ASCII 10 (0x0A)), a new line (line feed).
-     * - "\r"   (ASCII 13 (0x0D)), a carriage return.
-     * - "\0"   (ASCII  0 (0x00)), the NUL-byte.
-     * - "\x0B" (ASCII 11 (0x0B)), a vertical tab.
-     *
-     * @param mixed  $actual
-     * @param string $message
-     */
-    public static function assertStringIsWhiteSpace($actual, $message = '')
-    {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsWhiteSpace', ['assertEmpty']);
-        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
-        self::assertEmpty(trim($actual), $message);
-    }
-
-    /**
-     * Assert value is a string and not only contains white space characters (" \t\n\r\0\x0B").
-     *
-     * Uses PHP function trim @see http://php.net/manual/en/function.trim.php
-     * The following characters are considered white space:
-     * - " "    (ASCII 32 (0x20)), an ordinary space.
-     * - "\t"   (ASCII  9 (0x09)), a tab.
-     * - "\n"   (ASCII 10 (0x0A)), a new line (line feed).
-     * - "\r"   (ASCII 13 (0x0D)), a carriage return.
-     * - "\0"   (ASCII  0 (0x00)), the NUL-byte.
-     * - "\x0B" (ASCII 11 (0x0B)), a vertical tab.
-     *
-     * @param mixed  $actual
-     * @param string $message
-     */
-    public static function assertStringIsNotWhiteSpace($actual, $message = '')
-    {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotWhiteSpace', ['assertNotEmpty']);
-        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
-        self::assertNotEmpty(trim($actual), $message);
-    }
-
-    /**
      * Assert value is a scalar.
      *
      * @param mixed  $actual
@@ -160,6 +79,17 @@ trait ScalarAssertTrait
     public static function assertScalar($actual, $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertScalar', new ScalarConstraint(ScalarConstraint::TYPE_SCALAR));
+    }
+
+    /**
+     * Assert value is a string.
+     *
+     * @param mixed  $actual
+     * @param string $message
+     */
+    public static function assertString($actual, $message = '')
+    {
+        self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
     }
 
     /**
@@ -207,17 +137,6 @@ trait ScalarAssertTrait
     }
 
     /**
-     * Assert value is not a string.
-     *
-     * @param mixed  $actual
-     * @param string $message
-     */
-    public static function assertNotString($actual, $message = '')
-    {
-        self::assertTypeOfScalar($actual, $message, 'assertNotString', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_STRING)));
-    }
-
-    /**
      * Assert value is not a scalar.
      *
      * @param mixed  $actual
@@ -228,9 +147,20 @@ trait ScalarAssertTrait
         self::assertTypeOfScalar($actual, $message, 'assertNotScalar', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_SCALAR)));
     }
 
+    /**
+     * Assert value is not a string.
+     *
+     * @param mixed  $actual
+     * @param string $message
+     */
+    public static function assertNotString($actual, $message = '')
+    {
+        self::assertTypeOfScalar($actual, $message, 'assertNotString', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_STRING)));
+    }
+
     private static function assertTypeOfScalar($actual, $message, $method, \PHPUnit_Framework_Constraint $constraint)
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
         self::assertThat($actual, $constraint, $message);
     }
 }

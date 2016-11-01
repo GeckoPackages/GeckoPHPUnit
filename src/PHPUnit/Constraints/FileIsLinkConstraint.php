@@ -11,6 +11,11 @@
 
 namespace GeckoPackages\PHPUnit\Constraints;
 
+/**
+ * @api
+ *
+ * @author SpacePossum
+ */
 final class FileIsLinkConstraint extends \PHPUnit_Framework_Constraint
 {
     /**
@@ -18,7 +23,7 @@ final class FileIsLinkConstraint extends \PHPUnit_Framework_Constraint
      */
     protected function matches($other)
     {
-        return is_link($other);
+        return is_string($other) && is_link($other);
     }
 
     /**
@@ -26,15 +31,21 @@ final class FileIsLinkConstraint extends \PHPUnit_Framework_Constraint
      */
     protected function failureDescription($other)
     {
-        if (is_file($other)) {
-            $type = 'file';
+        if (is_object($other)) {
+            $type = sprintf('%s#%s', get_class($other), method_exists($other, '__toString') ? $other->__toString() : '');
+        } elseif (null === $other) {
+            $type = 'null';
+        } elseif (!is_string($other)) {
+            $type = gettype($other).'#'.$other;
+        } elseif (is_file($other)) {
+            $type = 'file#'.$other;
         } elseif (is_dir($other)) {
-            $type = 'directory';
+            $type = 'directory#'.$other;
         } else {
-            $type = gettype($other);
+            $type = $other;
         }
 
-        return sprintf('%s "%s" is link', $type, $other);
+        return $type.' '.$this->toString();
     }
 
     /**
@@ -42,6 +53,6 @@ final class FileIsLinkConstraint extends \PHPUnit_Framework_Constraint
      */
     public function toString()
     {
-        return 'file is link';
+        return 'is a link';
     }
 }

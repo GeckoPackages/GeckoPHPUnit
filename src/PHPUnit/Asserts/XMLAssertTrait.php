@@ -27,23 +27,6 @@ use GeckoPackages\PHPUnit\Constraints\XML\XMLValidConstraint;
 trait XMLAssertTrait
 {
     /**
-     * Assert string is valid XML.
-     *
-     * @param string $XML
-     * @param string $message
-     */
-    public static function assertXMLValid($XML, $message = '')
-    {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLValid', ['assertThat']);
-
-        if (!is_string($XML)) {
-            throw AssertHelper::createArgumentException(__TRAIT__, 'assertXMLValid', 'string', $XML);
-        }
-
-        self::assertThat($XML, new XMLValidConstraint(), $message);
-    }
-
-    /**
      * Assert string is XML formatted as defined by the XML Schema Definition.
      *
      * @param string $XML
@@ -52,16 +35,23 @@ trait XMLAssertTrait
      */
     public static function assertXMLMatchesXSD($XSD, $XML, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLMatchesXSD', ['assertThat']);
-
         if (!is_string($XSD)) {
             throw AssertHelper::createArgumentException(__TRAIT__, 'assertXMLMatchesXSD', 'string', $XSD);
         }
 
-        if (!is_string($XML)) {
-            throw AssertHelper::createArgumentException(__TRAIT__, 'assertXMLMatchesXSD', 'string', $XML, 2);
-        }
-
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLMatchesXSD', array('assertThat'));
         self::assertThat($XML, new XMLMatchesXSDConstraint($XSD), $message);
+    }
+
+    /**
+     * Assert string is valid XML.
+     *
+     * @param string $XML
+     * @param string $message
+     */
+    public static function assertXMLValid($XML, $message = '')
+    {
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLValid', array('assertThat'));
+        self::assertThat($XML, new XMLValidConstraint(), $message);
     }
 }

@@ -11,12 +11,17 @@
 
 namespace GeckoPackages\PHPUnit\Constraints\XML;
 
+/**
+ * @api
+ *
+ * @author SpacePossum
+ */
 final class XMLValidConstraint extends AbstractXMLConstraint
 {
     /**
      * {@inheritdoc}
      */
-    protected function matches($other)
+    protected function stringMatches($other)
     {
         $internalErrors = libxml_use_internal_errors(true);
         $disableEntities = libxml_disable_entity_loader(true);
@@ -45,6 +50,6 @@ final class XMLValidConstraint extends AbstractXMLConstraint
      */
     public function toString()
     {
-        return 'XML is valid';
+        return 'is valid XML';
     }
 }

@@ -11,28 +11,97 @@
 
 namespace GeckoPackages\PHPUnit\Constraints;
 
-final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Constraint_IsIdentical
+/**
+ * @api
+ *
+ * @note Some code is derived from the example on PHP net (http://php.net/manual/en/function.fileperms.php)
+ *
+ * @author SpacePossum
+ */
+final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Constraint
 {
     /**
-     * @var string
+     * @var int|string
      */
-    private $filename;
+    private $permissions;
 
-    /**
-     * @var string
-     */
-    private $type;
+    private static $permissionFormat = '#^[slbdcpu\-]([r-][w-][sxS-]){2}[r-][w-][txT-]$#';
 
     /**
      * @param int|string $permissions
-     * @param string     $filename
-     * @param string     $type        Type being tested, for example: link, file, directory
      */
-    public function __construct($permissions, $filename, $type)
+    public function __construct($permissions)
     {
-        parent::__construct($permissions);
-        $this->filename = $filename;
-        $this->type = $type;
+        parent::__construct();
+
+        if (is_string($permissions)) {
+            if (!ctype_digit($permissions)) {
+                if (1 !== preg_match(self::$permissionFormat, $permissions)) {
+                    throw new \InvalidArgumentException(sprintf('Permission to match "%s" is not formatted correctly.', $permissions));
+                }
+
+                $this->permissions = $permissions;
+
+                return;
+            }
+
+            if ('0' === $permissions[0]) {
+                $permissions = intval($permissions, 8);
+            } else {
+                $permissions = (int) $permissions;
+            }
+        }
+
+        if (!is_int($permissions)) {
+            if (is_object($permissions)) {
+                $type = sprintf('%s#%s', get_class($permissions), method_exists($permissions, '__toString') ? $permissions->__toString() : '');
+            } elseif (null === $permissions) {
+                $type = 'null';
+            } else {
+                $type = gettype($permissions).'#'.$permissions;
+            }
+
+            throw new \InvalidArgumentException(sprintf('Invalid value for permission to match "%s", expected int >= 0 or string.', $type));
+        }
+
+        if ($permissions < 0) {
+            throw new \InvalidArgumentException(sprintf('Invalid value for permission to match "%d", expected >= 0.', $permissions));
+        }
+
+        $this->permissions = $permissions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function matches($other)
+    {
+        if (!is_string($other) || !file_exists($other)) {
+            return false;
+        }
+
+        if (is_link($other)) {
+            $perms = lstat($other);
+            $perms = $perms['mode'];
+        } else {
+            $perms = fileperms($other);
+        }
+
+        if (is_string($this->permissions)) {
+            return self::getFilePermissionsAsString($perms) === $this->permissions;
+        }
+
+        // $this->permissions is int
+        // for example 0777 vs 100777
+        if ($this->permissions < 1412) {
+            $comp = (int) sprintf('%o', $this->permissions);
+            $filePerm = (int) substr(sprintf('%o', $perms), -3);
+        } else {
+            $comp = $this->permissions;
+            $filePerm = (int) sprintf('%o', $perms);
+        }
+
+        return $filePerm === $comp;
     }
 
     /**
@@ -40,7 +109,44 @@ final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Cons
      */
     protected function failureDescription($other)
     {
-        return sprintf('permission %s of %s "%s" %s', $this->exporter->export($other), $this->type, $this->filename, $this->toString());
+        if (!is_string($other)) {
+            if (is_object($other)) {
+                $type = sprintf('%s#%s', get_class($other), method_exists($other, '__toString') ? $other->__toString() : '');
+            } elseif (null === $other) {
+                $type = 'null';
+            } else {
+                $type = gettype($other).'#'.$other;
+            }
+
+            return $type.' '.$this->toString();
+        }
+
+        if (!file_exists($other)) {
+            return 'not file or directory#'.$other.' '.$this->toString();
+        }
+
+        if (is_link($other)) {
+            $perms = lstat($other);
+            $perms = $perms['mode'];
+            $type = 'link';
+        } else {
+            $perms = fileperms($other);
+            $type = is_file($other) ? 'file' : (is_dir($other) ? 'directory' : 'other');
+        }
+
+        if (is_string($this->permissions)) {
+            return sprintf('%s#%s %s %s to %s', $type, $other, self::getFilePermissionsAsString($perms), $this->toString(), $this->permissions);
+        }
+
+        if ($this->permissions < 1412) {
+            $comp = (int) sprintf('%o', $this->permissions);
+            $perms = (int) substr(sprintf('%o', $perms), -3);
+        } else {
+            $comp = $this->permissions;
+            $perms = (int) sprintf('%o', $perms);
+        }
+
+        return sprintf('%s#%s 0%d %s to 0%d', $type, $other, $perms, $this->toString(), $comp);
     }
 
     /**
@@ -48,10 +154,55 @@ final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Cons
      */
     public function toString()
     {
-        if (is_int($this->value)) {
-            return sprintf('is identical to permission %d', $this->value);
+        return 'permissions are equal';
+    }
+
+    /**
+     * @param int $perms
+     *
+     * @return string
+     */
+    private static function getFilePermissionsAsString($perms)
+    {
+        if (($perms & 0xC000) === 0xC000) {       // Socket
+            $info = 's';
+        } elseif (($perms & 0xA000) === 0xA000) { // Symbolic Link
+            $info = 'l';
+        } elseif (($perms & 0x8000) === 0x8000) { // Regular
+            $info = '-';
+        } elseif (($perms & 0x6000) === 0x6000) { // Block special
+            $info = 'b';
+        } elseif (($perms & 0x4000) === 0x4000) { // Directory
+            $info = 'd';
+        } elseif (($perms & 0x2000) === 0x2000) { // Character special
+            $info = 'c';
+        } elseif (($perms & 0x1000) === 0x1000) { // FIFO pipe
+            $info = 'p';
+        } else { // Unknown
+            $info = 'u';
         }
 
-        return sprintf('is identical to permission "%s"', $this->value);
+        // Owner
+        $info .= (($perms & 0x0100) ? 'r' : '-');
+        $info .= (($perms & 0x0080) ? 'w' : '-');
+        $info .= (($perms & 0x0040) ?
+            (($perms & 0x0800) ? 's' : 'x') :
+            (($perms & 0x0800) ? 'S' : '-'));
+
+        // Group
+        $info .= (($perms & 0x0020) ? 'r' : '-');
+        $info .= (($perms & 0x0010) ? 'w' : '-');
+        $info .= (($perms & 0x0008) ?
+            (($perms & 0x0400) ? 's' : 'x') :
+            (($perms & 0x0400) ? 'S' : '-'));
+
+        // World
+        $info .= (($perms & 0x0004) ? 'r' : '-');
+        $info .= (($perms & 0x0002) ? 'w' : '-');
+        $info .= (($perms & 0x0001) ?
+            (($perms & 0x0200) ? 't' : 'x') :
+            (($perms & 0x0200) ? 'T' : '-'));
+
+        return $info;
     }
 }

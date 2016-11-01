@@ -9,19 +9,24 @@
  * with this source code in the file LICENSE.
  */
 
-class ReadMeTest extends PHPUnit_Framework_TestCase
+/**
+ * @internal
+ *
+ * @author SpacePossum
+ */
+final class ReadMeTest extends \PHPUnit_Framework_TestCase
 {
-    public function testReadMe()
-    {
-        $this->assertStringEqualsFile(__DIR__.'/../../../README.md', $this->generateReadMe());
-    }
-
     public function generateReadMe()
     {
         require_once __DIR__.'/ReadMeGenerator.php';
         $generator = new ReadMeGenerator();
 
         return $generator->generateReadMe($this->getClasses());
+    }
+
+    public function testReadMe()
+    {
+        $this->assertStringEqualsFile(__DIR__.'/../../../../README.md', $this->generateReadMe());
     }
 
     /**
@@ -32,11 +37,12 @@ class ReadMeTest extends PHPUnit_Framework_TestCase
         $classDir = new ReflectionClass('GeckoPackages\PHPUnit\Asserts\AssertHelper');
         $classDir = $classDir->getFileName();
         $classDir = substr($classDir, 0, strrpos($classDir, '/'));
-        $classes = [];
+        $classes = array();
         foreach (new DirectoryIterator($classDir) as $file) {
             if ($file->isDir()) {
                 continue;
             }
+
             $classes[] = 'GeckoPackages\\PHPUnit\\Asserts\\'.substr($file->getFilename(), 0, -4);
         }
 
