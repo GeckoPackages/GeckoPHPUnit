@@ -41,4 +41,4 @@ install:
 script:
     - if [[ $TRAVIS_PHP_VERSION = 5.3 ]]; then phpunit --verbose --testsuite "5.3.6"; else phpunit --verbose; fi
     - phpenv config-rm xdebug.ini || return 0
-    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then php php-cs-fixer.phar --dry-run -v --config-file=.php_cs fix; fi
+    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then php php-cs-fixer.phar --dry-run -vvv fix; fi
