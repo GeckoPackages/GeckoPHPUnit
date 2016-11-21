@@ -27,16 +27,16 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     public function testFilePermissionsMaskConstraint($expected, $permission)
     {
         $constraint = new FilePermissionsIsIdenticalConstraint($permission);
-        $this->assertSame($expected, $constraint->evaluate(__FILE__, '', true));
+        $this->assertSame($expected, $constraint->evaluate($this->getTestFile(), '', true));
     }
 
     public function providePermissionExpected()
     {
         return array(
-            array(true, 100664),
-            array(true, '100664'),
-            array(true, '0664'),
-            array(true, '-rw-rw-r--'),
+            array(true, 100644),
+            array(true, '100644'),
+            array(true, '0644'),
+            array(true, '-rw-r--r--'),
         );
     }
 
@@ -165,32 +165,32 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/FilePermissionsIsIdenticalConstraintTest.php 0664 permissions are equal to 0111.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0644 permissions are equal to 0111.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatch()
     {
         $c = new FilePermissionsIsIdenticalConstraint(0111);
-        $c->evaluate(__FILE__);
+        $c->evaluate($this->getTestFile());
     }
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/FilePermissionsIsIdenticalConstraintTest.php 0100664 permissions are equal to 0100775.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0100644 permissions are equal to 0100775.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatchLarge()
     {
         $c = new FilePermissionsIsIdenticalConstraint(100775);
-        $c->evaluate(__FILE__);
+        $c->evaluate($this->getTestFile());
     }
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/FilePermissionsIsIdenticalConstraintTest.php -rw-rw-r-- permissions are equal to -rw-rw-rw-.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt -rw-r--r-- permissions are equal to -rw-rw-rw-.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatchString()
     {
         $c = new FilePermissionsIsIdenticalConstraint('-rw-rw-rw-');
-        $c->evaluate(__FILE__);
+        $c->evaluate($this->getTestFile());
     }
 
     public function testPermissionFormat()
@@ -235,12 +235,17 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     public function provideFilePermissions()
     {
         return array(
-            array('drwxrwxr-x', fileperms(__DIR__)),
+            array('drwxr-xr-x', fileperms($this->getAssetsDir().'/dir')), // 7775
             array('urwxrwxrwx', 0777),
             array('prwxrwxrwx', 010777),
             array('crwxrwxrwx', 020777),
             array('brwxrwxrwx', 060777),
             array('srwxrwxrwx', 0140777),
         );
+    }
+
+    private function getTestFile()
+    {
+        return realpath($this->getAssetsDir().'/dir/test_file.txt');
     }
 }
