@@ -12,7 +12,6 @@
 namespace GeckoPackages\PHPUnit\Asserts;
 
 use GeckoPackages\PHPUnit\Constraints\SameStringsConstraint;
-use GeckoPackages\PHPUnit\Constraints\ScalarConstraint;
 
 /**
  * Provides asserts for testing of strings.
