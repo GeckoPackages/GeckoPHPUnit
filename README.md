@@ -7,17 +7,17 @@ The asserts are provided using Traits so no changes are needed in the hierarchy 
 
 The additional asserts are provided through the Traits:
 
-- **FileExistsAssertTrait**
+- **FileExistsAssertTrait**<br/>
   Replaces the PHPUnit `assertFileExists` method. This assert does not pass if there is a directory rather than a file.
-- **FileSystemAssertTrait**
+- **FileSystemAssertTrait**<br/>
   Provides asserts for testing directories, files and symbolic links.
-- **RangeAssertTrait**
+- **RangeAssertTrait**<br/>
   Provides asserts for testing values with ranges.
-- **ScalarAssertTrait**
+- **ScalarAssertTrait**<br/>
   Provides asserts for testing of scalars such as integer, float, etc.
-- **StringsAssertTrait**
+- **StringsAssertTrait**<br/>
   Provides asserts for testing of strings.
-- **XMLAssertTrait**
+- **XMLAssertTrait**<br/>
   Additional PHPUnit asserts for testing XML based logic.
 
 See Traits and asserts listing for more details.
