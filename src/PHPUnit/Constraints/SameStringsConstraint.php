@@ -12,6 +12,8 @@
 namespace GeckoPackages\PHPUnit\Constraints;
 
 /**
+ * @api
+ *
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  */
 final class SameStringsConstraint extends \PHPUnit_Framework_Constraint_IsIdentical

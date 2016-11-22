@@ -16,7 +16,7 @@ namespace GeckoPackages\PHPUnit\Constraints\XML;
  *
  * @author SpacePossum
  */
-class XMLMatchesXSDConstraint extends AbstractXMLConstraint
+final class XMLMatchesXSDConstraint extends AbstractXMLConstraint
 {
     /**
      * @var string

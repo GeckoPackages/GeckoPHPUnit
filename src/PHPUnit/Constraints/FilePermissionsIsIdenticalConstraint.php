@@ -12,9 +12,9 @@
 namespace GeckoPackages\PHPUnit\Constraints;
 
 /**
- * @api
- *
  * @note Some code is derived from the example on PHP net (http://php.net/manual/en/function.fileperms.php)
+ *
+ * @api
  *
  * @author SpacePossum
  */
