@@ -69,12 +69,12 @@ Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 ### Methods
 
 #### assertFileExists()
-###### assertFileExists(string $filename [,string $message = ''])
+###### assertFileExists(mixed $filename [,string $message = ''])
 Assert the filename exists and is a regular file.
 
 The inverse assertion
 #### assertFileNotExists()
-###### assertFileNotExists(string $filename [,string $message = ''])
+###### assertFileNotExists(mixed $filename [,string $message = ''])
 Assert the filename does not exists or is not a regular file.
 
 
@@ -87,46 +87,50 @@ Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 ### Methods
 
 #### assertDirectoryEmpty()
-###### assertDirectoryEmpty(string $filename [,string $message = ''])
+###### assertDirectoryEmpty(mixed $filename [,string $message = ''])
 Assert that a directory exists and is empty.
 
 The inverse assertion
 #### assertDirectoryNotEmpty()
-###### assertDirectoryNotEmpty(string $filename [,string $message = ''])
+###### assertDirectoryNotEmpty(mixed $filename [,string $message = ''])
 Assert that a directory exists and is not empty.
 
 
 #### assertDirectoryExists()
-###### assertDirectoryExists(string $filename [,string $message = ''])
+###### assertDirectoryExists(mixed $filename [,string $message = ''])
 Assert that a directory exists (or is a symlink to a directory).
 
 The inverse assertion
 #### assertDirectoryNotExists()
-###### assertDirectoryNotExists(string $filename [,string $message = ''])
+###### assertDirectoryNotExists(mixed $filename [,string $message = ''])
 Assert that a filename does not exists as directory.
 
 
 #### assertFileHasPermissions()
-###### assertFileHasPermissions(int|string $permissions, string $filename [,string $message = ''])
+###### assertFileHasPermissions(int|string $permissions, mixed $filename [,string $message = ''])
 Asserts that a file permission matches, for example: 'drwxrwxrwx' or '0664'.
 
 #### assertFileIsLink()
-###### assertFileIsLink(string $filename [,string $message = ''])
+###### assertFileIsLink(mixed $filename [,string $message = ''])
 Assert that a file is a symbolic link.
 
 The inverse assertion
 #### assertFileIsNotLink()
-###### assertFileIsNotLink(string $filename [,string $message = ''])
+###### assertFileIsNotLink(mixed $filename [,string $message = ''])
 Assert that a file is not a symbolic link.
 
 
+#### assertFileIsValidLink()
+###### assertFileIsValidLink(mixed $filename [,string $message = ''])
+Assert given value is a string, symlink and points to a file or directory that exists.
+
 #### assertFilePermissionMask()
-###### assertFilePermissionMask(int $permissionMask, string $filename [,string $message = ''])
+###### assertFilePermissionMask(int $permissionMask, mixed $filename [,string $message = ''])
 Asserts that a file permission matches mask, for example: '0007'.
 
 The inverse assertion
 #### assertFilePermissionNotMask()
-###### assertFilePermissionNotMask(int $permissionMask, string $filename [,string $message = ''])
+###### assertFilePermissionNotMask(int $permissionMask, mixed $filename [,string $message = ''])
 Asserts that a file permission does not matches mask, for example: '0607'.
 
 
@@ -238,12 +242,12 @@ Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 ### Methods
 
 #### assertSameStrings()
-###### assertSameStrings(string $expected, string $actual [,string $message = ''])
+###### assertSameStrings(string $expected, mixed $actual [,string $message = ''])
 Assert that strings are identical.
 
 The inverse assertion
 #### assertNotSameStrings()
-###### assertNotSameStrings(string $expected, string $actual [,string $message = ''])
+###### assertNotSameStrings(string $expected, mixed $actual [,string $message = ''])
 Assert that strings are not identical.
 
 

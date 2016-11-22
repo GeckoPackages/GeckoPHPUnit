@@ -31,7 +31,7 @@ trait FileExistsAssertTrait
     /**
      * Assert the filename exists and is a regular file.
      *
-     * @param string $filename
+     * @param mixed  $filename
      * @param string $message
      */
     public static function assertFileExists($filename, $message = '')
@@ -42,7 +42,7 @@ trait FileExistsAssertTrait
     /**
      * Assert the filename does not exists or is not a regular file.
      *
-     * @param string $filename
+     * @param mixed  $filename
      * @param string $message
      */
     public static function assertFileNotExists($filename, $message = '')
@@ -50,6 +50,12 @@ trait FileExistsAssertTrait
         self::assertFileExisting($filename, $message, 'assertFileNotExists', new \PHPUnit_Framework_Constraint_Not(new FileExistsConstraint()));
     }
 
+    /**
+     * @param mixed                         $filename
+     * @param string                        $message
+     * @param string                        $method
+     * @param \PHPUnit_Framework_Constraint $constraint
+     */
     private static function assertFileExisting($filename, $message, $method, \PHPUnit_Framework_Constraint $constraint)
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
