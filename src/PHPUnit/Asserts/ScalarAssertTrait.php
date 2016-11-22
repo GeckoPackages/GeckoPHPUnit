@@ -158,6 +158,12 @@ trait ScalarAssertTrait
         self::assertTypeOfScalar($actual, $message, 'assertNotString', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_STRING)));
     }
 
+    /**
+     * @param mixed                         $actual
+     * @param string                        $message
+     * @param string                        $method
+     * @param \PHPUnit_Framework_Constraint $constraint
+     */
     private static function assertTypeOfScalar($actual, $message, $method, \PHPUnit_Framework_Constraint $constraint)
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));

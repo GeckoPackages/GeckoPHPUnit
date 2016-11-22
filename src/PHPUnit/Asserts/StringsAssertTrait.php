@@ -29,7 +29,7 @@ trait StringsAssertTrait
      * Assert that strings are not identical.
      *
      * @param string $expected
-     * @param string $actual
+     * @param mixed  $actual
      * @param string $message
      */
     public static function assertNotSameStrings($expected, $actual, $message = '')
@@ -41,7 +41,7 @@ trait StringsAssertTrait
      * Assert that strings are identical.
      *
      * @param string $expected
-     * @param string $actual
+     * @param mixed  $actual
      * @param string $message
      */
     public static function assertSameStrings($expected, $actual, $message = '')
@@ -119,6 +119,12 @@ trait StringsAssertTrait
         self::assertEmpty(trim($actual), $message);
     }
 
+    /**
+     * @param mixed                         $actual
+     * @param string                        $message
+     * @param string                        $method
+     * @param \PHPUnit_Framework_Constraint $constraint
+     */
     private static function assertStringsIdentity($actual, $message, $method, \PHPUnit_Framework_Constraint $constraint)
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
