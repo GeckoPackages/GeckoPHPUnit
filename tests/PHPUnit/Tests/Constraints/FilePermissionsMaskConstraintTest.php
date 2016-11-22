@@ -26,20 +26,20 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
     public function testFilePermissionsMaskConstraint($mask)
     {
         $constraint = new FilePermissionsMaskConstraint($mask);
-        $this->assertTrue($constraint->evaluate(__FILE__, '', true));
+        $this->assertTrue($constraint->evaluate($this->getTestFile(), '', true));
     }
 
     public function provideFileMasks()
     {
         return array(
-            array(0664),
+            array(0644),
             array(0000),
             array(0004),
-            array(0060),
-            array(0064),
+            array(0040),
+            array(0044),
             array(0600),
             array(0604),
-            array(0660),
+            array(0640),
         );
     }
 
@@ -94,12 +94,12 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/FilePermissionsMaskConstraintTest.php 100664 permissions matches mask 777.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 100644 permissions matches mask 777.$#
      */
     public function testFilePermissionsMaskConstraintMaskMismatch()
     {
         $constraint = new FilePermissionsMaskConstraint(0777);
-        $constraint->evaluate(__FILE__);
+        $constraint->evaluate($this->getTestFile());
     }
 
     /**
@@ -120,5 +120,10 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
     {
         $constraint = new FilePermissionsMaskConstraint(1);
         $constraint->evaluate(new \stdClass());
+    }
+
+    private function getTestFile()
+    {
+        return realpath($this->getAssetsDir().'/dir/test_file.txt');
     }
 }
