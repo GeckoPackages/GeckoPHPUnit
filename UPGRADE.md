@@ -8,17 +8,11 @@ Traits (asserts)
 
 The `FileExistsTrait` has been renamed to `FileExistsAssertTrait`.
 
-The `StringsAssertTrait` has been added.
-
 The following methods have been moved from `ScalarAssertTrait` to `StringsAssertTrait`:
 - `assertStringIsEmpty`
 - `assertStringIsNotEmpty`
 - `assertStringIsNotWhiteSpace`
 - `assertStringIsWhiteSpace`
-
-New methods have been added to `StringsAssertTrait`:
-- `assertNotSameStrings`
-- `assertSameStrings`
 
 Constraints
 --------------
