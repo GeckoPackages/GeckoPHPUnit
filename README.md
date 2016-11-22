@@ -11,6 +11,8 @@ The additional asserts are provided through the Traits:
   Replaces the PHPUnit `assertFileExists` method. This assert does not pass if there is a directory rather than a file.
 - **FileSystemAssertTrait**
   Provides asserts for testing directories, files and symbolic links.
+- **RangeAssertTrait**
+  Provides asserts for testing values with ranges.
 - **ScalarAssertTrait**
   Provides asserts for testing of scalars such as integer, float, etc.
 - **StringsAssertTrait**
@@ -127,6 +129,38 @@ The inverse assertion
 ###### assertFilePermissionNotMask(int $permissionMask, string $filename [,string $message = ''])
 Asserts that a file permission does not matches mask, for example: '0607'.
 
+
+## RangeAssertTrait
+###### GeckoPackages\PHPUnit\Asserts\RangeAssertTrait
+Additional PHPUnit asserts for testing if numbers are within or on ranges.
+
+Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
+
+### Methods
+
+#### assertNumberInRange()
+###### assertNumberInRange(int|float $lowerBoundary, int|float $upperBoundary, mixed $actual [,string $message = ''])
+Assert that a number is within a given range (a,b).
+
+The inverse assertion
+#### assertNumberNotInRange()
+###### assertNumberNotInRange(int|float $lowerBoundary, int|float $upperBoundary, mixed $actual [,string $message = ''])
+Assert that a number is not within a given range !(a,b).
+
+
+#### assertNumberOnRange()
+###### assertNumberOnRange(int|float $lowerBoundary, int|float $upperBoundary, mixed $actual [,string $message = ''])
+Assert that a number is within a given range or on its boundaries [a,b].
+
+The inverse assertion
+#### assertNumberNotOnRange()
+###### assertNumberNotOnRange(int|float $lowerBoundary, int|float $upperBoundary, mixed $actual [,string $message = ''])
+Assert that a number is not within a given range and not on its boundaries ![a,b].
+
+
+#### assertUnsignedInt()
+###### assertUnsignedInt(mixed $actual [,string $message = ''])
+Assert that given value is an unsigned int (>= 0).
 
 ## ScalarAssertTrait
 ###### GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait

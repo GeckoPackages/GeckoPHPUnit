@@ -46,7 +46,12 @@ final class ReadMeGenerator
                     continue;
                 }
 
-                $doc = $this->getMethodDoc($method->getDocComment());
+                try {
+                    $doc = $this->getMethodDoc($method->getDocComment());
+                } catch (\UnexpectedValueException $e) {
+                    throw new \UnexpectedValueException(sprintf('Exception when parsing "%s", "%s".', $class, $methodName), 1, $e);
+                }
+
                 if (false === $doc) {
                     throw new \UnexpectedValueException(sprintf('Missing doc for "%s:%s".', $class, $methodName));
                 }
@@ -294,6 +299,10 @@ EOF;
                 $docLine = substr($docLine, 9);
 
                 preg_match('#^(.+?\b)[\s]*\$(.+?\b)[\s]*(.+?\b)*#', $docLine, $matches);
+                if (count($matches) < 3) {
+                    throw new \UnexpectedValueException(sprintf("Matching failed for:\n------------------\n%s\n------------------", $doc));
+                }
+
                 $type = $matches[1];
                 $name = $matches[2];
                 //$description = count($matches[2]) > 2 ? $matches[3] : null;
