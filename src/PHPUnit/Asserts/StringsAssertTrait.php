@@ -58,7 +58,7 @@ trait StringsAssertTrait
     public static function assertStringIsEmpty($actual, $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsEmpty', array('assertThat', 'assertEmpty'));
-        self::assertThat($actual, new \PHPUnit_Framework_Constraint_IsType('string'));
+        self::assertThat($actual, new \PHPUnit_Framework_Constraint_IsType('string'), $message);
         self::assertEmpty($actual, $message);
     }
 
@@ -71,7 +71,7 @@ trait StringsAssertTrait
     public static function assertStringIsNotEmpty($actual, $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotEmpty', array('assertThat', 'assertNotEmpty'));
-        self::assertThat($actual, new \PHPUnit_Framework_Constraint_IsType('string'));
+        self::assertThat($actual, new \PHPUnit_Framework_Constraint_IsType('string'), $message);
         self::assertNotEmpty($actual, $message);
     }
 
@@ -93,7 +93,7 @@ trait StringsAssertTrait
     public static function assertStringIsNotWhiteSpace($actual, $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotWhiteSpace', array('assertThat', 'assertNotEmpty'));
-        self::assertThat($actual, new \PHPUnit_Framework_Constraint_IsType('string'));
+        self::assertThat($actual, new \PHPUnit_Framework_Constraint_IsType('string'), $message);
         self::assertNotEmpty(trim($actual), $message);
     }
 
@@ -115,7 +115,7 @@ trait StringsAssertTrait
     public static function assertStringIsWhiteSpace($actual, $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsWhiteSpace', array('assertThat', 'assertEmpty'));
-        self::assertThat($actual, new \PHPUnit_Framework_Constraint_IsType('string'));
+        self::assertThat($actual, new \PHPUnit_Framework_Constraint_IsType('string'), $message);
         self::assertEmpty(trim($actual), $message);
     }
 
