@@ -31,6 +31,7 @@ return Symfony\CS\Config\Config::create()
         'strict',
         'strict_param',
         '-empty_return',
+        '-php_unit_fqcn_annotation',
         '-phpdoc_short_description',
         '-phpdoc_to_comment',
         '-psr0',
