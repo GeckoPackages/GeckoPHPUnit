@@ -21,6 +21,14 @@ final class DirectoryExistsConstraint extends \PHPUnit_Framework_Constraint
     /**
      * {@inheritdoc}
      */
+    public function toString()
+    {
+        return 'is a directory';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function matches($other)
     {
         return is_string($other) && is_dir($other);
@@ -46,13 +54,5 @@ final class DirectoryExistsConstraint extends \PHPUnit_Framework_Constraint
         }
 
         return $type.' '.$this->toString();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return 'is a directory';
     }
 }

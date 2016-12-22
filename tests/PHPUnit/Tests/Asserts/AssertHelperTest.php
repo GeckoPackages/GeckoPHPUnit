@@ -11,6 +11,7 @@
 
 /**
  * @requires PHP 5.4
+ * @requires PHPUnit 5.2
  *
  * @internal
  *
@@ -23,12 +24,11 @@ final class AssertHelperTest extends AbstractGeckoPHPUnitTest
         require_once __DIR__.'/AssertHelperTestDummies.php';
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^FileExistsAssertTrait::assertFileExists\(\) Relies on missing method "assertThat".$#
-     */
     public function testMissingMethod()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^FileExistsAssertTrait::assertFileExists\(\) Relies on missing method "assertThat".$#');
+
         $dummy = new TestDummy();
         $dummy->assertFileExists(__FILE__);
     }

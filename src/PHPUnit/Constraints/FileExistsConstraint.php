@@ -21,6 +21,14 @@ final class FileExistsConstraint extends \PHPUnit_Framework_Constraint
     /**
      * {@inheritdoc}
      */
+    public function toString()
+    {
+        return 'is a file';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function matches($other)
     {
         return is_string($other) && is_file($other);
@@ -46,13 +54,5 @@ final class FileExistsConstraint extends \PHPUnit_Framework_Constraint
         }
 
         return $type.' '.$this->toString();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return 'is a file';
     }
 }

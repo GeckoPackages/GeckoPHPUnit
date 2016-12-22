@@ -12,6 +12,8 @@
 use GeckoPackages\PHPUnit\Constraints\FileExistsConstraint;
 
 /**
+ * @requires PHPUnit 5.2
+ *
  * @internal
  *
  * @author SpacePossum
@@ -50,22 +52,20 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
         $this->assertSame('is a file', $constraint->toString());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is a file.$#
-     */
     public function testFileExistsConstraintDir()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is a file.$#');
+
         $constraint = new FileExistsConstraint();
         $constraint->evaluate(__DIR__, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that link to directory\#/.*test_link_dir is a file.$#
-     */
     public function testFileExistsConstraintFileLink()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that link to directory\#/.*test_link_dir is a file.$#');
+
         $link = $this->getAssetsDir().'test_link_dir';
         $this->createSymlink(
             $this->getAssetsDir().'_link_test_target_dir_',
@@ -76,42 +76,38 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
         $constraint->evaluate($link, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a file.$#
-     */
     public function testFileExistsConstraintInt()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that integer\#1 is a file.$#');
+
         $constraint = new FileExistsConstraint();
         $constraint->evaluate(1, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is a file.$#
-     */
     public function testFileExistsConstraintNull()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null is a file.$#');
+
         $constraint = new FileExistsConstraint();
         $constraint->evaluate(null, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a file.$#
-     */
     public function testFileExistsConstraintObject()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that stdClass\# is a file.$#');
+
         $constraint = new FileExistsConstraint();
         $constraint->evaluate(new \stdClass(), '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is a file.$#
-     */
     public function testFileExistsConstraintString()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that __does_not_exists__ is a file.$#');
+
         $constraint = new FileExistsConstraint();
         $constraint->evaluate('__does_not_exists__', '');
     }

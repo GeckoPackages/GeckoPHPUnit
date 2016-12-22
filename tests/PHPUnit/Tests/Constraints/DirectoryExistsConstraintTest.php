@@ -12,6 +12,8 @@
 use GeckoPackages\PHPUnit\Constraints\DirectoryExistsConstraint;
 
 /**
+ * @requires PHPUnit 5.2
+ *
  * @internal
  *
  * @author SpacePossum
@@ -50,22 +52,20 @@ final class DirectoryExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
         $this->assertSame('is a directory', $constraint->toString());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/DirectoryExistsConstraintTest.php is a directory.$#
-     */
     public function testDirectoryExistsConstraintFile()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/DirectoryExistsConstraintTest.php is a directory.$#');
+
         $constraint = new DirectoryExistsConstraint();
         $constraint->evaluate(__FILE__, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that link to file\#/.*test_link_file is a directory.$#
-     */
     public function testDirectoryExistsConstraintFileLink()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that link to file\#/.*test_link_file is a directory.$#');
+
         $link = $this->getAssetsDir().'test_link_file';
         $this->createSymlink(
             $this->getAssetsDir().'_link_test_target_dir_/placeholder.tmp',
@@ -76,42 +76,38 @@ final class DirectoryExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
         $constraint->evaluate($link, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a directory.$#
-     */
     public function testDirectoryExistsConstraintInt()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that integer\#1 is a directory.$#');
+
         $constraint = new DirectoryExistsConstraint();
         $constraint->evaluate(1, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is a directory.$#
-     */
     public function testDirectoryExistsConstraintNull()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null is a directory.$#');
+
         $constraint = new DirectoryExistsConstraint();
         $constraint->evaluate(null, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a directory.$#
-     */
     public function testDirectoryExistsConstraintObject()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that stdClass\# is a directory.$#');
+
         $constraint = new DirectoryExistsConstraint();
         $constraint->evaluate(new \stdClass(), '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is a directory.$#
-     */
     public function testDirectoryExistsConstraintString()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that __does_not_exists__ is a directory.$#');
+
         $constraint = new DirectoryExistsConstraint();
         $constraint->evaluate('__does_not_exists__', '');
     }

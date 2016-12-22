@@ -36,6 +36,14 @@ final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
     /**
      * {@inheritdoc}
      */
+    public function toString()
+    {
+        return 'permissions matches mask';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function matches($other)
     {
         if (!is_string($other) || !file_exists($other)) {
@@ -83,13 +91,5 @@ final class FilePermissionsMaskConstraint extends \PHPUnit_Framework_Constraint
         }
 
         return sprintf('%s#%s %o %s %o', $type, $other, $perms, $this->toString(), $this->mask);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return 'permissions matches mask';
     }
 }

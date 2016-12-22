@@ -13,6 +13,7 @@ use GeckoPackages\PHPUnit\Asserts\XMLAssertTrait;
 
 /**
  * @requires PHP 5.4
+ * @requires PHPUnit 5.2
  *
  * @internal
  *
@@ -27,39 +28,35 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
         $this->assertXMLMatchesXSD(file_get_contents($this->getAssetsDir().'XLIFF/xliff-core-1.2-strict.xsd'), file_get_contents($this->getAssetsDir().'XLIFF/xliff_sample.xml'));
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that <note><test>Test</test></note> matches XSD.[\n]\[error 1845\] .+.$#
-     */
     public function testAssertXMLMatchesXSDFail()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that <note><test>Test</test></note> matches XSD.[\n]\[error 1845\] .+.$#');
+
         $this->assertXMLMatchesXSD(file_get_contents($this->getAssetsDir().'XLIFF/xliff-core-1.2-strict.xsd'), '<note><test>Test</test></note>');
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# matches XSD.$#
-     */
     public function testAssertXMLMatchesXSDInvalidInputXML()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that stdClass\# matches XSD.$#');
+
         $this->assertXMLMatchesXSD('', new \stdClass());
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Argument #1 \(integer#1\) of XMLAssertTrait::assertXMLMatchesXSD\(\) must be a string.$/
-     */
     public function testAssertXMLMatchesXSDInvalidInputXSD()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^Argument \#1 \(integer\#1\) of XMLAssertTrait::assertXMLMatchesXSD\(\) must be a string.$#');
+
         $this->assertXMLMatchesXSD(1, '');
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that b matches XSD.[\n]\[fatal 4\] .+.$#
-     */
     public function testAssertXMLMatchesXSDInvalidXMLInvalidXSD()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that b matches XSD.[\n]\[fatal 4\] .+.$#');
+
         $this->assertXMLMatchesXSD('a', 'b');
     }
 
@@ -68,21 +65,19 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
         $this->assertXMLValid('<note><test>Test</test></note>');
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that test string is valid XML.[\n]\[fatal 4\] .+.$#
-     */
     public function testAssertXMLValidFail()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that test string is valid XML.[\n]\[fatal 4\] .+.$#');
+
         $this->assertXMLValid('test string');
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that integer\#1234 is valid XML.$/
-     */
     public function testAssertXMLValidInvalidInput()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that integer\#1234 is valid XML.$#');
+
         $this->assertXMLValid(1234);
     }
 }

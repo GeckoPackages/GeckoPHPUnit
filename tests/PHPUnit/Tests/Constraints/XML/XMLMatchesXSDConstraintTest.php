@@ -12,6 +12,8 @@
 use GeckoPackages\PHPUnit\Constraints\XML\XMLMatchesXSDConstraint;
 
 /**
+ * @requires PHPUnit 5.2
+ *
  * @internal
  *
  * @author SpacePossum
@@ -31,62 +33,56 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
         $this->assertSame('matches XSD', $constraint->toString());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# matches XSD.$#
-     */
     public function testXMLValidConstraintFalse()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that boolean\# matches XSD.$#');
+
         $constraint = new XMLMatchesXSDConstraint($this->getXSD());
         $constraint->evaluate(false);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 matches XSD.$#
-     */
     public function testXMLValidConstraintInt()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that integer\#1 matches XSD.$#');
+
         $constraint = new XMLMatchesXSDConstraint($this->getXSD());
         $constraint->evaluate(1);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that <a></b> matches XSD.[\n]\[error \d{1,}\](?s).*$#
-     */
     public function testXMLValidConstraintInvalidXML()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that <a></b> matches XSD.[\n]\[error \d{1,}\](?s).*$#');
+
         $constraint = new XMLMatchesXSDConstraint($this->getXSD());
         $constraint->evaluate('<a></b>');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that <a></a> matches XSD.[\n]\[error \d{1,}\](?s).*$#
-     */
     public function testXMLValidConstraintNotMatchingXML()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that <a></a> matches XSD.[\n]\[error \d{1,}\](?s).*$#');
+
         $constraint = new XMLMatchesXSDConstraint($this->getXSD());
         $constraint->evaluate('<a></a>');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null matches XSD.$#
-     */
     public function testXMLValidConstraintNull()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null matches XSD.$#');
+
         $constraint = new XMLMatchesXSDConstraint($this->getXSD());
         $constraint->evaluate(null);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# matches XSD.$#
-     */
     public function testXMLValidConstraintObject()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that stdClass\# matches XSD.$#');
+
         $constraint = new XMLMatchesXSDConstraint($this->getXSD());
         $constraint->evaluate(new \stdClass());
     }

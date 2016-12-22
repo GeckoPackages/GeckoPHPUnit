@@ -12,6 +12,8 @@
 use GeckoPackages\PHPUnit\Constraints\FileIsLinkConstraint;
 
 /**
+ * @requires PHPUnit 5.2
+ *
  * @internal
  *
  * @author SpacePossum
@@ -56,62 +58,56 @@ final class FileIsLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
         $this->assertSame('is a link', $constraint->toString());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is a link.$#
-     */
     public function testFileIsLinkConstraintDir()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is a link.$#');
+
         $constraint = new FileIsLinkConstraint();
         $constraint->evaluate(__DIR__, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/FileIsLinkConstraintTest.php is a link.$#
-     */
     public function testFileIsLinkConstraintFile()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/FileIsLinkConstraintTest.php is a link.$#');
+
         $constraint = new FileIsLinkConstraint();
         $constraint->evaluate(__FILE__, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a link.$#
-     */
     public function testFileIsLinkConstraintInt()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that integer\#1 is a link.$#');
+
         $constraint = new FileIsLinkConstraint();
         $constraint->evaluate(1, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is a link.$#
-     */
     public function testFileIsLinkConstraintNull()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null is a link.$#');
+
         $constraint = new FileIsLinkConstraint();
         $constraint->evaluate(null, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a link.$#
-     */
     public function testFileIsLinkConstraintObject()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that stdClass\# is a link.$#');
+
         $constraint = new FileIsLinkConstraint();
         $constraint->evaluate(new \stdClass(), '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is a link.$#
-     */
     public function testFileIsLinkConstraintString()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that __does_not_exists__ is a link.$#');
+
         $constraint = new FileIsLinkConstraint();
         $constraint->evaluate('__does_not_exists__', '');
     }

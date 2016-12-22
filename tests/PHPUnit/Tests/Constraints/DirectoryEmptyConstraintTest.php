@@ -12,6 +12,8 @@
 use GeckoPackages\PHPUnit\Constraints\DirectoryEmptyConstraint;
 
 /**
+ * @requires PHPUnit 5.2
+ *
  * @internal
  *
  * @author SpacePossum
@@ -38,32 +40,29 @@ final class DirectoryEmptyConstraintTest extends AbstractGeckoPHPUnitFileTest
         $this->assertSame('is an empty directory', $constraint->toString());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is an empty directory.$#
-     */
     public function testDirectoryEmptyConstraintDirWithFiles()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is an empty directory.$#');
+
         $constraint = new DirectoryEmptyConstraint();
         $constraint->evaluate(__DIR__, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/DirectoryEmptyConstraintTest.php is an empty directory.$#
-     */
     public function testDirectoryEmptyConstraintFile()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/DirectoryEmptyConstraintTest.php is an empty directory.$#');
+
         $constraint = new DirectoryEmptyConstraint();
         $constraint->evaluate(__FILE__, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that link to file\#/.*test_link_file is an empty directory.$#
-     */
     public function testDirectoryEmptyConstraintFileLink()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that link to file\#/.*test_link_file is an empty directory.$#');
+
         $link = $this->getAssetsDir().'test_link_file';
         $this->createSymlink(
             $this->getAssetsDir().'_link_test_target_dir_/placeholder.tmp',
@@ -74,42 +73,38 @@ final class DirectoryEmptyConstraintTest extends AbstractGeckoPHPUnitFileTest
         $constraint->evaluate($link, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is an empty directory.$#
-     */
     public function testDirectoryEmptyConstraintInt()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that integer\#1 is an empty directory.$#');
+
         $constraint = new DirectoryEmptyConstraint();
         $constraint->evaluate(1, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is an empty directory.$#
-     */
     public function testDirectoryEmptyConstraintNull()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null is an empty directory.$#');
+
         $constraint = new DirectoryEmptyConstraint();
         $constraint->evaluate(null, '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is an empty directory.$#
-     */
     public function testDirectoryEmptyConstraintObject()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that stdClass\# is an empty directory.$#');
+
         $constraint = new DirectoryEmptyConstraint();
         $constraint->evaluate(new \stdClass(), '');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is an empty directory.$#
-     */
     public function testDirectoryEmptyConstraintString()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that __does_not_exists__ is an empty directory.$#');
+
         $constraint = new DirectoryEmptyConstraint();
         $constraint->evaluate('__does_not_exists__', '');
     }

@@ -13,6 +13,7 @@ use GeckoPackages\PHPUnit\Asserts\RangeAssertTrait;
 
 /**
  * @requires PHP 5.4
+ * @requires PHPUnit 5.2
  *
  * @internal
  *
@@ -27,12 +28,11 @@ final class RangeAssertTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertNumberInRange(1, 3, 2);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that -0.500 is in range \(1.100, 3.200\).$#
-     */
     public function testAssertNumberInRangeFail()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that -0.500 is in range \(1.100, 3.200\).$#');
+
         $this->assertNumberInRange(1.1, 3.2, -0.5);
     }
 
@@ -41,21 +41,19 @@ final class RangeAssertTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertNumberNotInRange(1, 3, 4);
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Argument \#1 \(null\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int.$#
-     */
     public function testAssertNumberNotInRangeInvalidArgumentLower()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^Argument \#1 \(null\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int.$#');
+
         $this->assertNumberNotInRange(null, 3, 4);
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Argument \#2 \(string\#_invalid_\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int.$#
-     */
     public function testAssertNumberNotInRangeInvalidArgumentUpper()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^Argument \#2 \(string\#_invalid_\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int.$#');
+
         $this->assertNumberNotInRange(3, '_invalid_', 4);
     }
 
@@ -69,12 +67,11 @@ final class RangeAssertTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertNumberOnRange(1, 3, 3);
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^RangeAssertTrait::assertNumberOnRange\(\) lower boundary 5 must be smaller than upper boundary -5.500.$#
-     */
     public function testAssertNumberOnRangeInvalidRange()
     {
+        $this->expectException(\PHPUnit_Framework_Exception::class);
+        $this->expectExceptionMessageRegExp('#^RangeAssertTrait::assertNumberOnRange\(\) lower boundary 5 must be smaller than upper boundary -5.500.$#');
+
         $this->assertNumberOnRange(5, -5.5, 6);
     }
 
@@ -83,12 +80,11 @@ final class RangeAssertTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertUnsignedInt(4);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that -4 is unsigned int.$#
-     */
     public function testAssertUnsignedIntFail()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that -4 is unsigned int.$#');
+
         $this->assertUnsignedInt(-4);
     }
 }
