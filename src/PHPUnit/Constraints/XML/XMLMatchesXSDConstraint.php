@@ -36,6 +36,14 @@ final class XMLMatchesXSDConstraint extends AbstractXMLConstraint
     /**
      * {@inheritdoc}
      */
+    public function toString()
+    {
+        return 'matches XSD';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function stringMatches($other)
     {
         $internalErrors = libxml_use_internal_errors(true);
@@ -67,13 +75,5 @@ final class XMLMatchesXSDConstraint extends AbstractXMLConstraint
         libxml_use_internal_errors($internalErrors);
 
         return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return 'matches XSD';
     }
 }

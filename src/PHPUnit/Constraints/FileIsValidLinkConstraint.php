@@ -25,6 +25,14 @@ final class FileIsValidLinkConstraint extends \PHPUnit_Framework_Constraint
     /**
      * {@inheritdoc}
      */
+    public function toString()
+    {
+        return 'is a valid link';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function matches($other)
     {
         return is_string($other) && is_link($other) && file_exists($other);
@@ -56,13 +64,5 @@ final class FileIsValidLinkConstraint extends \PHPUnit_Framework_Constraint
         }
 
         return $type.' '.$this->toString();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return 'is a valid link';
     }
 }

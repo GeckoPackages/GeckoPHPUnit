@@ -190,9 +190,9 @@ Contributions are welcome!
 
 This project follows [Semantic Versioning](http://semver.org/).
 
-Kindly note:
-We do not keep a backwards compatible promise on the tests and tooling (such as document generation) of the project itself 
-nor the content and/or format of exception messages.
+<sub>Kindly note:
+We do not keep a backwards compatible promise on the tests and tooling (such as document generation) of the project itself
+nor the content and/or format of exception messages.</sub>
 
 EOF;
         $readMeTemplate = str_replace('#GENERATED_LISTING#', $listing, $readMeTemplate);

@@ -21,6 +21,14 @@ final class DirectoryEmptyConstraint extends \PHPUnit_Framework_Constraint
     /**
      * {@inheritdoc}
      */
+    public function toString()
+    {
+        return 'is an empty directory';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function matches($other)
     {
         if (!is_string($other) || !is_dir($other)) {
@@ -60,13 +68,5 @@ final class DirectoryEmptyConstraint extends \PHPUnit_Framework_Constraint
         }
 
         return $type.' is an empty directory';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return 'is an empty directory';
     }
 }

@@ -74,6 +74,14 @@ final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Cons
     /**
      * {@inheritdoc}
      */
+    public function toString()
+    {
+        return 'permissions are equal';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function matches($other)
     {
         if (!is_string($other) || !file_exists($other)) {
@@ -147,14 +155,6 @@ final class FilePermissionsIsIdenticalConstraint extends \PHPUnit_Framework_Cons
         }
 
         return sprintf('%s#%s 0%d %s to 0%d', $type, $other, $perms, $this->toString(), $comp);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return 'permissions are equal';
     }
 
     /**

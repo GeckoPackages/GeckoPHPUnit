@@ -12,71 +12,67 @@
 use GeckoPackages\PHPUnit\Constraints\ScalarConstraint;
 
 /**
+ * @requires PHPUnit 5.2
+ *
  * @internal
  *
  * @author SpacePossum
  */
 final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 {
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is of type array.$#
-     */
     public function testArray()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that integer\#1 is of type array.$#');
+
         $constraint = new ScalarConstraint(ScalarConstraint::TYPE_ARRAY);
         $this->assertTrue($constraint->evaluate(array(), '', true));
         $this->assertFalse($constraint->evaluate(1, '', false));
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type bool.$#
-     */
     public function testBool()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null is of type bool.$#');
+
         $constraint = new ScalarConstraint(ScalarConstraint::TYPE_BOOL);
         $this->assertTrue($constraint->evaluate(true, '', true));
         $this->assertFalse($constraint->evaluate(null, '', false));
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is of type float.$#
-     */
     public function testFloat()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that stdClass\# is of type float.$#');
+
         $constraint = new ScalarConstraint(ScalarConstraint::TYPE_FLOAT);
         $this->assertTrue($constraint->evaluate(1.1, '', true));
         $this->assertFalse($constraint->evaluate(new \stdClass(), '', false));
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type int.$#
-     */
     public function testInt()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null is of type int.$#');
+
         $constraint = new ScalarConstraint(ScalarConstraint::TYPE_INT);
         $this->assertTrue($constraint->evaluate(1, '', true));
         $this->assertFalse($constraint->evaluate(null, '', false));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "null" provided.$#
-     */
     public function testNullType()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessageRegExp('#^Unknown ScalarConstraint type "null" provided.$#');
+
         new ScalarConstraint(null);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type string.$#
-     */
     public function testString()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null is of type string.$#');
+
         $constraint = new ScalarConstraint(ScalarConstraint::TYPE_STRING);
         $this->assertTrue($constraint->evaluate('', '', true));
         $this->assertFalse($constraint->evaluate(null, '', false));
@@ -88,24 +84,22 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
         $this->assertSame('is of given scalar type.', $constraint->toString());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type scalar.$#
-     */
     public function testScalar()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null is of type scalar.$#');
+
         $constraint = new ScalarConstraint(ScalarConstraint::TYPE_SCALAR);
         $this->assertSame(1, $constraint->count());
         $this->assertTrue($constraint->evaluate(1, '', true));
         $this->assertFalse($constraint->evaluate(null, '', false));
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "integer\#123456789" provided.$#
-     */
     public function testUnknownValue()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessageRegExp('#^Unknown ScalarConstraint type "integer\#123456789" provided.$#');
+
         new ScalarConstraint(123456789);
     }
 }

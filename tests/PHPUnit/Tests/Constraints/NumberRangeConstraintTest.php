@@ -12,6 +12,8 @@
 use GeckoPackages\PHPUnit\Constraints\NumberRangeConstraint;
 
 /**
+ * @requires PHPUnit 5.2
+ *
  * @internal
  *
  * @author SpacePossum
@@ -39,23 +41,21 @@ final class NumberRangeConstraintTest extends AbstractGeckoPHPUnitTest
         $this->assertSame('is in range', $constraint->toString());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that 1 is in range \(0, 1\).$#
-     */
     public function testNumberRangeConstraintFailOnRange()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that 1 is in range \(0, 1\).$#');
+
         $upper = 1;
         $constraint = new NumberRangeConstraint(0, $upper, false);
         $constraint->evaluate($upper);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that 2.500 is in range \[0.500, 1.500\].$#
-     */
     public function testNumberRangeConstraintFailOutOfRange()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that 2.500 is in range \[0.500, 1.500\].$#');
+
         $upper = 1.5;
         $constraint = new NumberRangeConstraint(0.5, $upper, true);
         $constraint->evaluate($upper + 1);

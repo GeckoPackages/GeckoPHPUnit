@@ -21,6 +21,14 @@ final class XMLValidConstraint extends AbstractXMLConstraint
     /**
      * {@inheritdoc}
      */
+    public function toString()
+    {
+        return 'is valid XML';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function stringMatches($other)
     {
         $internalErrors = libxml_use_internal_errors(true);
@@ -43,13 +51,5 @@ final class XMLValidConstraint extends AbstractXMLConstraint
         libxml_clear_errors();
 
         return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return 'is valid XML';
     }
 }

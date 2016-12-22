@@ -13,6 +13,7 @@ use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
 
 /**
  * @requires PHP 5.4
+ * @requires PHPUnit 5.2
  *
  * @internal
  *
@@ -32,12 +33,11 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertBool(true);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that DateTime\# is of type bool.$#
-     */
     public function testAssertBoolFail()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that DateTime\# is of type bool.$#');
+
         $this->assertBool(new \DateTime());
     }
 
@@ -51,12 +51,11 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
         $this->assertInt(1);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that double\#1 is of type int.$#
-     */
     public function testAssertIntFail()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that double\#1 is of type int.$#');
+
         $this->assertInt(1.0);
     }
 

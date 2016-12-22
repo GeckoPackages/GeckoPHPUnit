@@ -12,6 +12,8 @@
 use GeckoPackages\PHPUnit\Constraints\FilePermissionsMaskConstraint;
 
 /**
+ * @requires PHPUnit 5.2
+ *
  * @internal
  *
  * @author SpacePossum
@@ -50,12 +52,11 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
         $this->assertSame('permissions matches mask', $constraint->toString());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# permissions matches mask.$#
-     */
     public function testFilePermissionsMaskConstraintFalse()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that boolean\# permissions matches mask.$#');
+
         $constraint = new FilePermissionsMaskConstraint(1);
         $constraint->evaluate(false);
     }
@@ -72,52 +73,47 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
         $constraint->evaluate($link);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that not file or directory\#_does_not_exists_ permissions matches mask.$#
-     */
     public function testFilePermissionsMaskConstraintFileNotExists()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that not file or directory\#_does_not_exists_ permissions matches mask.$#');
+
         $constraint = new FilePermissionsMaskConstraint(1);
         $constraint->evaluate('_does_not_exists_');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1443 permissions matches mask.$#
-     */
     public function testFilePermissionsMaskConstraintInt()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that integer\#1443 permissions matches mask.$#');
+
         $constraint = new FilePermissionsMaskConstraint(1);
         $constraint->evaluate(1443);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 100644 permissions matches mask 777.$#
-     */
     public function testFilePermissionsMaskConstraintMaskMismatch()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 100644 permissions matches mask 777.$#');
+
         $constraint = new FilePermissionsMaskConstraint(0777);
         $constraint->evaluate($this->getTestFile());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null permissions matches mask.$#
-     */
     public function testFilePermissionsMaskConstraintNull()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null permissions matches mask.$#');
+
         $constraint = new FilePermissionsMaskConstraint(1);
         $constraint->evaluate(null);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# permissions matches mask.$#
-     */
     public function testFilePermissionsMaskConstraintObject()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that stdClass\# permissions matches mask.$#');
+
         $constraint = new FilePermissionsMaskConstraint(1);
         $constraint->evaluate(new \stdClass());
     }

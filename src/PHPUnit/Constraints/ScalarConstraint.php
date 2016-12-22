@@ -77,6 +77,14 @@ final class ScalarConstraint extends \PHPUnit_Framework_Constraint
     /**
      * {@inheritdoc}
      */
+    public function toString()
+    {
+        return 'is of given scalar type.';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function matches($other)
     {
         $m = $this->testFunction;
@@ -98,13 +106,5 @@ final class ScalarConstraint extends \PHPUnit_Framework_Constraint
         }
 
         return sprintf('%s is of type %s', $input, $this->type);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return 'is of given scalar type.';
     }
 }

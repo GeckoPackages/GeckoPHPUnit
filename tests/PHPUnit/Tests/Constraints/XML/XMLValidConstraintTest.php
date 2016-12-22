@@ -12,6 +12,8 @@
 use GeckoPackages\PHPUnit\Constraints\XML\XMLValidConstraint;
 
 /**
+ * @requires PHPUnit 5.2
+ *
  * @internal
  *
  * @author SpacePossum
@@ -31,52 +33,47 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
         $this->assertSame('is valid XML', $constraint->toString());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# is valid XML.$#
-     */
     public function testXMLValidConstraintFalse()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that boolean\# is valid XML.$#');
+
         $constraint = new XMLValidConstraint();
         $constraint->evaluate(false);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is valid XML.$#
-     */
     public function testXMLValidConstraintInt()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that integer\#1 is valid XML.$#');
+
         $constraint = new XMLValidConstraint();
         $constraint->evaluate(1);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that <a></b> is valid XML.[\n]\[error \d{1,}\](?s).*$#
-     */
     public function testXMLValidConstraintInvalidXML()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that <a></b> is valid XML.[\n]\[error \d{1,}\](?s).*$#');
+
         $constraint = new XMLValidConstraint();
         $constraint->evaluate('<a></b>');
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is valid XML.$#
-     */
     public function testXMLValidConstraintNull()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that null is valid XML.$#');
+
         $constraint = new XMLValidConstraint();
         $constraint->evaluate(null);
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is valid XML.$#
-     */
     public function testXMLValidConstraintObject()
     {
+        $this->expectException(\PHPUnit_Framework_ExpectationFailedException::class);
+        $this->expectExceptionMessageRegExp('#^Failed asserting that stdClass\# is valid XML.$#');
+
         $constraint = new XMLValidConstraint();
         $constraint->evaluate(new \stdClass());
     }
