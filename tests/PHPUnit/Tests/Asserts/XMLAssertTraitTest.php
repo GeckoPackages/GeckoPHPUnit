@@ -47,7 +47,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
     public function testAssertXMLMatchesXSDInvalidInputXSD()
     {
         $this->expectException(\PHPUnit_Framework_Exception::class);
-        $this->expectExceptionMessageRegExp('#^Argument #1 \(integer#1\) of XMLAssertTrait::assertXMLMatchesXSD\(\) must be a string.$#');
+        $this->expectExceptionMessageRegExp('#^Argument \#1 \(integer\#1\) of XMLAssertTrait::assertXMLMatchesXSD\(\) must be a string.$#');
 
         $this->assertXMLMatchesXSD(1, '');
     }
