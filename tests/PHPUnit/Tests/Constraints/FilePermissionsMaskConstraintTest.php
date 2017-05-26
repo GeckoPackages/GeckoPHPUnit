@@ -51,7 +51,7 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# permissions matches mask.$#
      */
     public function testFilePermissionsMaskConstraintFalse()
@@ -73,7 +73,7 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that not file or directory\#_does_not_exists_ permissions matches mask.$#
      */
     public function testFilePermissionsMaskConstraintFileNotExists()
@@ -83,7 +83,7 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1443 permissions matches mask.$#
      */
     public function testFilePermissionsMaskConstraintInt()
@@ -93,7 +93,7 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 100644 permissions matches mask 777.$#
      */
     public function testFilePermissionsMaskConstraintMaskMismatch()
@@ -103,7 +103,7 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that null permissions matches mask.$#
      */
     public function testFilePermissionsMaskConstraintNull()
@@ -113,7 +113,7 @@ final class FilePermissionsMaskConstraintTest extends AbstractGeckoPHPUnitFileTe
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# permissions matches mask.$#
      */
     public function testFilePermissionsMaskConstraintObject()

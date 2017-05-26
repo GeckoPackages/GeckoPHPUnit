@@ -51,7 +51,7 @@ final class DirectoryExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/DirectoryExistsConstraintTest.php is a directory.$#
      */
     public function testDirectoryExistsConstraintFile()
@@ -61,7 +61,7 @@ final class DirectoryExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that link to file\#/.*test_link_file is a directory.$#
      */
     public function testDirectoryExistsConstraintFileLink()
@@ -77,7 +77,7 @@ final class DirectoryExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a directory.$#
      */
     public function testDirectoryExistsConstraintInt()
@@ -87,7 +87,7 @@ final class DirectoryExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that null is a directory.$#
      */
     public function testDirectoryExistsConstraintNull()
@@ -97,7 +97,7 @@ final class DirectoryExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a directory.$#
      */
     public function testDirectoryExistsConstraintObject()
@@ -107,7 +107,7 @@ final class DirectoryExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is a directory.$#
      */
     public function testDirectoryExistsConstraintString()

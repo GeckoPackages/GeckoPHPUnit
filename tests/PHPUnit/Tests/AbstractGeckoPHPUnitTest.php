@@ -14,7 +14,7 @@
  *
  * @author SpacePossum
  */
-abstract class AbstractGeckoPHPUnitTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractGeckoPHPUnitTest extends GeckoTestCase
 {
     /**
      * @return string

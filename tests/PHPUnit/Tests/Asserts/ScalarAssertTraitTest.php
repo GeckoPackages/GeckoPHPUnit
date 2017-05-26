@@ -18,7 +18,7 @@ use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
  *
  * @author SpacePossum
  */
-final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
+final class ScalarAssertTraitTest extends GeckoTestCase
 {
     use ScalarAssertTrait;
 
@@ -33,7 +33,7 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that DateTime\# is of type bool.$#
      */
     public function testAssertBoolFail()
@@ -52,7 +52,7 @@ final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that double\#1 is of type int.$#
      */
     public function testAssertIntFail()

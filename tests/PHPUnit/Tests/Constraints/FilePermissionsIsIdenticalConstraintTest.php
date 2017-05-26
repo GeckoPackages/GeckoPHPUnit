@@ -96,7 +96,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 permissions are equal.$#
      */
     public function testFilePermissionsMaskConstraintInt()
@@ -106,7 +106,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that not file or directory\#_does_not_exists_ permissions are equal.$#
      */
     public function testFilePermissionsMaskConstraintNoFile()
@@ -116,7 +116,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that null permissions are equal.$#
      */
     public function testFilePermissionsMaskConstraintNull()
@@ -126,7 +126,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# permissions are equal.$#
      */
     public function testFilePermissionsMaskConstraintObject()
@@ -148,7 +148,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that link\#/.*PHPUnit/tests/assets/test_link_file 0777 permissions are equal to 0111.$#
      */
     public function testFilePermissionsMaskConstraintFileLinkMismatch()
@@ -164,7 +164,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0644 permissions are equal to 0111.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatch()
@@ -174,7 +174,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0100644 permissions are equal to 0100775.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatchLarge()
@@ -184,7 +184,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt -rw-r--r-- permissions are equal to -rw-rw-rw-.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatchString()

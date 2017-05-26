@@ -14,7 +14,7 @@
  *
  * @author SpacePossum
  */
-final class ReadMeTest extends \PHPUnit_Framework_TestCase
+final class ReadMeTest extends GeckoTestCase
 {
     public function generateReadMe()
     {
