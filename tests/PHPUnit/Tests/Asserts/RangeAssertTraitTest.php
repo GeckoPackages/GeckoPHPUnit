@@ -18,7 +18,7 @@ use GeckoPackages\PHPUnit\Asserts\RangeAssertTrait;
  *
  * @author SpacePossum
  */
-final class RangeAssertTraitTest extends \PHPUnit_Framework_TestCase
+final class RangeAssertTraitTest extends GeckoTestCase
 {
     use RangeAssertTrait;
 

@@ -9,38 +9,35 @@ matrix:
     fast_finish: true
     include:
         - php: 5.3
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest --optimize-autoloader"
         - php: 5.4
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest --optimize-autoloader"
         - php: 5.5
-          env: COMPOSER_FLAGS="--prefer-stable"
+          env: COMPOSER_FLAGS="--prefer-stable --optimize-autoloader"
         - php: 5.6
-          env: COMPOSER_FLAGS="--prefer-stable"
+          env: COMPOSER_FLAGS="--prefer-stable --optimize-autoloader"
         - php: 7.0
-          env: COMPOSER_FLAGS="--prefer-stable"
+          env: COMPOSER_FLAGS="--prefer-stable --optimize-autoloader"
         - php: 7.1
+          env: COMPOSER_FLAGS="--prefer-stable --optimize-autoloader"
+        - php: nightly
           env: COMPOSER_FLAGS="--dev"
-        - php: hhvm-3.9
-          sudo: required
-          dist: trusty
-          group: edge
-          env: COMPOSER_FLAGS="--prefer-stable"
         - php: hhvm-nightly
           sudo: required
           dist: trusty
           group: edge
-          env: COMPOSER_FLAGS="--dev"
+          env: COMPOSER_FLAGS="--dev --optimize-autoloader"
     allow_failures:
-        - php: 7.1
+        - php: nightly
         - php: hhvm-nightly
 
 install:
     - composer update $COMPOSER_FLAGS --no-interaction -v
-    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.13.1/php-cs-fixer.phar -o php-cs-fixer.phar; fi
+    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.3.2/php-cs-fixer.phar -o php-cs-fixer.phar; fi
 
 script:
     - chmod 755 tests/assets/dir
     - chmod 644 tests/assets/dir/test_file.txt
-    - if [[ $TRAVIS_PHP_VERSION = 5.3 ]]; then phpunit --verbose --testsuite "5.3.6"; else phpunit --verbose; fi
+    - if [[ $TRAVIS_PHP_VERSION = 5.3 ]]; then vendor/bin/phpunit --verbose --testsuite "5.3.6"; else vendor/bin/phpunit --verbose; fi
     - phpenv config-rm xdebug.ini || return 0
     - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then php php-cs-fixer.phar --dry-run -vvv fix; fi
