@@ -18,7 +18,7 @@ use GeckoPackages\PHPUnit\Asserts\RangeAssertTrait;
  *
  * @author SpacePossum
  */
-final class RangeAssertTraitTest extends \PHPUnit_Framework_TestCase
+final class RangeAssertTraitTest extends GeckoTestCase
 {
     use RangeAssertTrait;
 
@@ -28,7 +28,7 @@ final class RangeAssertTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that -0.500 is in range \(1.100, 3.200\).$#
      */
     public function testAssertNumberInRangeFail()
@@ -84,7 +84,7 @@ final class RangeAssertTraitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that -4 is unsigned int.$#
      */
     public function testAssertUnsignedIntFail()

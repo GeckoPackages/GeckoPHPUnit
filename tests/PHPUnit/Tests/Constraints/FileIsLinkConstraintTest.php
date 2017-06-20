@@ -57,7 +57,7 @@ final class FileIsLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is a link.$#
      */
     public function testFileIsLinkConstraintDir()
@@ -67,7 +67,7 @@ final class FileIsLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/FileIsLinkConstraintTest.php is a link.$#
      */
     public function testFileIsLinkConstraintFile()
@@ -77,7 +77,7 @@ final class FileIsLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a link.$#
      */
     public function testFileIsLinkConstraintInt()
@@ -87,7 +87,7 @@ final class FileIsLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that null is a link.$#
      */
     public function testFileIsLinkConstraintNull()
@@ -97,7 +97,7 @@ final class FileIsLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a link.$#
      */
     public function testFileIsLinkConstraintObject()
@@ -107,7 +107,7 @@ final class FileIsLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is a link.$#
      */
     public function testFileIsLinkConstraintString()

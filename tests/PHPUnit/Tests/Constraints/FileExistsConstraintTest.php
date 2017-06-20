@@ -51,7 +51,7 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is a file.$#
      */
     public function testFileExistsConstraintDir()
@@ -61,7 +61,7 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that link to directory\#/.*test_link_dir is a file.$#
      */
     public function testFileExistsConstraintFileLink()
@@ -77,7 +77,7 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a file.$#
      */
     public function testFileExistsConstraintInt()
@@ -87,7 +87,7 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that null is a file.$#
      */
     public function testFileExistsConstraintNull()
@@ -97,7 +97,7 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a file.$#
      */
     public function testFileExistsConstraintObject()
@@ -107,7 +107,7 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is a file.$#
      */
     public function testFileExistsConstraintString()

@@ -170,7 +170,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*tests/assets/dir is an empty directory.$#
      */
     public function testAssertDirectoryEmptyFail()
@@ -179,7 +179,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that a/b/c/d is a directory.$#
      */
     public function testAssertDirectoryExistsFail()
@@ -188,7 +188,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt is a directory.$#
      */
     public function testAssertDirectoryExistsFile()
@@ -206,7 +206,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt is a link.$#
      */
     public function testAssertFileIsLinkFailFile()
@@ -215,7 +215,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*tests/assets/dir is a link.$#
      */
     public function testAssertFileIsLinkFailDirectory()
