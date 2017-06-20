@@ -18,7 +18,7 @@ use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
  *
  * @author SpacePossum
  */
-final class ScalarAssertTraitTest extends \PHPUnit_Framework_TestCase
+final class ScalarAssertTraitTest extends GeckoTestCase
 {
     use ScalarAssertTrait;
 
