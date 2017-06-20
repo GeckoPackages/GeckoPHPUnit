@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -21,9 +23,9 @@ final class ReadMeGenerator
      *
      * @return string
      */
-    public function generateReadMe(array $classes)
+    public function generateReadMe(array $classes): string
     {
-        $docs = array();
+        $docs = [];
         foreach ($classes as $class) {
             $reflection = new ReflectionClass($class);
             $classDoc = $this->getClassDoc($reflection->getDocComment());
@@ -35,7 +37,7 @@ final class ReadMeGenerator
                 continue;
             }
 
-            $docs[$class] = array('classDoc' => $classDoc, 'methods' => array());
+            $docs[$class] = ['classDoc' => $classDoc, 'methods' => []];
             $reflectionMethods = $reflection->getMethods();
 
             /** @var ReflectionMethod $method */
@@ -74,7 +76,7 @@ final class ReadMeGenerator
                         $doc['params'][$param->getName()]['default'] = $param->getDefaultValue();
                     }
                 }
-                $docs[$class]['methods'][$methodName] = array('doc' => $doc, 'name' => $methodName);
+                $docs[$class]['methods'][$methodName] = ['doc' => $doc, 'name' => $methodName];
             }
 
             ksort($docs[$class]['methods']);
@@ -144,7 +146,9 @@ See Traits and asserts listing for more details.
 
 ### Requirements
 
-PHP 5.4 (PHP 5.3.6 for the constraints, PHP 7 supported). Optional HHVM support >= 3.9. PHPUnit >= 3.5.0.
+PHP 7 / PHPUnit 6
+
+<sub>Use ^v2.0 if you are using PHPUnit 5.</sub>
 
 ### Install
 
@@ -153,11 +157,11 @@ Add the package to your `composer.json`.
 
 ```
 "require-dev": {
-    "gecko-packages/gecko-php-unit" : "^2.0"
+    "gecko-packages/gecko-php-unit" : "^3.0"
 }
 ```
 
-Please note we hint `-dev` here because typically you only need tests during development.
+<sub>Please note we hint `-dev` here because typically you only need tests during development.</sub>
 
 ### Usage
 
@@ -200,7 +204,7 @@ EOF;
         return str_replace('#GENERATED_BODY#', $doc, $readMeTemplate);
     }
 
-    private function generateMethodDescription($method, $methodDescription)
+    private function generateMethodDescription(string $method, array $methodDescription): string
     {
         $params = '';
         foreach ($methodDescription['params'] as $name => $values) {
@@ -214,14 +218,14 @@ EOF;
         return sprintf("\n#### %s()\n###### %s(%s)\n%s\n", $method, $method, substr($params, 2), $methodDescription['doc']);
     }
 
-    private function getClassDoc($doc)
+    private function getClassDoc(string $docString)
     {
-        preg_match_all("/[^\n\r]+[\r\n]*/", $doc, $matches);
+        preg_match_all("/[^\n\r]+[\r\n]*/", $docString, $matches);
         if (count($matches[0]) < 1) {
             return false;
         }
 
-        $doc = array('summary' => '', 'doc' => '', 'tags' => array());
+        $doc = ['summary' => '', 'doc' => '', 'tags' => []];
 
         $capture = 'summary';
         foreach ($matches[0] as $docLine) {
@@ -244,19 +248,19 @@ EOF;
                 if (false === $tagDivision) {
                     $index = substr($docLine, 1);
                     if (!array_key_exists($index, $doc['tags'])) {
-                        $doc['tags'][$index] = array();
+                        $doc['tags'][$index] = [];
                     }
 
                     $doc['tags'][$index][] = '';
                 } else {
                     $index = substr($docLine, 1, $tagDivision - 1);
                     if (!array_key_exists($index, $doc['tags'])) {
-                        $doc['tags'][$index] = array();
+                        $doc['tags'][$index] = [];
                     }
 
                     $doc['tags'][$index][] = substr($docLine, $tagDivision + 1);
                 }
-            } else {
+            } elseif (strlen($docLine) > 2) {
                 $doc[$capture] .= ltrim(substr($docLine, 2))."\n";
             }
         }
@@ -274,14 +278,14 @@ EOF;
      *
      * @return array|false
      */
-    private function getMethodDoc($doc)
+    private function getMethodDoc(string $doc)
     {
         preg_match_all("/[^\n\r]+[\r\n]*/", $doc, $matches);
         if (count($matches[0]) < 1) {
             return false;
         }
 
-        $methodDoc = array('doc' => '', 'long' => '', 'params' => array());
+        $methodDoc = ['doc' => '', 'long' => '', 'params' => []];
         $capture = 'doc';
         foreach ($matches[0] as $docLine) {
             $docLine = trim($docLine);
@@ -307,7 +311,7 @@ EOF;
                 $name = $matches[2];
                 //$description = count($matches[2]) > 2 ? $matches[3] : null;
 
-                $methodDoc['params'][$name] = array('type' => $type);
+                $methodDoc['params'][$name] = ['type' => $type];
 
                 continue;
             }

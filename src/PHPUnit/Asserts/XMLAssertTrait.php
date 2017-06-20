@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -17,7 +19,6 @@ use GeckoPackages\PHPUnit\Constraints\XML\XMLValidConstraint;
 /**
  * Additional PHPUnit asserts for testing XML based logic.
  *
- * @requires PHPUnit >= 3.0.0 (https://phpunit.de/)
  * @requires libxml (https://secure.php.net/manual/en/book.libxml.php)
  *
  * @api
@@ -39,7 +40,7 @@ trait XMLAssertTrait
             throw AssertHelper::createArgumentException(__TRAIT__, 'assertXMLMatchesXSD', 'string', $XSD);
         }
 
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLMatchesXSD', array('assertThat'));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLMatchesXSD', ['assertThat']);
         self::assertThat($XML, new XMLMatchesXSDConstraint($XSD), $message);
     }
 
@@ -51,7 +52,7 @@ trait XMLAssertTrait
      */
     public static function assertXMLValid($XML, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLValid', array('assertThat'));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLValid', ['assertThat']);
         self::assertThat($XML, new XMLValidConstraint(), $message);
     }
 }

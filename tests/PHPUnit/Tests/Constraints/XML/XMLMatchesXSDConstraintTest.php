@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -32,8 +34,8 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# matches XSD.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# matches XSD\.$#
      */
     public function testXMLValidConstraintFalse()
     {
@@ -42,8 +44,8 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 matches XSD.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 matches XSD\.$#
      */
     public function testXMLValidConstraintInt()
     {
@@ -52,8 +54,8 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that <a></b> matches XSD.[\n]\[error \d{1,}\](?s).*$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that <a></b> matches XSD.[\n]\[error \d{1,}\](?s).*\.$#
      */
     public function testXMLValidConstraintInvalidXML()
     {
@@ -62,8 +64,8 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that <a></a> matches XSD.[\n]\[error \d{1,}\](?s).*$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that <a></a> matches XSD.[\n]\[error \d{1,}\](?s).*\.$#
      */
     public function testXMLValidConstraintNotMatchingXML()
     {
@@ -72,8 +74,8 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null matches XSD.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null matches XSD\.$#
      */
     public function testXMLValidConstraintNull()
     {
@@ -82,8 +84,8 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# matches XSD.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# matches XSD\.$#
      */
     public function testXMLValidConstraintObject()
     {
@@ -94,7 +96,7 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
     /**
      * @return string
      */
-    private function getXSD()
+    private function getXSD(): string
     {
         return file_get_contents($this->getAssetsDir().'XLIFF/xliff-core-1.2-strict.xsd');
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -12,8 +14,6 @@
 use GeckoPackages\PHPUnit\Asserts\StringsAssertTrait;
 
 /**
- * @requires PHP 5.4
- *
  * @internal
  *
  * @author SpacePossum
@@ -28,8 +28,8 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that two strings are not identical.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that two strings are not identical\.$#
      */
     public function testAssertNotSameStringsFail()
     {
@@ -42,8 +42,8 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that two strings are identical.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that two strings are identical\.$#
      */
     public function testAssertSameStringsFail()
     {
@@ -56,8 +56,8 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty\.$#
      */
     public function testAssertStringIsEmptyFail()
     {
@@ -70,8 +70,8 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty\.$#
      */
     public function testAssertStringIsNotEmptyFail()
     {
@@ -84,8 +84,8 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty\.$#
      */
     public function testAssertStringIsNotWhiteSpaceFail()
     {
@@ -98,8 +98,8 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty\.$#
      */
     public function testAssertStringIsWhiteSpaceFail()
     {

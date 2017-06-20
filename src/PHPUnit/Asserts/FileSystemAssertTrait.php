@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -12,18 +14,17 @@
 namespace GeckoPackages\PHPUnit\Asserts;
 
 use GeckoPackages\PHPUnit\Constraints\DirectoryEmptyConstraint;
-use GeckoPackages\PHPUnit\Constraints\DirectoryExistsConstraint;
 use GeckoPackages\PHPUnit\Constraints\FileIsLinkConstraint;
 use GeckoPackages\PHPUnit\Constraints\FileIsValidLinkConstraint;
 use GeckoPackages\PHPUnit\Constraints\FilePermissionsIsIdenticalConstraint;
 use GeckoPackages\PHPUnit\Constraints\FilePermissionsMaskConstraint;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\LogicalNot;
 
 /**
  * Provides asserts for testing directories, files and symbolic links.
  *
  * Additional PHPUnit asserts for testing file (system) based logic.
- *
- * @requires PHPUnit >= 3.0.0 (https://phpunit.de/)
  *
  * @api
  *
@@ -43,17 +44,6 @@ trait FileSystemAssertTrait
     }
 
     /**
-     * Assert that a directory exists (or is a symlink to a directory).
-     *
-     * @param mixed  $filename
-     * @param string $message
-     */
-    public static function assertDirectoryExists($filename, $message = '')
-    {
-        self::assertThatConstraint($filename, $message, 'assertDirectoryExists', new DirectoryExistsConstraint());
-    }
-
-    /**
      * Assert that a directory exists and is not empty.
      *
      * @param mixed  $filename
@@ -61,18 +51,7 @@ trait FileSystemAssertTrait
      */
     public static function assertDirectoryNotEmpty($filename, $message = '')
     {
-        self::assertThatConstraint($filename, $message, 'assertDirectoryNotEmpty', new \PHPUnit_Framework_Constraint_Not(new DirectoryEmptyConstraint()));
-    }
-
-    /**
-     * Assert that a filename does not exists as directory.
-     *
-     * @param mixed  $filename
-     * @param string $message
-     */
-    public static function assertDirectoryNotExists($filename, $message = '')
-    {
-        self::assertThatConstraint($filename, $message, 'assertDirectoryNotExists', new \PHPUnit_Framework_Constraint_Not(new DirectoryExistsConstraint()));
+        self::assertThatConstraint($filename, $message, 'assertDirectoryNotEmpty', new LogicalNot(new DirectoryEmptyConstraint()));
     }
 
     /**
@@ -91,7 +70,12 @@ trait FileSystemAssertTrait
         try {
             $constraint = new FilePermissionsIsIdenticalConstraint($permissions);
         } catch (\InvalidArgumentException $e) {
-            throw AssertHelper::createException(__TRAIT__, 'assertFileHasPermissions', substr($e->getMessage(), 0, -1));
+            throw AssertHelper::createArgumentExceptionWithMessage(
+                __TRAIT__,
+                'assertFileHasPermissions',
+                $permissions,
+                $e->getMessage()
+            );
         }
 
         self::assertThatConstraint($filename, $message, 'assertFileHasPermissions', $constraint);
@@ -116,7 +100,7 @@ trait FileSystemAssertTrait
      */
     public static function assertFileIsNotLink($filename, $message = '')
     {
-        self::assertThatConstraint($filename, $message, 'assertFileIsNotLink', new \PHPUnit_Framework_Constraint_Not(new FileIsLinkConstraint()));
+        self::assertThatConstraint($filename, $message, 'assertFileIsNotLink', new LogicalNot(new FileIsLinkConstraint()));
     }
 
     /**
@@ -155,14 +139,14 @@ trait FileSystemAssertTrait
     }
 
     /**
-     * @param mixed                         $input
-     * @param string                        $message
-     * @param string                        $method
-     * @param \PHPUnit_Framework_Constraint $constraint
+     * @param mixed      $input
+     * @param string     $message
+     * @param string     $method
+     * @param Constraint $constraint
      */
-    private static function assertThatConstraint($input, $message, $method, \PHPUnit_Framework_Constraint $constraint)
+    private static function assertThatConstraint($input, $message, $method, Constraint $constraint)
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
         self::assertThat($input, $constraint, $message);
     }
 
@@ -181,6 +165,6 @@ trait FileSystemAssertTrait
 
         $constraint = new FilePermissionsMaskConstraint($permissionMask);
 
-        self::assertThatConstraint($filename, $message, $method, $positive ? $constraint : new \PHPUnit_Framework_Constraint_Not($constraint));
+        self::assertThatConstraint($filename, $message, $method, $positive ? $constraint : new LogicalNot($constraint));
     }
 }

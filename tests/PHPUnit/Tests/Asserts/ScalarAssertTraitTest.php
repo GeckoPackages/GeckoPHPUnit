@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -12,8 +14,6 @@
 use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
 
 /**
- * @requires PHP 5.4
- *
  * @internal
  *
  * @author SpacePossum
@@ -24,7 +24,7 @@ final class ScalarAssertTraitTest extends GeckoTestCase
 
     public function testAssertArray()
     {
-        $this->assertArray(array());
+        $this->assertArray([]);
     }
 
     public function testAssertBool()
@@ -33,8 +33,8 @@ final class ScalarAssertTraitTest extends GeckoTestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that DateTime\# is of type bool.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that DateTime\# is of type bool\.$#
      */
     public function testAssertBoolFail()
     {
@@ -52,8 +52,8 @@ final class ScalarAssertTraitTest extends GeckoTestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that double\#1 is of type int.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that double\#1 is of type int\.$#
      */
     public function testAssertIntFail()
     {

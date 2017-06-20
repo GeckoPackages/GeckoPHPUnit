@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -11,17 +13,19 @@
 
 namespace GeckoPackages\PHPUnit\Constraints\XML;
 
+use PHPUnit\Framework\Constraint\Constraint;
+
 /**
  * @internal
  *
  * @author SpacePossum
  */
-abstract class AbstractXMLConstraint extends \PHPUnit_Framework_Constraint
+abstract class AbstractXMLConstraint extends Constraint
 {
     /**
      * @var string[]
      */
-    protected $XMLConstraintErrors = array();
+    protected $XMLConstraintErrors = [];
 
     /**
      * {@inheritdoc}

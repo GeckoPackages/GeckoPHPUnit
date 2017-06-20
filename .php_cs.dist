@@ -23,9 +23,11 @@ return (new PhpCsFixer\Config('GeckoPackagesCS'))
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
-        'array_syntax' => ['syntax' => 'long'],
+        '@PHP70Migration' => true,
+        'array_syntax' => ['syntax' => 'short'],
         'class_definition' => ['singleItemSingleLine' => true, 'multiLineExtendsEachSingleLine' => true],
         'combine_consecutive_unsets' => true,
+        'declare_strict_types' => true,
         'dir_constant' => true,
         'ereg_to_preg' => true,
         'header_comment' => ['header' => $header],

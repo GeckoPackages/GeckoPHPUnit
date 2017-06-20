@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -12,8 +14,6 @@
 use GeckoPackages\PHPUnit\Asserts\RangeAssertTrait;
 
 /**
- * @requires PHP 5.4
- *
  * @internal
  *
  * @author SpacePossum
@@ -28,8 +28,8 @@ final class RangeAssertTraitTest extends GeckoTestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that -0.500 is in range \(1.100, 3.200\).$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that -0.500 is in range \(1.100, 3.200\)\.$#
      */
     public function testAssertNumberInRangeFail()
     {
@@ -42,8 +42,8 @@ final class RangeAssertTraitTest extends GeckoTestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Argument \#1 \(null\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int.$#
+     * @expectedException PHPUnit\Framework\Exception
+     * @expectedExceptionMessageRegExp #^Argument \#1 \(null\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int\.$#
      */
     public function testAssertNumberNotInRangeInvalidArgumentLower()
     {
@@ -51,8 +51,8 @@ final class RangeAssertTraitTest extends GeckoTestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Argument \#2 \(string\#_invalid_\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int.$#
+     * @expectedException PHPUnit\Framework\Exception
+     * @expectedExceptionMessageRegExp #^Argument \#2 \(string\#_invalid_\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int\.$#
      */
     public function testAssertNumberNotInRangeInvalidArgumentUpper()
     {
@@ -70,8 +70,8 @@ final class RangeAssertTraitTest extends GeckoTestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^RangeAssertTrait::assertNumberOnRange\(\) lower boundary 5 must be smaller than upper boundary -5.500.$#
+     * @expectedException PHPUnit\Framework\Exception
+     * @expectedExceptionMessageRegExp #^Argument \#1 \(integer\#5\) of RangeAssertTrait::assertNumberOnRange\(\) lower boundary 5 must be smaller than upper boundary -5\.500\.$#
      */
     public function testAssertNumberOnRangeInvalidRange()
     {
@@ -84,8 +84,8 @@ final class RangeAssertTraitTest extends GeckoTestCase
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that -4 is unsigned int.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that -4 is unsigned int\.$#
      */
     public function testAssertUnsignedIntFail()
     {

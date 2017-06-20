@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -10,8 +12,6 @@
  */
 
 /**
- * @requires PHP 5.4
- *
  * @internal
  *
  * @author SpacePossum
@@ -24,8 +24,8 @@ final class AssertHelperTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^FileExistsAssertTrait::assertFileExists\(\) Relies on missing method "assertThat".$#
+     * @expectedException PHPUnit\Framework\Exception
+     * @expectedExceptionMessageRegExp #^FileExistsAssertTrait::assertFileExists\(\) Relies on missing method "assertThat"\.$#
      */
     public function testMissingMethod()
     {

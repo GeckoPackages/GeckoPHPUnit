@@ -11,6 +11,7 @@
  */
 
 require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../tests/PHPUnit/Tests/GeckoTestCase.php';
 require_once __DIR__.'/../tests/PHPUnit/Tests/AbstractGeckoPHPUnitTest.php';
 require_once __DIR__.'/../tests/PHPUnit/Tests/ReadMe/ReadMeTest.php';
 

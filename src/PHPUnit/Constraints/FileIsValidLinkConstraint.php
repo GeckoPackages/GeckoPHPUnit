@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -11,6 +13,8 @@
 
 namespace GeckoPackages\PHPUnit\Constraints;
 
+use PHPUnit\Framework\Constraint\Constraint;
+
 /**
  * Test if given value is a string and a symlink and points to a file or directory that exists.
  *
@@ -20,7 +24,7 @@ namespace GeckoPackages\PHPUnit\Constraints;
  *
  * @author SpacePossum
  */
-final class FileIsValidLinkConstraint extends \PHPUnit_Framework_Constraint
+final class FileIsValidLinkConstraint extends Constraint
 {
     /**
      * {@inheritdoc}

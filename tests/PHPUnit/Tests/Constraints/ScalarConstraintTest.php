@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -19,19 +21,19 @@ use GeckoPackages\PHPUnit\Constraints\ScalarConstraint;
 final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 {
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is of type array.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is of type array\.$#
      */
     public function testArray()
     {
         $constraint = new ScalarConstraint(ScalarConstraint::TYPE_ARRAY);
-        $this->assertTrue($constraint->evaluate(array(), '', true));
+        $this->assertTrue($constraint->evaluate([], '', true));
         $this->assertFalse($constraint->evaluate(1, '', false));
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type bool.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type bool\.$#
      */
     public function testBool()
     {
@@ -41,8 +43,8 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is of type float.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is of type float\.$#
      */
     public function testFloat()
     {
@@ -52,8 +54,8 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type int.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type int\.$#
      */
     public function testInt()
     {
@@ -64,7 +66,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "null" provided.$#
+     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "null" provided\.$#
      */
     public function testNullType()
     {
@@ -72,8 +74,8 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type string.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type string\.$#
      */
     public function testString()
     {
@@ -89,8 +91,8 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type scalar.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type scalar\.$#
      */
     public function testScalar()
     {
@@ -102,7 +104,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "integer\#123456789" provided.$#
+     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "integer\#123456789" provided\.$#
      */
     public function testUnknownValue()
     {

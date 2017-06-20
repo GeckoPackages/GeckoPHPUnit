@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -19,7 +21,7 @@ use GeckoPackages\PHPUnit\Constraints\SameStringsConstraint;
 final class SameStringsConstraintTest extends AbstractGeckoPHPUnitTest
 {
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that two strings are identical.[\n] \#Warning\: Strings contain different line endings\! Debug using remapping \[\"\\r\" => \"R\", \"\\n\" => \"N\", \"\\t\" => \"T\"\]\:\n \-N\n \+RN$#
      */
     public function testSameStringsConstraintFail()

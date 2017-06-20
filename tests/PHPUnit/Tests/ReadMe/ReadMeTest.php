@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -16,7 +18,7 @@
  */
 final class ReadMeTest extends GeckoTestCase
 {
-    public function generateReadMe()
+    public function generateReadMe(): string
     {
         require_once __DIR__.'/ReadMeGenerator.php';
         $generator = new ReadMeGenerator();
@@ -32,12 +34,12 @@ final class ReadMeTest extends GeckoTestCase
     /**
      * @return string[]
      */
-    private function getClasses()
+    private function getClasses(): array
     {
         $classDir = new ReflectionClass('GeckoPackages\PHPUnit\Asserts\AssertHelper');
         $classDir = $classDir->getFileName();
         $classDir = substr($classDir, 0, strrpos($classDir, '/'));
-        $classes = array();
+        $classes = [];
         foreach (new DirectoryIterator($classDir) as $file) {
             if ($file->isDir()) {
                 continue;

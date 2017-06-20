@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -38,22 +40,22 @@ final class UnsignedIntConstraintTest extends AbstractGeckoPHPUnitTest
         $this->assertFalse($constraint->evaluate($invalid, '', true));
     }
 
-    public function provideFailCases()
+    public function provideFailCases(): array
     {
-        return array(
-            array(-1),
-            array(0.1),
-            array(1.5),
-            array('123'),
-            array(false),
-            array(null),
-            array(new \stdClass()),
-        );
+        return [
+            [-1],
+            [0.1],
+            [1.5],
+            ['123'],
+            [false],
+            [null],
+            [new \stdClass()],
+        ];
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is unsigned int.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is unsigned int\.$#
      */
     public function testUnsignedIntConstraintFailMessage()
     {
