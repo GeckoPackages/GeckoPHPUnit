@@ -35,7 +35,7 @@ trait StringsAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertNotSameStrings($expected, $actual, $message = '')
+    public static function assertNotSameStrings($expected, $actual, string $message = '')
     {
         self::assertStringsIdentity($actual, $message, __FUNCTION__, new LogicalNot(new SameStringsConstraint($expected)));
     }
@@ -47,7 +47,7 @@ trait StringsAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertSameStrings($expected, $actual, $message = '')
+    public static function assertSameStrings($expected, $actual, string $message = '')
     {
         self::assertStringsIdentity($actual, $message, __FUNCTION__, new SameStringsConstraint($expected));
     }
@@ -58,7 +58,7 @@ trait StringsAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertStringIsEmpty($actual, $message = '')
+    public static function assertStringIsEmpty($actual, string $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsEmpty', ['assertThat', 'assertEmpty']);
         self::assertThat($actual, new IsType('string'), $message);
@@ -71,7 +71,7 @@ trait StringsAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertStringIsNotEmpty($actual, $message = '')
+    public static function assertStringIsNotEmpty($actual, string $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotEmpty', ['assertThat', 'assertNotEmpty']);
         self::assertThat($actual, new IsType('string'), $message);
@@ -93,7 +93,7 @@ trait StringsAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertStringIsNotWhiteSpace($actual, $message = '')
+    public static function assertStringIsNotWhiteSpace($actual, string $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsNotWhiteSpace', ['assertThat', 'assertNotEmpty']);
         self::assertThat($actual, new IsType('string'), $message);
@@ -115,7 +115,7 @@ trait StringsAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertStringIsWhiteSpace($actual, $message = '')
+    public static function assertStringIsWhiteSpace($actual, string $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertStringIsWhiteSpace', ['assertThat', 'assertEmpty']);
         self::assertThat($actual, new IsType('string'), $message);
@@ -128,7 +128,7 @@ trait StringsAssertTrait
      * @param string     $method
      * @param Constraint $constraint
      */
-    private static function assertStringsIdentity($actual, $message, $method, Constraint $constraint)
+    private static function assertStringsIdentity($actual, string $message, string $method, Constraint $constraint)
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
         self::assertThat($actual, $constraint, $message);

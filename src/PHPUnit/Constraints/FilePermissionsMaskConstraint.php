@@ -30,7 +30,7 @@ final class FilePermissionsMaskConstraint extends Constraint
     /**
      * @param int $mask
      */
-    public function __construct($mask)
+    public function __construct(int $mask)
     {
         parent::__construct();
 

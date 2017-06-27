@@ -42,7 +42,7 @@ final class NumberRangeConstraint extends Constraint
      * @param int|float $upperBoundary
      * @param bool      $onBoundary    pass if value is same as a boundary value, or false; value must be within the boundaries values
      */
-    public function __construct($lowerBoundary, $upperBoundary, $onBoundary)
+    public function __construct($lowerBoundary, $upperBoundary, bool $onBoundary)
     {
         parent::__construct();
 

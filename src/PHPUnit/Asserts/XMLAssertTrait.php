@@ -34,7 +34,7 @@ trait XMLAssertTrait
      * @param string $XSD
      * @param string $message
      */
-    public static function assertXMLMatchesXSD($XSD, $XML, $message = '')
+    public static function assertXMLMatchesXSD($XSD, $XML, string $message = '')
     {
         if (!is_string($XSD)) {
             throw AssertHelper::createArgumentException(__TRAIT__, 'assertXMLMatchesXSD', 'string', $XSD);
@@ -50,7 +50,7 @@ trait XMLAssertTrait
      * @param string $XML
      * @param string $message
      */
-    public static function assertXMLValid($XML, $message = '')
+    public static function assertXMLValid($XML, string $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertXMLValid', ['assertThat']);
         self::assertThat($XML, new XMLValidConstraint(), $message);

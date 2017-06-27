@@ -34,7 +34,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertArray($actual, $message = '')
+    public static function assertArray($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertArray', new ScalarConstraint(ScalarConstraint::TYPE_ARRAY));
     }
@@ -45,7 +45,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertBool($actual, $message = '')
+    public static function assertBool($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertBool', new ScalarConstraint(ScalarConstraint::TYPE_BOOL));
     }
@@ -56,7 +56,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertFloat($actual, $message = '')
+    public static function assertFloat($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertFloat', new ScalarConstraint(ScalarConstraint::TYPE_FLOAT));
     }
@@ -67,7 +67,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertInt($actual, $message = '')
+    public static function assertInt($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertInt', new ScalarConstraint(ScalarConstraint::TYPE_INT));
     }
@@ -78,7 +78,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertScalar($actual, $message = '')
+    public static function assertScalar($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertScalar', new ScalarConstraint(ScalarConstraint::TYPE_SCALAR));
     }
@@ -89,7 +89,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertString($actual, $message = '')
+    public static function assertString($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertString', new ScalarConstraint(ScalarConstraint::TYPE_STRING));
     }
@@ -100,7 +100,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertNotArray($actual, $message = '')
+    public static function assertNotArray($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertNotArray', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_ARRAY)));
     }
@@ -111,7 +111,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertNotBool($actual, $message = '')
+    public static function assertNotBool($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertNotBool', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_BOOL)));
     }
@@ -122,7 +122,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertNotFloat($actual, $message = '')
+    public static function assertNotFloat($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertNotFloat', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_FLOAT)));
     }
@@ -133,7 +133,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertNotInt($actual, $message = '')
+    public static function assertNotInt($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertNotInt', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_INT)));
     }
@@ -144,7 +144,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertNotScalar($actual, $message = '')
+    public static function assertNotScalar($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertNotScalar', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_SCALAR)));
     }
@@ -155,7 +155,7 @@ trait ScalarAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public static function assertNotString($actual, $message = '')
+    public static function assertNotString($actual, string $message = '')
     {
         self::assertTypeOfScalar($actual, $message, 'assertNotString', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_STRING)));
     }
@@ -166,7 +166,7 @@ trait ScalarAssertTrait
      * @param string     $method
      * @param Constraint $constraint
      */
-    private static function assertTypeOfScalar($actual, $message, $method, Constraint $constraint)
+    private static function assertTypeOfScalar($actual, string $message, string $method, Constraint $constraint)
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
         self::assertThat($actual, $constraint, $message);

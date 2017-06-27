@@ -36,7 +36,7 @@ trait RangeAssertTrait
      * @param mixed     $actual
      * @param string    $message
      */
-    public static function assertNumberInRange($lowerBoundary, $upperBoundary, $actual, $message = '')
+    public static function assertNumberInRange($lowerBoundary, $upperBoundary, $actual, string $message = '')
     {
         self::assertNumberRangeMatch($lowerBoundary, $upperBoundary, $actual, $message, 'assertNumberInRange', false, false);
     }
@@ -49,7 +49,7 @@ trait RangeAssertTrait
      * @param mixed     $actual
      * @param string    $message
      */
-    public static function assertNumberNotInRange($lowerBoundary, $upperBoundary, $actual, $message = '')
+    public static function assertNumberNotInRange($lowerBoundary, $upperBoundary, $actual, string $message = '')
     {
         self::assertNumberRangeMatch($lowerBoundary, $upperBoundary, $actual, $message, 'assertNumberNotInRange', false, true);
     }
@@ -62,7 +62,7 @@ trait RangeAssertTrait
      * @param mixed     $actual
      * @param string    $message
      */
-    public static function assertNumberNotOnRange($lowerBoundary, $upperBoundary, $actual, $message = '')
+    public static function assertNumberNotOnRange($lowerBoundary, $upperBoundary, $actual, string $message = '')
     {
         self::assertNumberRangeMatch($lowerBoundary, $upperBoundary, $actual, $message, 'assertNumberNotOnRange', true, true);
     }
@@ -75,7 +75,7 @@ trait RangeAssertTrait
      * @param mixed     $actual
      * @param string    $message
      */
-    public static function assertNumberOnRange($lowerBoundary, $upperBoundary, $actual, $message = '')
+    public static function assertNumberOnRange($lowerBoundary, $upperBoundary, $actual, string $message = '')
     {
         self::assertNumberRangeMatch($lowerBoundary, $upperBoundary, $actual, $message, 'assertNumberOnRange', true, false);
     }
@@ -86,7 +86,7 @@ trait RangeAssertTrait
      * @param mixed  $actual
      * @param string $message
      */
-    public function assertUnsignedInt($actual, $message = '')
+    public function assertUnsignedInt($actual, string $message = '')
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertUnsignedInt', ['assertThat']);
         self::assertThat($actual, new UnsignedIntConstraint(), $message);
@@ -105,10 +105,10 @@ trait RangeAssertTrait
         $lowerBoundary,
         $upperBoundary,
         $actual,
-        $message,
-        $method,
-        $onBoundary,
-        $negative
+        string $message,
+        string $method,
+        bool $onBoundary,
+        bool $negative
     ) {
         if (!is_int($lowerBoundary) && !is_float($lowerBoundary)) {
             throw AssertHelper::createArgumentException(__TRAIT__, $method, 'float or int', $lowerBoundary);

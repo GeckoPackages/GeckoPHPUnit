@@ -65,15 +65,6 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "null" provided\.$#
-     */
-    public function testNullType()
-    {
-        new ScalarConstraint(null);
-    }
-
-    /**
      * @expectedException PHPUnit\Framework\ExpectationFailedException
      * @expectedExceptionMessageRegExp #^Failed asserting that null is of type string\.$#
      */

@@ -38,7 +38,7 @@ trait FileSystemAssertTrait
      * @param mixed  $filename
      * @param string $message
      */
-    public static function assertDirectoryEmpty($filename, $message = '')
+    public static function assertDirectoryEmpty($filename, string $message = '')
     {
         self::assertThatConstraint($filename, $message, 'assertDirectoryEmpty', new DirectoryEmptyConstraint());
     }
@@ -49,7 +49,7 @@ trait FileSystemAssertTrait
      * @param mixed  $filename
      * @param string $message
      */
-    public static function assertDirectoryNotEmpty($filename, $message = '')
+    public static function assertDirectoryNotEmpty($filename, string $message = '')
     {
         self::assertThatConstraint($filename, $message, 'assertDirectoryNotEmpty', new LogicalNot(new DirectoryEmptyConstraint()));
     }
@@ -61,7 +61,7 @@ trait FileSystemAssertTrait
      * @param mixed      $filename
      * @param string     $message
      */
-    public static function assertFileHasPermissions($permissions, $filename, $message = '')
+    public static function assertFileHasPermissions($permissions, $filename, string $message = '')
     {
         if (!is_string($permissions) && !(is_int($permissions) && $permissions >= 0)) {
             throw AssertHelper::createArgumentException(__TRAIT__, 'assertFileHasPermissions', 'int (>= 0) or string', $permissions);
@@ -87,7 +87,7 @@ trait FileSystemAssertTrait
      * @param mixed  $filename
      * @param string $message
      */
-    public static function assertFileIsLink($filename, $message = '')
+    public static function assertFileIsLink($filename, string $message = '')
     {
         self::assertThatConstraint($filename, $message, 'assertFileIsLink', new FileIsLinkConstraint());
     }
@@ -98,7 +98,7 @@ trait FileSystemAssertTrait
      * @param mixed  $filename
      * @param string $message
      */
-    public static function assertFileIsNotLink($filename, $message = '')
+    public static function assertFileIsNotLink($filename, string $message = '')
     {
         self::assertThatConstraint($filename, $message, 'assertFileIsNotLink', new LogicalNot(new FileIsLinkConstraint()));
     }
@@ -109,7 +109,7 @@ trait FileSystemAssertTrait
      * @param mixed  $filename
      * @param string $message
      */
-    public static function assertFileIsValidLink($filename, $message = '')
+    public static function assertFileIsValidLink($filename, string $message = '')
     {
         self::assertThatConstraint($filename, $message, 'assertFileIsValidLink', new FileIsValidLinkConstraint());
     }
@@ -121,7 +121,7 @@ trait FileSystemAssertTrait
      * @param mixed  $filename
      * @param string $message
      */
-    public static function assertFilePermissionMask($permissionMask, $filename, $message = '')
+    public static function assertFilePermissionMask($permissionMask, $filename, string $message = '')
     {
         self::filePermissionMask($permissionMask, $filename, 'assertFilePermissionMask', true, $message);
     }
@@ -133,7 +133,7 @@ trait FileSystemAssertTrait
      * @param mixed  $filename
      * @param string $message
      */
-    public static function assertFilePermissionNotMask($permissionMask, $filename, $message = '')
+    public static function assertFilePermissionNotMask($permissionMask, $filename, string $message = '')
     {
         self::filePermissionMask($permissionMask, $filename, 'assertFilePermissionNotMask', false, $message);
     }
@@ -144,7 +144,7 @@ trait FileSystemAssertTrait
      * @param string     $method
      * @param Constraint $constraint
      */
-    private static function assertThatConstraint($input, $message, $method, Constraint $constraint)
+    private static function assertThatConstraint($input, string $message, string $method, Constraint $constraint)
     {
         AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
         self::assertThat($input, $constraint, $message);
@@ -157,7 +157,7 @@ trait FileSystemAssertTrait
      * @param bool   $positive
      * @param string $message
      */
-    private static function filePermissionMask($permissionMask, $filename, $method, $positive, $message = '')
+    private static function filePermissionMask($permissionMask, $filename, string $method, bool $positive, string $message = '')
     {
         if (!is_int($permissionMask)) {
             throw AssertHelper::createArgumentException(__TRAIT__, $method, 'int', $permissionMask);

@@ -35,7 +35,7 @@ final class ScalarConstraint extends Constraint
     /**
      * @param int $type
      */
-    public function __construct($type)
+    public function __construct(int $type)
     {
         parent::__construct();
 
