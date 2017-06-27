@@ -28,7 +28,7 @@ final class XMLMatchesXSDConstraint extends AbstractXMLConstraint
     /**
      * @param string $XSD
      */
-    public function __construct($XSD)
+    public function __construct(string $XSD)
     {
         parent::__construct();
 
