@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -10,6 +12,8 @@
  */
 
 namespace GeckoPackages\PHPUnit\Asserts;
+
+use PHPUnit\Framework\Exception;
 
 /**
  * Helper for building exceptions and checking dependencies.
@@ -25,25 +29,25 @@ final class AssertHelper
      * @param string   $trait              name of the trait calling method;
      * @param string   $method             called method name
      * @param string[] $methodDependencies list of methods the trait relies on
+     *
+     * @throws Exception
      */
-    public static function assertMethodDependency($class, $trait, $method, array $methodDependencies)
+    public static function assertMethodDependency(string $class, string $trait, string $method, array $methodDependencies)
     {
-        $missing = array();
+        $missing = [];
         foreach ($methodDependencies as $methodDependency) {
             if (!method_exists($class, $methodDependency)) {
                 $missing[] = sprintf('"%s"', $methodDependency);
             }
         }
 
-        if (0 === count($missing)) {
-            return;
+        if (0 !== count($missing)) {
+            throw self::createException(
+                $trait,
+                $method,
+                sprintf('Relies on missing %s %s', count($missing) > 1 ? 'methods' : 'method', implode(', ', $missing))
+            );
         }
-
-        throw self::createException(
-            $trait,
-            $method,
-            sprintf('Relies on missing %s %s', count($missing) > 1 ? 'methods' : 'method', implode(', ', $missing))
-        );
     }
 
     /**
@@ -53,9 +57,20 @@ final class AssertHelper
      * @param mixed  $valueOfArgument         given value
      * @param int    $index                   argument position
      *
-     * @return \PHPUnit_Framework_Exception
+     * @return Exception
      */
-    public static function createArgumentException($trait, $method, $expectedTypeForArgument, $valueOfArgument, $index = 1)
+    public static function createArgumentException(string $trait, string $method, string $expectedTypeForArgument, $valueOfArgument, int $index = 1): Exception
+    {
+        return self::createArgumentExceptionWithMessage(
+            $trait,
+            $method,
+            $valueOfArgument,
+            sprintf('must be %s.', (in_array($expectedTypeForArgument[0], ['a', 'e', 'i', 'o', 'u'], true) ? 'an' : 'a').' '.$expectedTypeForArgument),
+            $index
+        );
+    }
+
+    public static function createArgumentExceptionWithMessage(string $trait, string $method, $valueOfArgument, string $message, int $index = 1): Exception
     {
         if (is_object($valueOfArgument)) {
             $valueOfArgument = sprintf('%s#%s', get_class($valueOfArgument), method_exists($valueOfArgument, '__toString') ? $valueOfArgument->__toString() : '');
@@ -65,14 +80,14 @@ final class AssertHelper
             $valueOfArgument = gettype($valueOfArgument).'#'.$valueOfArgument;
         }
 
-        return new \PHPUnit_Framework_Exception(
+        return new Exception(
             sprintf(
-                'Argument #%d (%s) of %s::%s() must be %s.',
+                'Argument #%d (%s) of %s::%s() %s',
                 $index,
                 $valueOfArgument,
                 substr($trait, strrpos($trait, '\\') + 1),
                 $method,
-                (in_array($expectedTypeForArgument[0], array('a', 'e', 'i', 'o', 'u'), true) ? 'an' : 'a').' '.$expectedTypeForArgument
+                $message
             )
         );
     }
@@ -82,11 +97,11 @@ final class AssertHelper
      * @param string $method  called method name
      * @param string $message
      *
-     * @return \PHPUnit_Framework_Exception
+     * @return Exception
      */
-    public static function createException($trait, $method, $message)
+    private static function createException(string $trait, string $method, string $message): Exception
     {
-        return new \PHPUnit_Framework_Exception(
+        return new Exception(
             sprintf(
                 '%s::%s() %s.',
                 substr($trait, strrpos($trait, '\\') + 1),

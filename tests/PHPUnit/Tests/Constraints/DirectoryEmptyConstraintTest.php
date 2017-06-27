@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -39,8 +41,8 @@ final class DirectoryEmptyConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is an empty directory.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is an empty directory\.$#
      */
     public function testDirectoryEmptyConstraintDirWithFiles()
     {
@@ -49,8 +51,8 @@ final class DirectoryEmptyConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/DirectoryEmptyConstraintTest.php is an empty directory.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints/DirectoryEmptyConstraintTest\.php is an empty directory\.$#
      */
     public function testDirectoryEmptyConstraintFile()
     {
@@ -59,8 +61,8 @@ final class DirectoryEmptyConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that link to file\#/.*test_link_file is an empty directory.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that link to file\#/.*test_link_file is an empty directory\.$#
      */
     public function testDirectoryEmptyConstraintFileLink()
     {
@@ -75,8 +77,8 @@ final class DirectoryEmptyConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is an empty directory.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is an empty directory\.$#
      */
     public function testDirectoryEmptyConstraintInt()
     {
@@ -85,8 +87,8 @@ final class DirectoryEmptyConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is an empty directory.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is an empty directory\.$#
      */
     public function testDirectoryEmptyConstraintNull()
     {
@@ -95,8 +97,8 @@ final class DirectoryEmptyConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is an empty directory.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is an empty directory\.$#
      */
     public function testDirectoryEmptyConstraintObject()
     {
@@ -105,8 +107,8 @@ final class DirectoryEmptyConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is an empty directory.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is an empty directory\.$#
      */
     public function testDirectoryEmptyConstraintString()
     {

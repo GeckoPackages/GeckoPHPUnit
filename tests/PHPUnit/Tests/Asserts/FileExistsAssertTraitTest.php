@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -12,8 +14,6 @@
 use GeckoPackages\PHPUnit\Asserts\FileExistsAssertTrait;
 
 /**
- * @requires PHP 5.4
- *
  * @internal
  *
  * @author SpacePossum
@@ -23,21 +23,20 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     use FileExistsAssertTrait;
 
     /**
-     * @param string $expected
+     * @param bool   $expected
      * @param string $file
      *
      * @dataProvider provideFiles
      */
-    public function testFileExists($expected, $file)
+    public function testFileExists(bool $expected, string $file)
     {
-        if ($expected) {
-            $this->assertFileExists($file);
-        } else {
-            $this->assertFileNotExists($file);
-        }
+        $expected
+            ? $this->assertFileExists($file)
+            : $this->assertFileNotExists($file)
+        ;
     }
 
-    public function provideFiles()
+    public function provideFiles(): array
     {
         $dirLink = $this->getAssetsDir().'test_link_dir';
         $this->createSymlink(
@@ -51,18 +50,18 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
             $fileLink
         );
 
-        return array(
-            array(true, __FILE__),
-            array(true, $fileLink),
-            array(false, $dirLink),
-            array(false, __FILE__.time()),
-            array(false, __DIR__),
-        );
+        return [
+            [true, __FILE__],
+            [true, $fileLink],
+            [false, $dirLink],
+            [false, __FILE__.time()],
+            [false, __DIR__],
+        ];
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a file.$#
+     * @expectedException PHPUnit\Framework\Exception
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a file\.$#
      */
     public function testAssertFileExistsDirectory()
     {
@@ -70,8 +69,8 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that integer\#123 is a file.$/
+     * @expectedException PHPUnit\Framework\Exception
+     * @expectedExceptionMessageRegExp /^Failed asserting that integer\#123 is a file\.$/
      */
     public function testAssertFileExistsInt()
     {
@@ -79,8 +78,8 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that _no_file_ is a file.$/
+     * @expectedException PHPUnit\Framework\Exception
+     * @expectedExceptionMessageRegExp /^Failed asserting that _no_file_ is a file\.$/
      */
     public function testAssertFileExistsNoFile()
     {
@@ -88,8 +87,8 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that null is a file.$/
+     * @expectedException PHPUnit\Framework\Exception
+     * @expectedExceptionMessageRegExp /^Failed asserting that null is a file\.$/
      */
     public function testAssertFileExistsNull()
     {
@@ -97,8 +96,8 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that stdClass\# is a file.$/
+     * @expectedException PHPUnit\Framework\Exception
+     * @expectedExceptionMessageRegExp /^Failed asserting that stdClass\# is a file\.$/
      */
     public function testAssertFileExistsObject()
     {

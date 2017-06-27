@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -27,7 +29,7 @@ final class FileIsValidLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
         );
 
         $constraint = new FileIsValidLinkConstraint();
-        $constraint->evaluate($link);
+        $this->assertTrue($constraint->evaluate($link, '', true));
     }
 
     public function testFileIsValidLinkToDir()
@@ -39,12 +41,12 @@ final class FileIsValidLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
         );
 
         $constraint = new FileIsValidLinkConstraint();
-        $constraint->evaluate($link);
+        $this->assertTrue($constraint->evaluate($link, '', true));
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that link\#/.*tests/assets/invalid_link is a valid link.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that link\#/.*tests/assets/invalid_link is a valid link\.$#
      */
     public function testFileIsValidLinkToNowhere()
     {
@@ -53,8 +55,8 @@ final class FileIsValidLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a valid link.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a valid link\.$#
      */
     public function testFileIsValidLinkObject()
     {
@@ -63,8 +65,8 @@ final class FileIsValidLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is a valid link.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is a valid link\.$#
      */
     public function testFileIsValidLinkNull()
     {
@@ -73,8 +75,8 @@ final class FileIsValidLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that string\#a is a valid link.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that string\#a is a valid link\.$#
      */
     public function testFileIsValidLinkString()
     {
@@ -83,8 +85,8 @@ final class FileIsValidLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a valid link.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a valid link\.$#
      */
     public function testFileIsValidLinkNotString()
     {
@@ -93,8 +95,8 @@ final class FileIsValidLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt is a valid link.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file\.txt is a valid link\.$#
      */
     public function testFileIsValidLinkFile()
     {
@@ -103,8 +105,8 @@ final class FileIsValidLinkConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*tests/assets/ is a valid link.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*tests/assets/ is a valid link\.$#
      */
     public function testFileIsValidLinkDir()
     {

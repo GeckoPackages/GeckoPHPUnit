@@ -24,7 +24,9 @@ See Traits and asserts listing for more details.
 
 ### Requirements
 
-PHP 5.4 (PHP 5.3.6 for the constraints, PHP 7 supported). Optional HHVM support >= 3.9. PHPUnit >= 3.5.0.
+PHP 7 / PHPUnit 6
+
+<sub>Use ^v2.0 if you are using PHPUnit 5.</sub>
 
 ### Install
 
@@ -33,11 +35,11 @@ Add the package to your `composer.json`.
 
 ```
 "require-dev": {
-    "gecko-packages/gecko-php-unit" : "^2.0"
+    "gecko-packages/gecko-php-unit" : "^3.0"
 }
 ```
 
-Please note we hint `-dev` here because typically you only need tests during development.
+<sub>Please note we hint `-dev` here because typically you only need tests during development.</sub>
 
 ### Usage
 
@@ -64,7 +66,6 @@ Replacement for PHPUnits `assertFileExists` and `assertFileNotExists`.
 Asserts when the filename exists and is a regular file, i.e. directories do not pass (symlink to a file does).
 (Note. Since this changes the default behaviour of the PHPUnit assert this has been placed in a separate trait)
 
-Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 
 ### Methods
 
@@ -82,7 +83,6 @@ Assert the filename does not exists or is not a regular file.
 ###### GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait
 Additional PHPUnit asserts for testing file (system) based logic.
 
-Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 
 ### Methods
 
@@ -94,16 +94,6 @@ The inverse assertion
 #### assertDirectoryNotEmpty()
 ###### assertDirectoryNotEmpty(mixed $filename [,string $message = ''])
 Assert that a directory exists and is not empty.
-
-
-#### assertDirectoryExists()
-###### assertDirectoryExists(mixed $filename [,string $message = ''])
-Assert that a directory exists (or is a symlink to a directory).
-
-The inverse assertion
-#### assertDirectoryNotExists()
-###### assertDirectoryNotExists(mixed $filename [,string $message = ''])
-Assert that a filename does not exists as directory.
 
 
 #### assertFileHasPermissions()
@@ -138,7 +128,6 @@ Asserts that a file permission does not matches mask, for example: '0607'.
 ###### GeckoPackages\PHPUnit\Asserts\RangeAssertTrait
 Additional PHPUnit asserts for testing if numbers are within or on ranges.
 
-Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 
 ### Methods
 
@@ -170,7 +159,6 @@ Assert that given value is an unsigned int (>= 0).
 ###### GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait
 Additional shorthand PHPUnit asserts to test (for) scalar types.
 
-Requires PHPUnit >= 3.5.0 (https://phpunit.de/).
 
 ### Methods
 
@@ -237,7 +225,6 @@ Assert value is not a string.
 ## StringsAssertTrait
 ###### GeckoPackages\PHPUnit\Asserts\StringsAssertTrait
 
-Requires PHPUnit >= 3.0.0 (https://phpunit.de/).
 
 ### Methods
 
@@ -274,9 +261,7 @@ Assert value is a string and not only contains white space characters (" \t\n\r\
 ## XMLAssertTrait
 ###### GeckoPackages\PHPUnit\Asserts\XMLAssertTrait
 
-Requires:
-* PHPUnit >= 3.0.0 (https://phpunit.de/)
-* libxml (https://secure.php.net/manual/en/book.libxml.php)
+Requires libxml (https://secure.php.net/manual/en/book.libxml.php).
 
 ### Methods
 

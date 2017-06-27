@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -40,8 +42,8 @@ final class NumberRangeConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that 1 is in range \(0, 1\).$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that 1 is in range \(0, 1\)\.$#
      */
     public function testNumberRangeConstraintFailOnRange()
     {
@@ -51,8 +53,8 @@ final class NumberRangeConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that 2.500 is in range \[0.500, 1.500\].$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that 2\.500 is in range \[0\.500, 1\.500\]\.$#
      */
     public function testNumberRangeConstraintFailOutOfRange()
     {

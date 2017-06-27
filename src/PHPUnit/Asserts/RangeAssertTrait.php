@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -13,13 +15,12 @@ namespace GeckoPackages\PHPUnit\Asserts;
 
 use GeckoPackages\PHPUnit\Constraints\NumberRangeConstraint;
 use GeckoPackages\PHPUnit\Constraints\UnsignedIntConstraint;
+use PHPUnit\Framework\Constraint\LogicalNot;
 
 /**
  * Provides asserts for testing values with ranges.
  *
  * Additional PHPUnit asserts for testing if numbers are within or on ranges.
- *
- * @requires PHPUnit >= 3.0.0 (https://phpunit.de/)
  *
  * @api
  *
@@ -87,7 +88,7 @@ trait RangeAssertTrait
      */
     public function assertUnsignedInt($actual, $message = '')
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertUnsignedInt', array('assertThat'));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, 'assertUnsignedInt', ['assertThat']);
         self::assertThat($actual, new UnsignedIntConstraint(), $message);
     }
 
@@ -119,24 +120,25 @@ trait RangeAssertTrait
 
         if ($lowerBoundary >= $upperBoundary) {
             $message = sprintf(
-                'lower boundary %s must be smaller than upper boundary %s',
+                'lower boundary %s must be smaller than upper boundary %s.',
                 is_int($lowerBoundary) ? '%d' : '%.3f',
                 is_int($upperBoundary) ? '%d' : '%.3f'
             );
 
-            throw AssertHelper::createException(
+            throw AssertHelper::createArgumentExceptionWithMessage(
                 __TRAIT__,
                 $method,
+                $lowerBoundary,
                 sprintf($message, $lowerBoundary, $upperBoundary)
             );
         }
 
         $rangeConstraint = new NumberRangeConstraint($lowerBoundary, $upperBoundary, $onBoundary);
         if ($negative) {
-            $rangeConstraint = new \PHPUnit_Framework_Constraint_Not($rangeConstraint);
+            $rangeConstraint = new LogicalNot($rangeConstraint);
         }
 
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
         self::assertThat($actual, $rangeConstraint, $message);
     }
 }

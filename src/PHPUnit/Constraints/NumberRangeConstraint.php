@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -11,12 +13,14 @@
 
 namespace GeckoPackages\PHPUnit\Constraints;
 
+use PHPUnit\Framework\Constraint\Constraint;
+
 /**
  * @api
  *
  * @author SpacePossum
  */
-final class NumberRangeConstraint extends \PHPUnit_Framework_Constraint
+final class NumberRangeConstraint extends Constraint
 {
     /**
      * @var int|float

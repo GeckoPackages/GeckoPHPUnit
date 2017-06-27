@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -23,13 +25,13 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
      *
      * @dataProvider provideFiles
      */
-    public function testFileExistsConstraint($file)
+    public function testFileExistsConstraint(string $file)
     {
         $constraint = new FileExistsConstraint();
         $this->assertTrue($constraint->evaluate($file, '', true));
     }
 
-    public function provideFiles()
+    public function provideFiles(): array
     {
         $link = $this->getAssetsDir().'test_link_file';
         $this->createSymlink(
@@ -37,10 +39,10 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
             $link
         );
 
-        return array(
-            array(__FILE__),
-            array($link),
-        );
+        return [
+            [__FILE__],
+            [$link],
+        ];
     }
 
     public function testFileExistsConstraintBasics()
@@ -51,8 +53,8 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is a file.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Constraints is a file\.$#
      */
     public function testFileExistsConstraintDir()
     {
@@ -61,8 +63,8 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that link to directory\#/.*test_link_dir is a file.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that link to directory\#/.*test_link_dir is a file\.$#
      */
     public function testFileExistsConstraintFileLink()
     {
@@ -77,8 +79,8 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a file.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is a file\.$#
      */
     public function testFileExistsConstraintInt()
     {
@@ -87,8 +89,8 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is a file.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is a file\.$#
      */
     public function testFileExistsConstraintNull()
     {
@@ -97,8 +99,8 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a file.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is a file\.$#
      */
     public function testFileExistsConstraintObject()
     {
@@ -107,8 +109,8 @@ final class FileExistsConstraintTest extends AbstractGeckoPHPUnitFileTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is a file.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that __does_not_exists__ is a file\.$#
      */
     public function testFileExistsConstraintString()
     {

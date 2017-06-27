@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -24,20 +26,20 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
      *
      * @dataProvider providePermissionExpected
      */
-    public function testFilePermissionsMaskConstraint($expected, $permission)
+    public function testFilePermissionsMaskConstraint(bool $expected, $permission)
     {
         $constraint = new FilePermissionsIsIdenticalConstraint($permission);
         $this->assertSame($expected, $constraint->evaluate($this->getTestFile(), '', true));
     }
 
-    public function providePermissionExpected()
+    public function providePermissionExpected(): array
     {
-        return array(
-            array(true, 100644),
-            array(true, '100644'),
-            array(true, '0644'),
-            array(true, '-rw-r--r--'),
-        );
+        return [
+            [true, 100644],
+            [true, '100644'],
+            [true, '0644'],
+            [true, '-rw-r--r--'],
+        ];
     }
 
     public function testFilePermissionsMaskConstraintBasic()
@@ -49,7 +51,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"-1\", expected >= 0.$#
+     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"-1\", expected >= 0\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg1()
     {
@@ -58,7 +60,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Permission to match \"invalid"\ is not formatted correctly.$#
+     * @expectedExceptionMessageRegExp #^Permission to match \"invalid"\ is not formatted correctly\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg2()
     {
@@ -67,7 +69,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"stdClass\#\", expected int >= 0 or string.$#
+     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"stdClass\#\", expected int >= 0 or string\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg3()
     {
@@ -77,7 +79,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"null\", expected int >= 0 or string.$#
+     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"null\", expected int >= 0 or string\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg4()
     {
@@ -87,7 +89,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"double\#1.5\", expected int >= 0 or string.$#
+     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"double\#1.5\", expected int >= 0 or string\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg5()
     {
@@ -96,8 +98,8 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 permissions are equal.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 permissions are equal\.$#
      */
     public function testFilePermissionsMaskConstraintInt()
     {
@@ -106,8 +108,8 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that not file or directory\#_does_not_exists_ permissions are equal.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that not file or directory\#_does_not_exists_ permissions are equal\.$#
      */
     public function testFilePermissionsMaskConstraintNoFile()
     {
@@ -116,8 +118,8 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null permissions are equal.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null permissions are equal\.$#
      */
     public function testFilePermissionsMaskConstraintNull()
     {
@@ -126,8 +128,8 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# permissions are equal.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# permissions are equal\.$#
      */
     public function testFilePermissionsMaskConstraintObject()
     {
@@ -144,12 +146,12 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
         );
 
         $c = new FilePermissionsIsIdenticalConstraint(0777);
-        $c->evaluate($link);
+        $this->assertTrue($c->evaluate($link, '', true));
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that link\#/.*PHPUnit/tests/assets/test_link_file 0777 permissions are equal to 0111.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that link\#/.*PHPUnit/tests/assets/test_link_file 0777 permissions are equal to 0111\.$#
      */
     public function testFilePermissionsMaskConstraintFileLinkMismatch()
     {
@@ -164,8 +166,8 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0644 permissions are equal to 0111.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file\.txt 0644 permissions are equal to 0111\.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatch()
     {
@@ -174,8 +176,8 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0100644 permissions are equal to 0100775.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file\.txt 0100644 permissions are equal to 0100775\.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatchLarge()
     {
@@ -184,8 +186,8 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt -rw-r--r-- permissions are equal to -rw-rw-rw-.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file\.txt -rw-r--r-- permissions are equal to -rw-rw-rw-\.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatchString()
     {
@@ -220,31 +222,31 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @param string $expected
-     * @param string $input
+     * @param int    $input
      *
      * @dataProvider provideFilePermissions
      */
-    public function testPermissionsGetAsString($expected, $input)
+    public function testPermissionsGetAsString(string $expected, int $input)
     {
         $reflection = new \ReflectionClass('GeckoPackages\PHPUnit\Constraints\FilePermissionsIsIdenticalConstraint');
         $method = $reflection->getMethod('getFilePermissionsAsString');
         $method->setAccessible(true);
-        $this->assertSame($expected, $method->invokeArgs($this, array($input)));
+        $this->assertSame($expected, $method->invokeArgs($this, [$input]));
     }
 
-    public function provideFilePermissions()
+    public function provideFilePermissions(): array
     {
-        return array(
-            array('drwxr-xr-x', fileperms($this->getAssetsDir().'/dir')), // 7775
-            array('urwxrwxrwx', 0777),
-            array('prwxrwxrwx', 010777),
-            array('crwxrwxrwx', 020777),
-            array('brwxrwxrwx', 060777),
-            array('srwxrwxrwx', 0140777),
-        );
+        return [
+            ['drwxr-xr-x', fileperms($this->getAssetsDir().'/dir')], // 7775
+            ['urwxrwxrwx', 0777],
+            ['prwxrwxrwx', 010777],
+            ['crwxrwxrwx', 020777],
+            ['brwxrwxrwx', 060777],
+            ['srwxrwxrwx', 0140777],
+        ];
     }
 
-    private function getTestFile()
+    private function getTestFile(): string
     {
         return realpath($this->getAssetsDir().'/dir/test_file.txt');
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -19,7 +21,7 @@ abstract class AbstractGeckoPHPUnitTest extends GeckoTestCase
     /**
      * @return string
      */
-    protected function getAssetsDir()
+    protected function getAssetsDir(): string
     {
         static $assertDir;
 

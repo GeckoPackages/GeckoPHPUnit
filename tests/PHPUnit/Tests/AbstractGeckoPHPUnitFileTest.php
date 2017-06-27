@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -20,7 +22,7 @@ abstract class AbstractGeckoPHPUnitFileTest extends AbstractGeckoPHPUnitTest
      * @param string $target filesystem path
      * @param string $link   filesystem path
      */
-    protected function createSymlink($target, $link)
+    protected function createSymlink(string $target, string $link)
     {
         // File_exists returns false if the sym link exits but the target does not.
         // Therefor test if the symlink exists first and delete it if the target does not not.

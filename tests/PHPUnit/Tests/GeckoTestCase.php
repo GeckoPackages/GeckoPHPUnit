@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -9,6 +11,8 @@
  * with this source code in the file LICENSE.
  */
 
-abstract class GeckoTestCase extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+abstract class GeckoTestCase extends TestCase
 {
 }

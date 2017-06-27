@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -12,13 +14,13 @@
 namespace GeckoPackages\PHPUnit\Asserts;
 
 use GeckoPackages\PHPUnit\Constraints\ScalarConstraint;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\LogicalNot;
 
 /**
  * Provides asserts for testing of scalars such as integer, float, etc.
  *
  * Additional shorthand PHPUnit asserts to test (for) scalar types.
- *
- * @requires PHPUnit >= 3.5.0 (https://phpunit.de/)
  *
  * @api
  *
@@ -100,7 +102,7 @@ trait ScalarAssertTrait
      */
     public static function assertNotArray($actual, $message = '')
     {
-        self::assertTypeOfScalar($actual, $message, 'assertNotArray', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_ARRAY)));
+        self::assertTypeOfScalar($actual, $message, 'assertNotArray', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_ARRAY)));
     }
 
     /**
@@ -111,7 +113,7 @@ trait ScalarAssertTrait
      */
     public static function assertNotBool($actual, $message = '')
     {
-        self::assertTypeOfScalar($actual, $message, 'assertNotBool', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_BOOL)));
+        self::assertTypeOfScalar($actual, $message, 'assertNotBool', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_BOOL)));
     }
 
     /**
@@ -122,7 +124,7 @@ trait ScalarAssertTrait
      */
     public static function assertNotFloat($actual, $message = '')
     {
-        self::assertTypeOfScalar($actual, $message, 'assertNotFloat', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_FLOAT)));
+        self::assertTypeOfScalar($actual, $message, 'assertNotFloat', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_FLOAT)));
     }
 
     /**
@@ -133,7 +135,7 @@ trait ScalarAssertTrait
      */
     public static function assertNotInt($actual, $message = '')
     {
-        self::assertTypeOfScalar($actual, $message, 'assertNotInt', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_INT)));
+        self::assertTypeOfScalar($actual, $message, 'assertNotInt', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_INT)));
     }
 
     /**
@@ -144,7 +146,7 @@ trait ScalarAssertTrait
      */
     public static function assertNotScalar($actual, $message = '')
     {
-        self::assertTypeOfScalar($actual, $message, 'assertNotScalar', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_SCALAR)));
+        self::assertTypeOfScalar($actual, $message, 'assertNotScalar', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_SCALAR)));
     }
 
     /**
@@ -155,18 +157,18 @@ trait ScalarAssertTrait
      */
     public static function assertNotString($actual, $message = '')
     {
-        self::assertTypeOfScalar($actual, $message, 'assertNotString', new \PHPUnit_Framework_Constraint_Not(new ScalarConstraint(ScalarConstraint::TYPE_STRING)));
+        self::assertTypeOfScalar($actual, $message, 'assertNotString', new LogicalNot(new ScalarConstraint(ScalarConstraint::TYPE_STRING)));
     }
 
     /**
-     * @param mixed                         $actual
-     * @param string                        $message
-     * @param string                        $method
-     * @param \PHPUnit_Framework_Constraint $constraint
+     * @param mixed      $actual
+     * @param string     $message
+     * @param string     $method
+     * @param Constraint $constraint
      */
-    private static function assertTypeOfScalar($actual, $message, $method, \PHPUnit_Framework_Constraint $constraint)
+    private static function assertTypeOfScalar($actual, $message, $method, Constraint $constraint)
     {
-        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, array('assertThat'));
+        AssertHelper::assertMethodDependency(__CLASS__, __TRAIT__, $method, ['assertThat']);
         self::assertThat($actual, $constraint, $message);
     }
 }

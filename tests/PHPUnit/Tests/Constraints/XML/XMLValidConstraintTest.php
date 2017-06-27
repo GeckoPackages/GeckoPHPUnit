@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the GeckoPackages.
  *
@@ -32,8 +34,8 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# is valid XML.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# is valid XML\.$#
      */
     public function testXMLValidConstraintFalse()
     {
@@ -42,8 +44,8 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is valid XML.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is valid XML\.$#
      */
     public function testXMLValidConstraintInt()
     {
@@ -52,8 +54,8 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that <a></b> is valid XML.[\n]\[error \d{1,}\](?s).*$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that <a></b> is valid XML.[\n]\[error \d{1,}\](?s).*\.$#
      */
     public function testXMLValidConstraintInvalidXML()
     {
@@ -62,8 +64,8 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is valid XML.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is valid XML\.$#
      */
     public function testXMLValidConstraintNull()
     {
@@ -72,8 +74,8 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
     }
 
     /**
-     * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is valid XML.$#
+     * @expectedException PHPUnit\Framework\ExpectationFailedException
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is valid XML\.$#
      */
     public function testXMLValidConstraintObject()
     {
