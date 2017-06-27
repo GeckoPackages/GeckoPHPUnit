@@ -11,9 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
+use GeckoPackages\PHPUnit\Asserts\AliasAssertTrait;
 use GeckoPackages\PHPUnit\Asserts\FileExistsAssertTrait;
 use GeckoPackages\PHPUnit\Asserts\FileSystemAssertTrait;
-use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
 use GeckoPackages\PHPUnit\Asserts\XMLAssertTrait;
 
 /**
@@ -23,8 +23,8 @@ use GeckoPackages\PHPUnit\Asserts\XMLAssertTrait;
  */
 final class TestDummy
 {
+    use AliasAssertTrait;
     use FileExistsAssertTrait;
     use FileSystemAssertTrait;
-    use ScalarAssertTrait;
     use XMLAssertTrait;
 }

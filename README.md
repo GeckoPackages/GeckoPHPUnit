@@ -7,14 +7,14 @@ The asserts are provided using Traits so no changes are needed in the hierarchy 
 
 The additional asserts are provided through the Traits:
 
+- **AliasAssertTrait**<br/>
+  Provides alias/short hand asserts.
 - **FileExistsAssertTrait**<br/>
   Replaces the PHPUnit `assertFileExists` method. This assert does not pass if there is a directory rather than a file.
 - **FileSystemAssertTrait**<br/>
   Provides asserts for testing directories, files and symbolic links.
 - **RangeAssertTrait**<br/>
   Provides asserts for testing values with ranges.
-- **ScalarAssertTrait**<br/>
-  Provides asserts for testing of scalars such as integer, float, etc.
 - **StringsAssertTrait**<br/>
   Provides asserts for testing of strings.
 - **XMLAssertTrait**<br/>
@@ -60,11 +60,78 @@ class myTest extends \PHPUnit_Framework_TestCase
 
 # Traits and asserts listing
 
+## AliasAssertTrait
+###### GeckoPackages\PHPUnit\Asserts\AliasAssertTrait
+Additional alias/shorthand PHPUnit asserts to test for some types etc.
+
+
+### Methods
+
+#### assertArray()
+###### assertArray(mixed $actual [,string $message = ''])
+Assert value is an array.
+
+The inverse assertion
+#### assertNotArray()
+###### assertNotArray(mixed $actual [,string $message = ''])
+Assert value is not an array.
+
+
+#### assertBool()
+###### assertBool(mixed $actual [,string $message = ''])
+Assert value is a bool (boolean).
+
+The inverse assertion
+#### assertNotBool()
+###### assertNotBool(mixed $actual [,string $message = ''])
+Assert value is not a bool (boolean).
+
+
+#### assertFloat()
+###### assertFloat(mixed $actual [,string $message = ''])
+Assert value is a float (double, real).
+
+The inverse assertion
+#### assertNotFloat()
+###### assertNotFloat(mixed $actual [,string $message = ''])
+Assert value is not a float (double, real).
+
+
+#### assertInt()
+###### assertInt(mixed $actual [,string $message = ''])
+Assert value is an int (integer).
+
+The inverse assertion
+#### assertNotInt()
+###### assertNotInt(mixed $actual [,string $message = ''])
+Assert value is not an int (integer).
+
+
+#### assertScalar()
+###### assertScalar(mixed $actual [,string $message = ''])
+Assert value is a scalar.
+
+The inverse assertion
+#### assertNotScalar()
+###### assertNotScalar(mixed $actual [,string $message = ''])
+Assert value is not a scalar.
+
+
+#### assertString()
+###### assertString(mixed $actual [,string $message = ''])
+Assert value is a string.
+
+The inverse assertion
+#### assertNotString()
+###### assertNotString(mixed $actual [,string $message = ''])
+Assert value is not a string.
+
+
 ## FileExistsAssertTrait
 ###### GeckoPackages\PHPUnit\Asserts\FileExistsAssertTrait
 Replacement for PHPUnits `assertFileExists` and `assertFileNotExists`.
-Asserts when the filename exists and is a regular file, i.e. directories do not pass (symlink to a file does).
-(Note. Since this changes the default behaviour of the PHPUnit assert this has been placed in a separate trait)
+Asserts when the filename exists and is a regular file, i.e. directories do not pass (however a symlink to a file does).<br/>
+<sub>Note. Since this changes the default behaviour of the PHPUnit assert this has been placed in a separate trait.</sub>
 
 
 ### Methods
@@ -154,73 +221,6 @@ Assert that a number is not within a given range and not on its boundaries ![a,b
 #### assertUnsignedInt()
 ###### assertUnsignedInt(mixed $actual [,string $message = ''])
 Assert that given value is an unsigned int (>= 0).
-
-## ScalarAssertTrait
-###### GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait
-Additional shorthand PHPUnit asserts to test (for) scalar types.
-
-
-### Methods
-
-#### assertArray()
-###### assertArray(mixed $actual [,string $message = ''])
-Assert value is an array.
-
-The inverse assertion
-#### assertNotArray()
-###### assertNotArray(mixed $actual [,string $message = ''])
-Assert value is not an array.
-
-
-#### assertBool()
-###### assertBool(mixed $actual [,string $message = ''])
-Assert value is a bool (boolean).
-
-The inverse assertion
-#### assertNotBool()
-###### assertNotBool(mixed $actual [,string $message = ''])
-Assert value is not a bool (boolean).
-
-
-#### assertFloat()
-###### assertFloat(mixed $actual [,string $message = ''])
-Assert value is a float (double, real).
-
-The inverse assertion
-#### assertNotFloat()
-###### assertNotFloat(mixed $actual [,string $message = ''])
-Assert value is not a float (double, real).
-
-
-#### assertInt()
-###### assertInt(mixed $actual [,string $message = ''])
-Assert value is an int (integer).
-
-The inverse assertion
-#### assertNotInt()
-###### assertNotInt(mixed $actual [,string $message = ''])
-Assert value is not an int (integer).
-
-
-#### assertScalar()
-###### assertScalar(mixed $actual [,string $message = ''])
-Assert value is a scalar.
-
-The inverse assertion
-#### assertNotScalar()
-###### assertNotScalar(mixed $actual [,string $message = ''])
-Assert value is not a scalar.
-
-
-#### assertString()
-###### assertString(mixed $actual [,string $message = ''])
-Assert value is a string.
-
-The inverse assertion
-#### assertNotString()
-###### assertNotString(mixed $actual [,string $message = ''])
-Assert value is not a string.
-
 
 ## StringsAssertTrait
 ###### GeckoPackages\PHPUnit\Asserts\StringsAssertTrait

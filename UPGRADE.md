@@ -1,3 +1,24 @@
+UPGRADE GUIDE FROM 2.x to 3.0
+=============================
+
+This is guide for upgrade from version 2.x to 3.0 for the project.
+
+Traits (asserts)
+--------------
+
+`ScalarAssertTrait` has been renamed to `AliasAssertTrait`.
+
+The following methods have been removed from `FileSystemAssertTrait`:
+- `assertDirectoryExists`
+- `assertDirectoryNotExists`
+
+PHPUnit provides these asserts self now.
+
+Constraints
+--------------
+
+The `DirectoryExistsConstraint` has been removed.
+
 UPGRADE GUIDE FROM 1.x to 2.0
 =============================
 
