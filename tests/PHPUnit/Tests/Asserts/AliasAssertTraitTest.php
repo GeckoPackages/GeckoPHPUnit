@@ -11,16 +11,16 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-use GeckoPackages\PHPUnit\Asserts\ScalarAssertTrait;
+use GeckoPackages\PHPUnit\Asserts\AliasAssertTrait;
 
 /**
  * @internal
  *
  * @author SpacePossum
  */
-final class ScalarAssertTraitTest extends GeckoTestCase
+final class AliasAssertTraitTest extends GeckoTestCase
 {
-    use ScalarAssertTrait;
+    use AliasAssertTrait;
 
     public function testAssertArray()
     {

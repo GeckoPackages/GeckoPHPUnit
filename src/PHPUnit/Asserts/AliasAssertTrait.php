@@ -18,15 +18,15 @@ use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\LogicalNot;
 
 /**
- * Provides asserts for testing of scalars such as integer, float, etc.
+ * Provides alias/short hand asserts.
  *
- * Additional shorthand PHPUnit asserts to test (for) scalar types.
+ * Additional alias/shorthand PHPUnit asserts to test for some types etc.
  *
  * @api
  *
  * @author SpacePossum
  */
-trait ScalarAssertTrait
+trait AliasAssertTrait
 {
     /**
      * Assert value is an array.

@@ -21,8 +21,8 @@ use PHPUnit\Framework\Constraint\LogicalNot;
  * Replaces the PHPUnit `assertFileExists` method. This assert does not pass if there is a directory rather than a file.
  *
  * Replacement for PHPUnits `assertFileExists` and `assertFileNotExists`.
- * Asserts when the filename exists and is a regular file, i.e. directories do not pass (symlink to a file does).
- * (Note. Since this changes the default behaviour of the PHPUnit assert this has been placed in a separate trait)
+ * Asserts when the filename exists and is a regular file, i.e. directories do not pass (however a symlink to a file does).<br/>
+ * <sub>Note. Since this changes the default behaviour of the PHPUnit assert this has been placed in a separate trait.</sub>
  *
  * @api
  *
