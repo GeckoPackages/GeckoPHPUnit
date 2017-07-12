@@ -121,7 +121,7 @@ final class ReadMeGenerator
 
 # PHPUnit extensions
 
-Provides additional asserts to be used in [PHPUnit](https://phpunit.de/) tests.
+Provides additional asserts and constraints to be used in [PHPUnit](https://phpunit.de/) tests.
 The asserts are provided using Traits so no changes are needed in the hierarchy of test classes.
 
 The additional asserts are provided through the Traits:
@@ -169,6 +169,21 @@ class myTest extends \PHPUnit_Framework_TestCase
 ### License
 
 The project is released under the MIT license, see the LICENSE file.
+
+### Contributions
+
+Contributions are welcome!<br/>
+Visit us on [github :octocat:](https://github.com/GeckoPackages/GeckoPHPUnit)
+
+### Semantic Versioning
+
+This project follows [Semantic Versioning](http://semver.org/).
+
+<sub>Kindly note:
+We do not keep a backwards compatible promise on code annotated with `@internal`, the tests and tooling (such as document generation) of the project itself
+nor the content and/or format of exception/error messages.</sub>
+
+This project is maintained on [github :octocat:](https://github.com/GeckoPackages/GeckoPHPUnit)
 
 EOF;
         $readMeTemplate = str_replace('#GENERATED_LISTING#', $listing, $readMeTemplate);

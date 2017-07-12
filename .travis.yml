@@ -37,5 +37,5 @@ install:
     - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.12.1/php-cs-fixer.phar -o php-cs-fixer.phar; fi
 
 script:
-    - phpunit --verbose
+    - ./vendor/bin/phpunit --verbose
     - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then php php-cs-fixer.phar --dry-run -v --config-file=.php_cs.dist fix; fi

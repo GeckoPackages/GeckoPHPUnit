@@ -13,7 +13,11 @@ final class ReadMeTest extends \PHPUnit_Framework_TestCase
 {
     public function testReadMe()
     {
-        $this->assertStringEqualsFile(__DIR__.'/../../../README.md', $this->generateReadMe());
+        $this->assertStringEqualsFile(
+            __DIR__.'/../../../README.md',
+            $this->generateReadMe(),
+            'README is out of sync, please run `$ ./generate_readme` from the root of the project.'
+        );
     }
 
     public function generateReadMe()
@@ -37,6 +41,7 @@ final class ReadMeTest extends \PHPUnit_Framework_TestCase
             if ($file->isDir()) {
                 continue;
             }
+
             $classes[] = 'GeckoPackages\\PHPUnit\\Asserts\\'.substr($file->getFilename(), 0, -4);
         }
 
