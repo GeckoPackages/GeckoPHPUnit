@@ -109,6 +109,6 @@ final class ScalarConstraint extends Constraint
      */
     public function toString()
     {
-        return 'is of given scalar type.';
+        return sprintf('is of type "%s".', $this->type);
     }
 }

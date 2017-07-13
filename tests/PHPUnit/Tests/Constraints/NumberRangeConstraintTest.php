@@ -20,30 +20,35 @@ use GeckoPackages\PHPUnit\Constraints\NumberRangeConstraint;
  */
 final class NumberRangeConstraintTest extends AbstractGeckoPHPUnitTest
 {
-    public function testNumberRangeConstraint()
+    public function testNumberRangeConstraintInRange()
     {
         $lower = -1;
         $upper = 5;
         $constraint = new NumberRangeConstraint($lower, $upper, true);
 
+        $this->assertSame('is in range', $constraint->toString());
+
         for ($i = $lower; $i <= $upper; ++$i) {
             $this->assertTrue($constraint->evaluate($i, '', true));
         }
+    }
 
+    public function testNumberRangeConstraintWithInRange()
+    {
         $lower = 1;
         $upper = 3;
         $constraint = new NumberRangeConstraint($lower, $upper, false);
 
+        $this->assertSame('is within range', $constraint->toString());
+
         for ($i = $lower + 1; $i < $upper; ++$i) {
             $this->assertTrue($constraint->evaluate($i, '', true));
         }
-
-        $this->assertSame('is in range', $constraint->toString());
     }
 
     /**
      * @expectedException PHPUnit\Framework\ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that 1 is in range \(0, 1\)\.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that 1 is within range \(0, 1\)\.$#
      */
     public function testNumberRangeConstraintFailOnRange()
     {

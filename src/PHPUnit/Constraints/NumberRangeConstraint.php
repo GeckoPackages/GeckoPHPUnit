@@ -56,7 +56,7 @@ final class NumberRangeConstraint extends Constraint
      */
     public function toString()
     {
-        return 'is in range';
+        return sprintf('is %s range', $this->onBoundary ? 'in' : 'within');
     }
 
     /**
