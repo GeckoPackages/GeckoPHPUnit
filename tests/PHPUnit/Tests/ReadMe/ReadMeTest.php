@@ -19,6 +19,7 @@ final class ReadMeTest extends GeckoTestCase
     public function generateReadMe()
     {
         require_once __DIR__.'/ReadMeGenerator.php';
+
         $generator = new ReadMeGenerator();
 
         return $generator->generateReadMe($this->getClasses());
@@ -26,7 +27,11 @@ final class ReadMeTest extends GeckoTestCase
 
     public function testReadMe()
     {
-        $this->assertStringEqualsFile(__DIR__.'/../../../../README.md', $this->generateReadMe());
+        $this->assertSame(
+            file_get_contents(__DIR__.'/../../../../README.md'),
+            $this->generateReadMe(),
+            'README.md is out of sync, please run `$ ./bin/generate_readme` from the root of the project.'
+        );
     }
 
     /**

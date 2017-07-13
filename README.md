@@ -24,7 +24,8 @@ See Traits and asserts listing for more details.
 
 ### Requirements
 
-PHP 5.4 (PHP 5.3.6 for the constraints, PHP 7 supported). Optional HHVM support >= 3.9. PHPUnit >= 3.5.0.
+PHP 5.4 (PHP 5.3.6 for the constraints), PHP 7 supported.<br/>
+PHPUnit 4.8.35 || ^5.4.3
 
 ### Install
 
@@ -303,3 +304,18 @@ This project follows [Semantic Versioning](http://semver.org/).
 <sub>Kindly note:
 We do not keep a backwards compatible promise on code annotated with `@internal`, the tests and tooling (such as document generation) of the project itself
 nor the content and/or format of exception/error messages.</sub>
+
+### Contributions
+
+Contributions are welcome!<br/>
+Visit us on [github :octocat:](https://github.com/GeckoPackages/GeckoPHPUnit)
+
+### Semantic Versioning
+
+This project follows [Semantic Versioning](http://semver.org/).
+
+<sub>Kindly note:
+We do not keep a backwards compatible promise on code annotated with `@internal`, the tests and tooling (such as document generation) of the project itself
+nor the content and/or format of exception/error messages.</sub>
+
+This project is maintained on [github :octocat:](https://github.com/GeckoPackages/GeckoPHPUnit)
