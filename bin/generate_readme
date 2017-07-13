@@ -16,13 +16,8 @@ require_once __DIR__.'/../tests/PHPUnit/Tests/AbstractGeckoPHPUnitTest.php';
 require_once __DIR__.'/../tests/PHPUnit/Tests/ReadMe/ReadMeTest.php';
 
 $readMeFile = __DIR__.'/../README.md';
-if (!file_exists($readMeFile)) {
-    echo sprintf("\nCannot find \"%s\".\n", $readMeFile);
-    exit(-1);
-}
-
-if (!is_writable($readMeFile)) {
-    echo sprintf("\nCannot write to \"%s\".\n", realpath($readMeFile));
+if (file_exists($readMeFile) && !is_writable($readMeFile)) {
+    echo sprintf("\nCannot overwrite \"%s\".\n", realpath($readMeFile));
     exit(-1);
 }
 

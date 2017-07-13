@@ -2,7 +2,7 @@
     "name": "gecko-packages/gecko-php-unit",
     "type": "library",
     "homepage": "https://github.com/GeckoPackages",
-    "description": "Additional PHPUnit tests.",
+    "description": "Additional PHPUnit asserts and constraints.",
     "license": "MIT",
     "keywords": ["PHPUnit", "Extension", "FileSystem"],
     "require": {
@@ -15,5 +15,9 @@
         "psr-4": {
             "GeckoPackages\\PHPUnit\\": "src\\PHPUnit"
         }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
     }
 }
