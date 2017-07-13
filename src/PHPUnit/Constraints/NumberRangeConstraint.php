@@ -52,7 +52,7 @@ final class NumberRangeConstraint extends \PHPUnit_Framework_Constraint
      */
     public function toString()
     {
-        return 'is in range';
+        return sprintf('is %s range', $this->onBoundary ? 'in' : 'within');
     }
 
     /**

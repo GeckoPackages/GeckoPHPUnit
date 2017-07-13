@@ -85,7 +85,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
     public function testToString()
     {
         $constraint = new ScalarConstraint(ScalarConstraint::TYPE_ARRAY);
-        $this->assertSame('is of given scalar type.', $constraint->toString());
+        $this->assertSame('is of type "array".', $constraint->toString());
     }
 
     /**

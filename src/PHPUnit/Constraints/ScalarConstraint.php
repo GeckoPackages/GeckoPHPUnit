@@ -105,6 +105,6 @@ final class ScalarConstraint extends \PHPUnit_Framework_Constraint
      */
     public function toString()
     {
-        return 'is of given scalar type.';
+        return sprintf('is of type "%s".', $this->type);
     }
 }
