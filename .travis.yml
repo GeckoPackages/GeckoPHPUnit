@@ -9,16 +9,16 @@ matrix:
     fast_finish: true
     include:
         - php: 7.0
-          env: COMPOSER_FLAGS="--prefer-stable --optimize-autoloader"
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
         - php: 7.1
-          env: COMPOSER_FLAGS="--prefer-stable --optimize-autoloader"
+          env: COMPOSER_FLAGS="--prefer-stable"
         - php: nightly
           env: COMPOSER_FLAGS="--dev"
         - php: hhvm-nightly
           sudo: required
           dist: trusty
           group: edge
-          env: COMPOSER_FLAGS="--dev --optimize-autoloader"
+          env: COMPOSER_FLAGS="--dev"
     allow_failures:
         - php: nightly
         - php: hhvm-nightly
