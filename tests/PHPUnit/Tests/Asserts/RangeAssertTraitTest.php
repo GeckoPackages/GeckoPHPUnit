@@ -29,7 +29,7 @@ final class RangeAssertTraitTest extends GeckoTestCase
 
     /**
      * @expectedException PHPUnit\Framework\ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that -0.500 is within range \(1.100, 3.200\)\.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that -0\.500 is within range \(1\.100, 3\.200\)\.$#
      */
     public function testAssertNumberInRangeFail()
     {

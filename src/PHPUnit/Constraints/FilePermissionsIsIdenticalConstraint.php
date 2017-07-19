@@ -39,21 +39,22 @@ final class FilePermissionsIsIdenticalConstraint extends Constraint
         parent::__construct();
 
         if (is_string($permissions)) {
-            if (!ctype_digit($permissions)) {
-                if (1 !== preg_match(self::$permissionFormat, $permissions)) {
-                    throw new \InvalidArgumentException(sprintf('Permission to match "%s" is not formatted correctly.', $permissions));
-                }
+            if (preg_match('#^\d+$#', $permissions)) {
+                $this->permissions = '0' === $permissions[0]
+                    ? intval($permissions, 8)
+                    : (int) $permissions
+                ;
 
+                return;
+            }
+
+            if (1 === preg_match(self::$permissionFormat, $permissions)) {
                 $this->permissions = $permissions;
 
                 return;
             }
 
-            if ('0' === $permissions[0]) {
-                $permissions = intval($permissions, 8);
-            } else {
-                $permissions = (int) $permissions;
-            }
+            throw new \InvalidArgumentException(sprintf('Permission to match "%s" is not formatted correctly.', $permissions));
         }
 
         if (!is_int($permissions)) {
@@ -69,7 +70,7 @@ final class FilePermissionsIsIdenticalConstraint extends Constraint
         }
 
         if ($permissions < 0) {
-            throw new \InvalidArgumentException(sprintf('Invalid value for permission to match "%d", expected >= 0.', $permissions));
+            throw new \InvalidArgumentException(sprintf('Invalid value for permission to match "%d", expected int >= 0 or string.', $permissions));
         }
 
         $this->permissions = $permissions;

@@ -29,7 +29,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit\Framework\Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that <note><test>Test</test></note> matches XSD.[\n]\[error 1845\] .+\.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that <note><test>Test</test></note> matches XSD\.[\n]\[error 1845\] .+\.$#
      */
     public function testAssertXMLMatchesXSDFail()
     {

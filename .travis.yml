@@ -24,8 +24,9 @@ matrix:
         - php: hhvm-nightly
 
 install:
-    - composer update $COMPOSER_FLAGS --no-interaction -v
-    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.3.2/php-cs-fixer.phar -o php-cs-fixer.phar; fi
+    - travis_retry composer update $COMPOSER_FLAGS --no-interaction -v
+    - composer info -D | sort
+    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.4.0/php-cs-fixer.phar -o php-cs-fixer.phar; fi
 
 script:
     - chmod 755 tests/assets/dir

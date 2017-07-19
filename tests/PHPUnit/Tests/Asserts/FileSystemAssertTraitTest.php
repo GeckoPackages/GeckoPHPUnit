@@ -78,7 +78,7 @@ final class FileSystemAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException PHPUnit\Framework\Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0644 permissions are equal to 0555\.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file\.txt 0644 permissions are equal to 0555\.$#
      */
     public function testAssertFileHasPermissionsFailureFile()
     {

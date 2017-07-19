@@ -61,7 +61,7 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException PHPUnit\Framework\Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a file\.$#
+     * @expectedExceptionMessageRegExp %^Failed asserting that directory#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a file\.$%
      */
     public function testAssertFileExistsDirectory()
     {
