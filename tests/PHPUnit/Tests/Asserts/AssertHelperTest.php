@@ -25,7 +25,7 @@ final class AssertHelperTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^FileExistsAssertTrait::assertFileExists\(\) Relies on missing method "assertThat".$#
+     * @expectedExceptionMessageRegExp #^FileExistsAssertTrait::assertFileExists\(\) Relies on missing method "assertThat"\.$#
      */
     public function testMissingMethod()
     {

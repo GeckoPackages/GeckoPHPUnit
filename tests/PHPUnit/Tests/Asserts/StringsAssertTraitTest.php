@@ -29,7 +29,7 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that two strings are not identical.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that two strings are not identical\.$#
      */
     public function testAssertNotSameStringsFail()
     {
@@ -43,7 +43,7 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that two strings are identical.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that two strings are identical\.$#
      */
     public function testAssertSameStringsFail()
     {
@@ -57,7 +57,7 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty\.$#
      */
     public function testAssertStringIsEmptyFail()
     {
@@ -71,7 +71,7 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty\.$#
      */
     public function testAssertStringIsNotEmptyFail()
     {
@@ -85,7 +85,7 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is not empty\.$#
      */
     public function testAssertStringIsNotWhiteSpaceFail()
     {
@@ -99,7 +99,7 @@ final class StringsAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that a string is empty\.$#
      */
     public function testAssertStringIsWhiteSpaceFail()
     {

@@ -29,7 +29,7 @@ final class RangeAssertTraitTest extends GeckoTestCase
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that -0.500 is within range \(1.100, 3.200\).$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that -0\.500 is within range \(1.100, 3.200\)\.$#
      */
     public function testAssertNumberInRangeFail()
     {
@@ -43,7 +43,7 @@ final class RangeAssertTraitTest extends GeckoTestCase
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Argument \#1 \(null\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int.$#
+     * @expectedExceptionMessageRegExp #^Argument \#1 \(null\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int\.$#
      */
     public function testAssertNumberNotInRangeInvalidArgumentLower()
     {
@@ -52,7 +52,7 @@ final class RangeAssertTraitTest extends GeckoTestCase
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Argument \#2 \(string\#_invalid_\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int.$#
+     * @expectedExceptionMessageRegExp #^Argument \#2 \(string\#_invalid_\) of RangeAssertTrait::assertNumberNotInRange\(\) must be a float or int\.$#
      */
     public function testAssertNumberNotInRangeInvalidArgumentUpper()
     {
@@ -71,7 +71,7 @@ final class RangeAssertTraitTest extends GeckoTestCase
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^RangeAssertTrait::assertNumberOnRange\(\) lower boundary 5 must be smaller than upper boundary -5.500.$#
+     * @expectedExceptionMessageRegExp #^RangeAssertTrait::assertNumberOnRange\(\) lower boundary 5 must be smaller than upper boundary -5\.500\.$#
      */
     public function testAssertNumberOnRangeInvalidRange()
     {
@@ -85,7 +85,7 @@ final class RangeAssertTraitTest extends GeckoTestCase
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that -4 is unsigned int.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that -4 is unsigned int\.$#
      */
     public function testAssertUnsignedIntFail()
     {

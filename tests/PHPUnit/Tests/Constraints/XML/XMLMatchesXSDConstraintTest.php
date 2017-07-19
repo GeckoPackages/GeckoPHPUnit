@@ -33,7 +33,7 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# matches XSD.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# matches XSD\.$#
      */
     public function testXMLValidConstraintFalse()
     {
@@ -43,7 +43,7 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 matches XSD.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 matches XSD\.$#
      */
     public function testXMLValidConstraintInt()
     {
@@ -63,7 +63,7 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that <a></a> matches XSD.[\n]\[error \d{1,}\](?s).*$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that <a></a> matches XSD.[\n]\[error \d{1,}\](?s).*\.$#
      */
     public function testXMLValidConstraintNotMatchingXML()
     {
@@ -73,7 +73,7 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null matches XSD.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that null matches XSD\.$#
      */
     public function testXMLValidConstraintNull()
     {
@@ -83,7 +83,7 @@ final class XMLMatchesXSDConstraintTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# matches XSD.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# matches XSD\.$#
      */
     public function testXMLValidConstraintObject()
     {

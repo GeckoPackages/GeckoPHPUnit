@@ -27,7 +27,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
     public function testFilePermissionsMaskConstraint($expected, $permission)
     {
         $constraint = new FilePermissionsIsIdenticalConstraint($permission);
-        $this->assertSame($expected, $constraint->evaluate($this->getTestFile(), '', true));
+        $this->assertSame($expected, $constraint->evaluate($this->getTestFile(), '', true), 'Permisson evaluation failed.');
     }
 
     public function providePermissionExpected()
@@ -35,6 +35,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
         return array(
             array(true, 100644),
             array(true, '100644'),
+            array(true, 0644),
             array(true, '0644'),
             array(true, '-rw-r--r--'),
         );
@@ -49,7 +50,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"-1\", expected >= 0.$#
+     * @expectedExceptionMessageRegExp #^Invalid value for permission to match "-1", expected int >= 0 or string\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg1()
     {
@@ -58,7 +59,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Permission to match \"invalid"\ is not formatted correctly.$#
+     * @expectedExceptionMessageRegExp #^Permission to match "invalid" is not formatted correctly\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg2()
     {
@@ -67,37 +68,61 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"stdClass\#\", expected int >= 0 or string.$#
+     * @expectedExceptionMessageRegExp #^Invalid value for permission to match "stdClass\#", expected int >= 0 or string\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg3()
     {
-        $c = new FilePermissionsIsIdenticalConstraint(new \stdClass());
-        $c->evaluate(1);
+        new FilePermissionsIsIdenticalConstraint(new \stdClass());
     }
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"null\", expected int >= 0 or string.$#
+     * @expectedExceptionMessageRegExp #^Invalid value for permission to match "null", expected int >= 0 or string\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg4()
     {
-        $c = new FilePermissionsIsIdenticalConstraint(null);
-        $c->evaluate(1);
+        new FilePermissionsIsIdenticalConstraint(null);
     }
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Invalid value for permission to match \"double\#1.5\", expected int >= 0 or string.$#
+     * @expectedExceptionMessageRegExp #^Invalid value for permission to match "double\#1\.5", expected int >= 0 or string\.$#
      */
     public function testFilePermissionsMaskConstraintInvalidArg5()
     {
-        $c = new FilePermissionsIsIdenticalConstraint(1.5);
-        $c->evaluate(1);
+        new FilePermissionsIsIdenticalConstraint(1.5);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessageRegExp #^Permission to match "1\.5" is not formatted correctly\.$#
+     */
+    public function testFilePermissionsMaskConstraintInvalidArg6()
+    {
+        new FilePermissionsIsIdenticalConstraint('1.5');
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessageRegExp #^Permission to match "1,5" is not formatted correctly\.$#
+     */
+    public function testFilePermissionsMaskConstraintInvalidArg7()
+    {
+        new FilePermissionsIsIdenticalConstraint('1,5');
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessageRegExp #^Permission to match "-1" is not formatted correctly\.$#
+     */
+    public function testFilePermissionsMaskConstraintInvalidArg8()
+    {
+        new FilePermissionsIsIdenticalConstraint('-1');
     }
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 permissions are equal.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 permissions are equal\.$#
      */
     public function testFilePermissionsMaskConstraintInt()
     {
@@ -107,7 +132,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that not file or directory\#_does_not_exists_ permissions are equal.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that not file or directory\#_does_not_exists_ permissions are equal\.$#
      */
     public function testFilePermissionsMaskConstraintNoFile()
     {
@@ -117,7 +142,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null permissions are equal.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that null permissions are equal\.$#
      */
     public function testFilePermissionsMaskConstraintNull()
     {
@@ -127,7 +152,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# permissions are equal.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# permissions are equal\.$#
      */
     public function testFilePermissionsMaskConstraintObject()
     {
@@ -149,7 +174,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that link\#/.*PHPUnit/tests/assets/test_link_file 0777 permissions are equal to 0111.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that link\#/.*PHPUnit/tests/assets/test_link_file 0777 permissions are equal to 0111\.$#
      */
     public function testFilePermissionsMaskConstraintFileLinkMismatch()
     {
@@ -165,7 +190,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0644 permissions are equal to 0111.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0644 permissions are equal to 0111\.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatch()
     {
@@ -175,7 +200,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0100644 permissions are equal to 0100775.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt 0100644 permissions are equal to 0100775\.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatchLarge()
     {
@@ -185,7 +210,7 @@ final class FilePermissionsIsIdenticalConstraintTest extends AbstractGeckoPHPUni
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt -rw-r--r-- permissions are equal to -rw-rw-rw-.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that file\#/.*tests/assets/dir/test_file.txt -rw-r--r-- permissions are equal to -rw-rw-rw-\.$#
      */
     public function testFilePermissionsMaskConstraintFileMismatchString()
     {

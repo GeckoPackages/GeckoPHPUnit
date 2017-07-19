@@ -20,7 +20,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 {
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is of type array.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is of type array\.$#
      */
     public function testArray()
     {
@@ -31,7 +31,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type bool.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type bool\.$#
      */
     public function testBool()
     {
@@ -42,7 +42,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is of type float.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is of type float\.$#
      */
     public function testFloat()
     {
@@ -53,7 +53,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type int.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type int\.$#
      */
     public function testInt()
     {
@@ -64,7 +64,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "null" provided.$#
+     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "null" provided\.$#
      */
     public function testNullType()
     {
@@ -73,7 +73,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type string.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type string\.$#
      */
     public function testString()
     {
@@ -90,7 +90,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type scalar.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is of type scalar\.$#
      */
     public function testScalar()
     {
@@ -102,7 +102,7 @@ final class ScalarConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "integer\#123456789" provided.$#
+     * @expectedExceptionMessageRegExp #^Unknown ScalarConstraint type "integer\#123456789" provided\.$#
      */
     public function testUnknownValue()
     {

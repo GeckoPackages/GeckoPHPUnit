@@ -46,7 +46,7 @@ final class NumberRangeConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that 1 is within range \(0, 1\).$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that 1 is within range \(0, 1\)\.$#
      */
     public function testNumberRangeConstraintFailOnRange()
     {
@@ -57,7 +57,7 @@ final class NumberRangeConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that 2.500 is in range \[0.500, 1.500\].$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that 2.500 is in range \[0\.500, 1\.500\]\.$#
      */
     public function testNumberRangeConstraintFailOutOfRange()
     {
