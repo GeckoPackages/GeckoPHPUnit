@@ -62,7 +62,7 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that directory\#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a file.$#
+     * @expectedExceptionMessageRegExp %^Failed asserting that directory#/.*PHPUnit/tests/PHPUnit/Tests/Asserts is a file\.$%
      */
     public function testAssertFileExistsDirectory()
     {
@@ -71,7 +71,7 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that integer\#123 is a file.$/
+     * @expectedExceptionMessageRegExp /^Failed asserting that integer\#123 is a file\.$/
      */
     public function testAssertFileExistsInt()
     {
@@ -80,7 +80,7 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that _no_file_ is a file.$/
+     * @expectedExceptionMessageRegExp /^Failed asserting that _no_file_ is a file\.$/
      */
     public function testAssertFileExistsNoFile()
     {
@@ -89,7 +89,7 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that null is a file.$/
+     * @expectedExceptionMessageRegExp /^Failed asserting that null is a file\.$/
      */
     public function testAssertFileExistsNull()
     {
@@ -98,7 +98,7 @@ final class FileExistsAssertTraitTest extends AbstractGeckoPHPUnitFileTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that stdClass\# is a file.$/
+     * @expectedExceptionMessageRegExp /^Failed asserting that stdClass\# is a file\.$/
      */
     public function testAssertFileExistsObject()
     {

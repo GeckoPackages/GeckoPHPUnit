@@ -29,7 +29,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that <note><test>Test</test></note> matches XSD.[\n]\[error 1845\] .+.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that <note><test>Test</test></note> matches XSD\.[\n]\[error 1845\] .+\.$#
      */
     public function testAssertXMLMatchesXSDFail()
     {
@@ -47,7 +47,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Argument #1 \(integer#1\) of XMLAssertTrait::assertXMLMatchesXSD\(\) must be a string.$/
+     * @expectedExceptionMessageRegExp /^Argument #1 \(integer#1\) of XMLAssertTrait::assertXMLMatchesXSD\(\) must be a string\.$/
      */
     public function testAssertXMLMatchesXSDInvalidInputXSD()
     {
@@ -56,7 +56,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that b matches XSD.[\n]\[fatal 4\] .+.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that b matches XSD.[\n]\[fatal 4\] .+\.$#
      */
     public function testAssertXMLMatchesXSDInvalidXMLInvalidXSD()
     {
@@ -70,7 +70,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp #^Failed asserting that test string is valid XML.[\n]\[fatal 4\] .+.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that test string is valid XML.[\n]\[fatal 4\] .+\.$#
      */
     public function testAssertXMLValidFail()
     {
@@ -79,7 +79,7 @@ final class XMLAssertTraitTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException PHPUnit_Framework_Exception
-     * @expectedExceptionMessageRegExp /^Failed asserting that integer\#1234 is valid XML.$/
+     * @expectedExceptionMessageRegExp /^Failed asserting that integer\#1234 is valid XML\.$/
      */
     public function testAssertXMLValidInvalidInput()
     {

@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "GeckoPackages\\PHPUnit\\": "src\\PHPUnit"
+            "GeckoPackages\\PHPUnit\\": "src/PHPUnit"
         }
     },
     "config": {
