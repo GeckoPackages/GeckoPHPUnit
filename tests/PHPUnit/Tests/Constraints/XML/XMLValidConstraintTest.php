@@ -33,7 +33,7 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# is valid XML.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that boolean\# is valid XML\.$#
      */
     public function testXMLValidConstraintFalse()
     {
@@ -43,7 +43,7 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is valid XML.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that integer\#1 is valid XML\.$#
      */
     public function testXMLValidConstraintInt()
     {
@@ -63,7 +63,7 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is valid XML.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is valid XML\.$#
      */
     public function testXMLValidConstraintNull()
     {
@@ -73,7 +73,7 @@ final class XMLValidConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is valid XML.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that stdClass\# is valid XML\.$#
      */
     public function testXMLValidConstraintObject()
     {

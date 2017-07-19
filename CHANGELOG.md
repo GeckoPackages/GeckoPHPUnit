@@ -4,10 +4,15 @@
 
 This file contains the changelogs of the package.
 
-### Changelog for v2.1.1
+### Changelog for v2.2
 ###### Pending release
 
-- add missing CHANGELOG.md file
+- Travis - retry composer info, show packages installed
+- Update CS to PHP-CS-Fixer 2.4
+- Better exception messages on construction of `FilePermissionsIsIdenticalConstraint`
+- More strict testing and remove useless escaping
+- Remove dependency on `ctype` extension
+- Add missing CHANGELOG.md file
 
 ### Changelog for v2.1
 ###### Jun 20, 2017

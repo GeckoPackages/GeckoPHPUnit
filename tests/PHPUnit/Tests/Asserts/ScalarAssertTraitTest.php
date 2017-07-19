@@ -34,7 +34,7 @@ final class ScalarAssertTraitTest extends GeckoTestCase
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that DateTime\# is of type bool.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that DateTime\# is of type bool\.$#
      */
     public function testAssertBoolFail()
     {
@@ -53,7 +53,7 @@ final class ScalarAssertTraitTest extends GeckoTestCase
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that double\#1 is of type int.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that double\#1 is of type int\.$#
      */
     public function testAssertIntFail()
     {

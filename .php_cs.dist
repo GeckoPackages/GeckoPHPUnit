@@ -23,16 +23,48 @@ return (new PhpCsFixer\Config('GeckoPackagesCS'))
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
-        'array_syntax' => ['syntax' => 'long'],
-        'class_definition' => ['singleItemSingleLine' => true, 'multiLineExtendsEachSingleLine' => true],
+        'array_syntax' => [
+            'syntax' => 'long'
+        ],
+        'blank_line_before_statement' => [
+            'statements' => [
+                'break',
+                'continue',
+                'return',
+                'throw',
+            ]
+        ],
+        'class_definition' => [
+            'singleItemSingleLine' => true,
+            'multiLineExtendsEachSingleLine' => true
+        ],
         'combine_consecutive_unsets' => true,
         'dir_constant' => true,
         'ereg_to_preg' => true,
-        'header_comment' => ['header' => $header],
+        'header_comment' => [
+            'header' => $header
+        ],
         'heredoc_to_nowdoc' => true,
         'modernize_types_casting' => true,
-        'no_extra_consecutive_blank_lines' => ['break', 'continue', 'curly_brace_block', 'extra', 'parenthesis_brace_block', 'return', 'square_brace_block', 'throw', 'use', 'useTrait'],
+        'no_extra_consecutive_blank_lines' => [
+            'tokens' => [
+                'break',
+                'case',
+                'continue',
+                'curly_brace_block',
+                'default',
+                'extra',
+                'parenthesis_brace_block',
+                'return',
+                'square_brace_block',
+                'switch',
+                'throw',
+                'use',
+                'use_trait',
+            ]
+        ],
         'no_multiline_whitespace_before_semicolons' => false,
+        'no_null_property_initialization' => true,
         'no_php4_constructor' => true,
         'no_short_echo_tag' => true,
         'no_unreachable_default_argument_value' => true,
@@ -42,7 +74,9 @@ return (new PhpCsFixer\Config('GeckoPackagesCS'))
         'ordered_imports' => true,
         'php_unit_fqcn_annotation' => false,
         'php_unit_strict' => true,
-        'phpdoc_add_missing_param_annotation' => ['only_untyped' => false],
+        'phpdoc_add_missing_param_annotation' => [
+            'only_untyped' => false
+        ],
         'phpdoc_order' => true,
         'pow_to_exponentiation' => true,
         'protected_to_private' => true,

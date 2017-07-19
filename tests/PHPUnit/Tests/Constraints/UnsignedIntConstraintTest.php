@@ -53,7 +53,7 @@ final class UnsignedIntConstraintTest extends AbstractGeckoPHPUnitTest
 
     /**
      * @expectedException \PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessageRegExp #^Failed asserting that null is unsigned int.$#
+     * @expectedExceptionMessageRegExp #^Failed asserting that null is unsigned int\.$#
      */
     public function testUnsignedIntConstraintFailMessage()
     {
