@@ -29,16 +29,15 @@ PHPUnit 4.8.35 || ^5.4.3
 
 ### Install
 
-The package can be installed using [Composer](https://getcomposer.org/).
-Add the package to your `composer.json`.
+The package can be installed using [Composer](https://getcomposer.org/):
 
-```
-"require-dev": {
-    "gecko-packages/gecko-php-unit" : "^2.0"
-}
+
+```bash
+composer require gecko-packages/gecko-php-unit --dev
 ```
 
 Please note we hint `-dev` here because typically you only need tests during development.
+
 
 ### Usage
 
