@@ -7,6 +7,7 @@ This file contains the changelogs of the package.
 ### Changelog for v2.2
 ###### Pending release
 
+- Fix duplicate copy in README
 - Travis - retry composer info, show packages installed
 - Update CS to PHP-CS-Fixer 2.4
 - Better exception messages on construction of `FilePermissionsIsIdenticalConstraint`
