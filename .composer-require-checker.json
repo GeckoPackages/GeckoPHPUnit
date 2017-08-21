@@ -1,0 +1,41 @@
+{
+    "symbol-whitelist" : [
+        "array",
+        "bool",
+        "callable",
+        "false",
+        "float",
+        "int",
+        "iterable",
+        "null",
+        "parent",
+        "self",
+        "static",
+        "string",
+        "true",
+        "void",
+        "DOMDocument",
+        "libxml_clear_errors",
+        "LIBXML_COMPACT",
+        "libxml_disable_entity_loader",
+        "LIBXML_ERR_ERROR",
+        "LIBXML_ERR_FATAL",
+        "LIBXML_ERR_WARNING",
+        "libxml_get_errors",
+        "LIBXML_NONET",
+        "libxml_use_internal_errors",
+        "PHPUnit\\Framework\\Constraint\\Constraint",
+        "PHPUnit\\Framework\\Constraint\\IsIdentical",
+        "PHPUnit\\Framework\\Constraint\\IsType",
+        "PHPUnit\\Framework\\Constraint\\LogicalNot",
+        "PHPUnit\\Framework\\Exception"
+    ],
+    "php-core-extensions" : [
+        "Core",
+        "date",
+        "pcre",
+        "Reflection",
+        "SPL",
+        "standard"
+    ]
+}

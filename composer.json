@@ -24,5 +24,10 @@
         "branch-alias": {
             "dev-master": "3.0-dev"
         }
+    },
+    "suggest": {
+        "ext-dom": "When testing with xml.",
+        "ext-libxml": "When testing with xml.",
+        "phpunit/phpunit" : "This is an extension for it so make sure you have it some way."
     }
 }
