@@ -8,7 +8,7 @@ sudo: false
 matrix:
     fast_finish: true
     include:
-        - php: 7.0
+        - php: 7.0.22
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
         - php: 7.1
           env: COMPOSER_FLAGS="--prefer-stable"
