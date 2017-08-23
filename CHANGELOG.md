@@ -4,6 +4,11 @@
 
 This file contains the changelogs of the package.
 
+### Changelog for v3.0
+###### Aug 23, 2017
+
+For upgrading from 2.x to 3.x please see https://github.com/GeckoPackages/GeckoPHPUnit/blob/3.0/UPGRADE.md
+
 ### Changelog for v2.2
 ###### Aug 23, 2017
 
