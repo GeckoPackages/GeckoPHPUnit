@@ -2,6 +2,7 @@ UPGRADE GUIDE FROM 2.x to 3.0
 =============================
 
 This is guide for upgrade from version 2.x to 3.0 for the project.
+Release 3.0 has been made to be compat with "phpunit/phpunit": "^6.0".
 
 Traits (asserts)
 --------------
