@@ -5,7 +5,7 @@
 This file contains the changelogs of the package.
 
 ### Changelog for v2.2
-###### Pending release
+###### Aug 23, 2017
 
 - Fix duplicate copy in README
 - Travis - retry composer info, show packages installed
