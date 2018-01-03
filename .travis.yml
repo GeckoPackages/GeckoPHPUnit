@@ -26,7 +26,7 @@ matrix:
 install:
     - travis_retry composer update $COMPOSER_FLAGS --no-interaction -v
     - composer info -D | sort
-    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.4.0/php-cs-fixer.phar -o php-cs-fixer.phar; fi
+    - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then curl -L https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.9.0/php-cs-fixer.phar -o php-cs-fixer.phar; fi
     - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then curl -L https://github.com/maglnet/ComposerRequireChecker/releases/download/0.1.5/composer-require-checker.phar -o composer-require-checker.phar; fi
 
 script:
