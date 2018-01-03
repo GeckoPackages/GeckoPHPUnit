@@ -108,7 +108,7 @@ final class ReadMeGenerator
             }
 
             if (array_key_exists('requires', $classDoc['tags'])) {
-                if (count($classDoc['tags']['requires']) === 1) {
+                if (1 === count($classDoc['tags']['requires'])) {
                     $doc .= sprintf("Requires %s.\n", $classDoc['tags']['requires'][0]);
                 } else {
                     $doc .= "Requires:\n";
