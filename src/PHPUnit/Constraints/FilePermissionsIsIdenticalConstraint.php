@@ -169,19 +169,19 @@ final class FilePermissionsIsIdenticalConstraint extends Constraint
      */
     private static function getFilePermissionsAsString($perms)
     {
-        if (($perms & 0xC000) === 0xC000) {       // Socket
+        if (0xC000 === ($perms & 0xC000)) {       // Socket
             $info = 's';
-        } elseif (($perms & 0xA000) === 0xA000) { // Symbolic Link
+        } elseif (0xA000 === ($perms & 0xA000)) { // Symbolic Link
             $info = 'l';
-        } elseif (($perms & 0x8000) === 0x8000) { // Regular
+        } elseif (0x8000 === ($perms & 0x8000)) { // Regular
             $info = '-';
-        } elseif (($perms & 0x6000) === 0x6000) { // Block special
+        } elseif (0x6000 === ($perms & 0x6000)) { // Block special
             $info = 'b';
-        } elseif (($perms & 0x4000) === 0x4000) { // Directory
+        } elseif (0x4000 === ($perms & 0x4000)) { // Directory
             $info = 'd';
-        } elseif (($perms & 0x2000) === 0x2000) { // Character special
+        } elseif (0x2000 === ($perms & 0x2000)) { // Character special
             $info = 'c';
-        } elseif (($perms & 0x1000) === 0x1000) { // FIFO pipe
+        } elseif (0x1000 === ($perms & 0x1000)) { // FIFO pipe
             $info = 'p';
         } else { // Unknown
             $info = 'u';
