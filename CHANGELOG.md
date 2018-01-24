@@ -4,6 +4,11 @@
 
 This file contains the changelogs of the package.
 
+### Changelog for v3.1
+###### Jan 24, 2018
+
+- add missing conflict with PHPUnit in composer.json
+
 ### Changelog for v3.0
 ###### Aug 23, 2017
 
