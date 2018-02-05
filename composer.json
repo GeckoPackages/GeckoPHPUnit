@@ -8,6 +8,9 @@
     "require": {
         "php": "^5.3.6 || ^7.0"
     },
+    "conflict": {
+        "phpunit/phpunit": ">=6.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^4.8.35 || ^5.4.3"
     },
@@ -23,6 +26,6 @@
     "suggest": {
         "ext-dom": "When testing with xml.",
         "ext-libxml": "When testing with xml.",
-        "phpunit/phpunit" : "This is an extension for it so make sure you have it some way."
+        "phpunit/phpunit" : "This is an extension for PHPUnit so make sure you have that in some way."
     }
 }
